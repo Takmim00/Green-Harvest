@@ -6,7 +6,7 @@ import Footer from '../shared/Footer';
 const Main = () => {
     return (
         <div>
-            <Navbar/>
+           <Navbar/>
             <Outlet/>
             <Footer/>
         </div>
