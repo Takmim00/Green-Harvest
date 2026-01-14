@@ -25,14 +25,14 @@ export default function Footer() {
       <img
         src="/footer-left.png"
         alt=""
-        className="absolute -left-20 bottom-0  h-105  hidden lg:block pointer-events-none"
+        className="absolute -left-15 -bottom-8  h-105  hidden lg:block pointer-events-none"
       />
 
       {/* Right Side Image */}
       <img
         src="/footer-right.png"
         alt=""
-        className="absolute -right-20 bottom-0 h-105  hidden lg:block pointer-events-none"
+        className="absolute -right-25 -bottom-12 h-105  hidden lg:block pointer-events-none"
       />
 
       <div className="max-w-11/12 mx-auto px-4 py-12 relative z-10">
@@ -41,7 +41,7 @@ export default function Footer() {
           
           <div className="col-span-2">
             <h4 className="text-white font-semibold mb-5">About Shopery</h4>
-            <p className="text-sm leading-relaxed mb-6 text-gray-400 w-[80%]">
+            <p className="text-sm leading-relaxed mb-6 text-[#7A997C] w-[80%]">
               Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis dui, eget bibendum magna congue nec.
             </p>
 
@@ -61,38 +61,38 @@ export default function Footer() {
           {/* Links */}
           <div className="col-span-1">
             <h4 className="text-white font-semibold mb-5">My Account</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>My Account</li>
-              <li>Order History</li>
-              <li>Shopping Cart</li>
-              <li>Wishlist</li>
+            <ul className="space-y-3 text-sm ">
+              <li className="text-[#7A997C] hover:text-white">My Account</li>
+              <li className="text-[#7A997C] hover:text-white">Order History</li>
+              <li className="text-[#7A997C] hover:text-white">Shopping Cart</li>
+              <li className="text-[#7A997C] hover:text-white">Wishlist</li>
             </ul>
           </div>
            {/* Helps */}
           <div  className="col-span-1">
             <h4 className="text-white font-semibold mb-5">Helps</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>Contact</li>
-              <li>Faqs</li>
-              <li>Terms & Condition</li>
-              <li>Privacy Policy</li>
+            <ul className="space-y-3 text-sm ">
+              <li className="text-[#7A997C] hover:text-white">Contact</li>
+              <li className="text-[#7A997C] hover:text-white">Faqs</li>
+              <li className="text-[#7A997C] hover:text-white">Terms & Condition</li>
+              <li className="text-[#7A997C] hover:text-white">Privacy Policy</li>
             </ul>
           </div>
 
           {/* Proxy */}
           <div className="col-span-1">
             <h4 className="text-white font-semibold mb-5">Proxy</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>About</li>
-              <li>Shop</li>
-              <li>Product</li>
-              <li>Track Order</li>
+            <ul className="space-y-3 text-sm ">
+              <li className="text-[#7A997C] hover:text-white">About</li>
+              <li className="text-[#7A997C] hover:text-white">Shop</li>
+              <li className="text-[#7A997C] hover:text-white">Product</li>
+              <li className="text-[#7A997C] hover:text-white">Track Order</li>
             </ul>
           </div>
 
           {/* Instagram */}
           <div className="col-span-1">
-            <h4 className="font-semibold text-lg mb-4 border-b-2 border-green-500 inline-block">
+            <h4 className="text-white font-semibold mb-5">
               Instagram
             </h4>
             <div className="grid grid-cols-4 gap-2">
@@ -120,7 +120,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-[#7A997C]">
             Shopery © 2026. All Rights Reserved
           </p>
 
