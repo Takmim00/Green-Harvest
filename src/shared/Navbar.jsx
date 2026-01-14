@@ -46,7 +46,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="shrink-0">
               <div className="text-2xl font-bold text-green-600 flex items-center gap-2">
-                <span className="text-green-500">🌿</span> Ecobazar
+                <span className="text-green-500">🍃</span> Ecobazar
               </div>
             </Link>
 
