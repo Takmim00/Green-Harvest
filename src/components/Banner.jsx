@@ -107,16 +107,18 @@ export default function Banner() {
       {/* Navigation */}
       <button
         onClick={prevSlide}
-        className="absolute  left-4 md:left-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2"
+        className="absolute  left-4 md:left-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
+             transition-all duration-300 group"
       >
-        <ArrowLeft size={25} className="text-gray-600" />
+        <ArrowLeft size={25} className="text-gray-600 group-hover:text-white" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2"
+        className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
+             transition-all duration-300 group"
       >
-        <ArrowRight size={25} className="text-gray-600" />
+        <ArrowRight size={25} className="text-gray-600 group-hover:text-white" />
       </button>
 
       {/* Dots */}
