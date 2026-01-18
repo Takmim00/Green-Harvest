@@ -66,7 +66,8 @@ export default function Banner() {
 
   return (
     <section
-      className="relative w-full h-[80vh] bg-cover "
+      className="relative w-full h-[80vh] bg-cover bg-[#EDF2EE]
+"
       style={{ backgroundImage: "url(/BG.png)" }}
     >
       <div className="absolute inset-0 bg-white/40"></div>
