@@ -9,7 +9,7 @@ const slides = [
     description: "Free shipping on all your order. we deliver, you enjoy",
     discount: "OFF",
     discountPercent: 70,
-    
+
     image: "/fresh-vegetables-basket.png",
   },
   {
@@ -19,7 +19,7 @@ const slides = [
     description: "Sustainable products for a healthier lifestyle and planet",
     discount: "OFF",
     discountPercent: 50,
-    
+
     image: "/organic-products.png",
   },
   {
@@ -29,7 +29,7 @@ const slides = [
     description: "Picked fresh daily from local farms. Quality guaranteed.",
     discount: "OFF",
     discountPercent: 65,
-    
+
     image: "/farm-fresh-produce.png",
   },
 ];
@@ -96,10 +96,12 @@ export default function Banner() {
               </h2>
             </div>
 
-            <p className="text-sm md:text-base text-gray-600 max-w-sm">{slide.description}</p>
+            <p className="text-sm md:text-base text-gray-600 max-w-sm">
+              {slide.description}
+            </p>
 
             <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full flex justify-center items-center gap-2">
-              Shop now  <ArrowRight />
+              Shop now <ArrowRight />
             </button>
           </div>
         </div>
@@ -119,7 +121,10 @@ export default function Banner() {
         className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
              transition-all duration-300 group"
       >
-        <ArrowRight size={25} className="text-gray-600 group-hover:text-white" />
+        <ArrowRight
+          size={25}
+          className="text-gray-600 group-hover:text-white"
+        />
       </button>
 
       {/* Dots */}
@@ -134,6 +139,20 @@ export default function Banner() {
           />
         ))}
       </div>
+      {/* Bottom Leaf Image */}
+      <img
+        src="/Top.png"
+        alt="leaf decoration"
+        className="
+    absolute
+    
+    -translate-x-1/2
+   -bottom-15
+   right-0
+    pointer-events-none
+    select-none
+  "
+      />
     </section>
   );
 }
