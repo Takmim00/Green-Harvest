@@ -1,21 +1,10 @@
+import { ChevronDown, Heart, Star, X } from "lucide-react";
 import { useState } from "react";
-import {
-  X,
-  ChevronDown,
-  Star,
-  ChevronDownSquareIcon,
-  Heart,
-} from "lucide-react";
-import {
-  FaFacebook,
-  FaFacebookF,
-  FaInstagram,
-  FaPinterestP,
-} from "react-icons/fa";
 import { BsChevronUp, BsTwitterX } from "react-icons/bs";
-import greenApple from "../assets/Product Image.png";
-import Farmary from "../assets/Group 19.png";
+import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import Farmary from "../assets/Group 19.png";
+import greenApple from "../assets/Product Image.png";
 const galleryImages = [
   {
     id: 1,
