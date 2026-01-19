@@ -1,5 +1,4 @@
-import React from "react";
-import { Heart, Eye } from "lucide-react";
+import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
   console.log(product);
@@ -11,13 +10,16 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       )
     : 0;
   return (
-    <div className="bg-white shadow hover:shadow-md transition-shadow border border-gray-200">
+    <div
+      className="bg-white shadow hover:shadow-md transition-shadow rounded-2xl border border-gray-200 hover:border-[#00B307] 
+"
+    >
       {/* Image Section */}
       <div className="relative h-48 rounded-t-lg overflow-hidden group">
         <img
           src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-t-2xl"
         />
 
         {/* Sale Badge */}
