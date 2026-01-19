@@ -17,15 +17,21 @@ const ProductModal = ({ product, onClose }) => {
       name: product.name,
       price: product.price,
       quantity,
-      image: images[selectedImage], 
+      image: images[selectedImage],
     };
 
     console.log("Added to cart:", cartItem);
   };
   if (!product) return null;
   const images = Array.isArray(product.image) ? product.image : [product.image];
+  const discountPercent = product.original_price
+    ? Math.round(
+        ((product.original_price - product.current_price) /
+          product.original_price) *
+          100,
+      )
+    : 0;
 
-  console.log(images);
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-y-auto max-h-[90vh]">
@@ -114,16 +120,16 @@ const ProductModal = ({ product, onClose }) => {
             {/* Price */}
             <div>
               <div className="flex items-center gap-3">
-                {product.originalPrice && (
+                {product.original_price && (
                   <span className="line-through text-gray-400 text-lg">
-                    ${product.originalPrice}
+                    ${product.original_price}
                   </span>
                 )}
                 <span className="text-3xl text-green-600">
-                  ${product.price}
+                  ${product.current_price}
                 </span>
                 <span className="bg-red-100 text-red-600 text-sm rounded-full px-2 py-1">
-                  64% Off
+                  {discountPercent}% Off
                 </span>
               </div>
             </div>
@@ -173,7 +179,7 @@ const ProductModal = ({ product, onClose }) => {
                   >
                     −
                   </button>
-                  <span className="px-5 py-2 font-semibold min-w-[40px] text-center">
+                  <span className="px-5 py-2 font-semibold min-w-10 text-center">
                     {quantity}
                   </span>
                   <button

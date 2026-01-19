@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import greenApple from "../assets/Product Image.png";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 
@@ -51,15 +50,15 @@ const IntroducingProducts = () => {
   }
 
   return (
-    <div className="min-h-scree bg-[#EDF2EE]">
+    <div className="w-11/12 mx-auto pb-10 ">
       {/* Header */}
-      <div className="px-6">
-        <h1 className="text-center text-4xl font-bold text-gray-900 mb-8">
-          Introducing Our Products
+      <div className="">
+        <h1 className="text-start text-4xl font-bold text-gray-900 mb-8">
+          Featured Products
         </h1>
 
         {/* Category Filter */}
-        <div className="flex justify-center gap-6 flex-wrap">
+        {/* <div className="flex justify-center gap-6 flex-wrap">
           {CATEGORIES.map((category) => (
             <button
               key={category.id}
@@ -74,13 +73,13 @@ const IntroducingProducts = () => {
               <span className="text-gray-300"> |</span>
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto py-20 px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
-          {filteredProducts.map((product) => (
+      <div className="">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {filteredProducts.slice(0, 4).map((product) => (
             <ProductCard
               key={product.id}
               product={product}
