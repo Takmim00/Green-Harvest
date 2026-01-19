@@ -1,77 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import { Heart, ShoppingCart, Star } from "lucide-react";
-import ProductCard from "./ProductCard";
+import { useEffect, useState } from "react";
 import greenApple from "../assets/Product Image.png";
+import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
-const PRODUCTS = [
-  {
-    id: 1,
-    name: "Green Apple",
-    category: "fruit",
-    price: 14.99,
-    originalPrice: 20.99,
-    rating: 4.5,
-    image: greenApple,
-    isSale: true,
-  },
-  {
-    id: 2,
-    name: "Sunripe Mango",
-    category: "fruit",
-    price: 14.99,
-    rating: 4.2,
-    image: "/mango-fruit.jpg",
-  },
-  {
-    id: 3,
-    name: "Red Tomatos",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.3,
-    image: "/red-tomatoes.jpg",
-  },
-  {
-    id: 4,
-    name: "Fresh Cauliflower",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.4,
-    image: "/cauliflower-vegetables.jpg",
-  },
-  {
-    id: 5,
-    name: "Green Lettuce",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.1,
-    image: "/lettuce-vegetables.jpg",
-  },
-  {
-    id: 6,
-    name: "Eggplant",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.2,
-    image: "/eggplant-vegetables.jpg",
-  },
-  {
-    id: 7,
-    name: "Green Chilli",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.0,
-    image: "/green-chilli-pepper.jpg",
-  },
-  {
-    id: 8,
-    name: "Eggplant Purple",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.3,
-    image: "/purple-eggplant.jpg",
-  },
-];
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -81,21 +11,44 @@ const CATEGORIES = [
   { id: "view-all", label: "View All" },
 ];
 const IntroducingProducts = () => {
+  const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [favorites, setFavorites] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  //  Fetch
+  useEffect(() => {
+    fetch("/api/product.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Product fetch error:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProducts =
     selectedCategory === "all" || selectedCategory === "view-all"
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === selectedCategory);
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   const toggleFavorite = (id) => {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id],
     );
   };
+
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-xl font-semibold">
+        Loading products...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-scree bg-[#EDF2EE]">
@@ -133,10 +86,13 @@ const IntroducingProducts = () => {
               product={product}
               isFavorite={favorites.includes(product.id)}
               onToggleFavorite={() => toggleFavorite(product.id)}
-              onView={(product)=>setSelectedProduct(product)}
+              onView={(product) => setSelectedProduct(product)}
             />
           ))}
-          <ProductModal product={selectedProduct} onClose={()=>setSelectedProduct(null)}/>
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+          />
         </div>
       </div>
     </div>

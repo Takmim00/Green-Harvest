@@ -4,30 +4,6 @@ import { BsChevronUp, BsTwitterX } from "react-icons/bs";
 import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Farmary from "../assets/Group 19.png";
-import greenApple from "../assets/Product Image.png";
-const galleryImages = [
-  {
-    id: 1,
-    image: greenApple,
-    alt: "Chinese Cabbage - Main",
-    brand: Farmary,
-  },
-  {
-    id: 2,
-    image: "/images/cabbage-thumb-1.jpg",
-    alt: "Chinese Cabbage - Detail",
-  },
-  {
-    id: 3,
-    image: "/images/cabbage-thumb-2.jpg",
-    alt: "Chinese Cabbage - Leaves",
-  },
-  {
-    id: 4,
-    image: "/images/cabbage-thumb-2.jpg",
-    alt: "Chinese Cabbage - Side",
-  },
-];
 
 const ProductModal = ({ product, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -35,21 +11,21 @@ const ProductModal = ({ product, onClose }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-
   const handleAddToCart = () => {
     const cartItem = {
       id: product.id,
       name: product.name,
       price: product.price,
       quantity,
-      image: galleryImages[selectedImage].image,
+      image: images[selectedImage], 
     };
 
     console.log("Added to cart:", cartItem);
   };
-
   if (!product) return null;
+  const images = Array.isArray(product.image) ? product.image : [product.image];
 
+  console.log(images);
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-y-auto max-h-[90vh]">
@@ -72,9 +48,9 @@ const ProductModal = ({ product, onClose }) => {
                   className=" hover:bg-gray-300 rounded-full"
                 />
               </button>
-              {galleryImages.map((item, index) => (
+              {images.map((img, index) => (
                 <button
-                  key={item.id}
+                  key={img}
                   onClick={() => setSelectedImage(index)}
                   className={`w-20 h-20 rounded-lg border-2 overflow-hidden ${
                     selectedImage === index
@@ -83,8 +59,8 @@ const ProductModal = ({ product, onClose }) => {
                   }`}
                 >
                   <img
-                    src={item.image}
-                    alt={item.alt}
+                    src={img}
+                    alt={`product-${index}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -99,8 +75,8 @@ const ProductModal = ({ product, onClose }) => {
 
             <div className="flex-1 flex items-center justify-center bg-white min-h-105">
               <img
-                src={galleryImages[selectedImage].image}
-                alt={galleryImages[selectedImage].alt}
+                src={images[selectedImage]}
+                alt={`product-main-${selectedImage}`}
                 className="w-full h-full object-contain"
               />
             </div>

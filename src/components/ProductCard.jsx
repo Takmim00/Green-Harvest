@@ -1,10 +1,13 @@
 import React from "react";
 import { Heart, Eye } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
-  const discountPercent = product.originalPrice
+const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
+  console.log(product);
+  const discountPercent = product.original_price
     ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+        ((product.original_price - product.current_price) /
+          product.original_price) *
+          100,
       )
     : 0;
   return (
@@ -12,7 +15,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
       {/* Image Section */}
       <div className="relative h-48 rounded-t-lg overflow-hidden group">
         <img
-          src={product.image || "/placeholder.svg"}
+          src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
           className="w-full h-full object-cover"
         />
@@ -55,11 +58,11 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
         {/* Price Section */}
         <div className="flex items-center gap-2 mb-1">
           <span className="font-bold text-gray-900">
-            ${product.price.toFixed(2)}
+            ${product?.current_price?.toFixed(2)}
           </span>
-          {product.originalPrice && (
+          {product?.original_price && (
             <span className="text-xs text-gray-400 line-through">
-              ${product.originalPrice.toFixed(2)}
+              ${product?.original_price?.toFixed(2)}
             </span>
           )}
         </div>
