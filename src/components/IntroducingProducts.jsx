@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
@@ -66,30 +67,20 @@ const IntroducingProducts = () => {
   "
       />
 
-      <div className="w-11/12 mx-auto pb-10 ">
+      <div className="max-w-11/12 mx-auto pb-10 ">
         {/* Header */}
-        <div className="">
-          <h1 className="text-start text-4xl font-bold text-gray-900 mb-8">
-            Featured Products
-          </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-4">
+          <div className="flex justify-center md:justify-start">
+            <h1 className="text-4xl font-bold text-gray-900">
+              Featured Products
+            </h1>
+          </div>
 
-          {/* Category Filter */}
-          {/* <div className="flex justify-center gap-6 flex-wrap">
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`pb-2 font-medium transition-colors ${
-                selectedCategory === category.id
-                  ? "border-b-2 border-green-500 text-green-600"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              {category.label}
-              <span className="text-gray-300"> |</span>
+          <div className="flex justify-center md:justify-end">
+            <button className="text-green-600 hover:text-green-700 flex items-center gap-2">
+              View All <ArrowRight />
             </button>
-          ))}
-        </div> */}
+          </div>
         </div>
 
         {/* Products Grid */}

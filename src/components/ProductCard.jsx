@@ -1,7 +1,6 @@
 import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
-  console.log(product);
   const discountPercent = product.original_price
     ? Math.round(
         ((product.original_price - product.current_price) /
@@ -10,10 +9,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       )
     : 0;
   return (
-   <div
-      className="bg-white shadow hover:shadow-md transition-shadow rounded-2xl border border-gray-200 hover:border-[#00B307] 
-"
-    >
+    <div className="bg-white shadow hover:shadow-md transition-shadow rounded-2xl border border-gray-200 hover:border-[#00B307]">
       {/* Image Section */}
       <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
@@ -52,25 +48,23 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4 " >
-        <h3 className="font-semibold text-gray-900 mb-2 text-sm">
-          {product.name}
-        </h3>
+      <div className="flex items-center justify-between p-4">
+        <div>
+          <h3 className="font-semibold text-[#4d4d4d] mb-2 text-base ">
+            {product.name}
+          </h3>
 
-        {/* Price Section */}
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-bold text-gray-900">
-            ${product?.current_price?.toFixed(2)}
-          </span>
-          {product?.original_price && (
-            <span className="text-xs text-gray-400 line-through">
-              ${product?.original_price?.toFixed(2)}
+          {/* Price Section */}
+          <div className="flex items-center gap-2 ">
+            <span className="font-bold text-base text-gray-900">
+              ${product?.current_price?.toFixed(2)}
             </span>
-          )}
-        </div>
-
-        {/* Rating */}
-        <div className="flex items-center justify-between mt-2">
+            {product?.original_price && (
+              <span className="text-base text-gray-400 line-through">
+                ${product?.original_price?.toFixed(2)}
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <span
@@ -84,6 +78,10 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
               {product.rating.toFixed(1)}
             </span>
           </div>
+        </div>
+
+        {/* Rating */}
+        <div>
           <button className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
             <HiOutlineShoppingBag size={22} />
           </button>
