@@ -95,7 +95,7 @@ const ProductModal = ({ product, onClose }) => {
                 {product.name}
               </h2>
               <span className="bg-green-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-md">
-                In Stock
+                {product.stock_status}
               </span>
             </div>
 
@@ -114,7 +114,7 @@ const ProductModal = ({ product, onClose }) => {
                 {product.rating} Reviews
               </span>
               <span className="text-sm text-gray-500">•</span>
-              <span className="text-sm text-gray-700">SKU: 2,51,594</span>
+              <span className="text-sm text-gray-700">SKU: {product.sku}</span>
             </div>
 
             {/* Price */}

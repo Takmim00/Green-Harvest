@@ -34,6 +34,7 @@
     "original_price": 20.99,
     "discount_percentage": 28,
     "rating": 4,
+    "isSale":48,
     "reviews_count": 30,
     "stock_status": "In Stock",
     "category": "Fruits",
@@ -89,6 +90,7 @@
     "discount_percentage": 15,
     "rating": 5,
     "reviews_count": 9,
+    "isSale":38,
     "stock_status": "In Stock",
     "category": "Vegetables",
     "description": "Farm-fresh white cauliflower heads, rich in fiber and vitamins, perfect for roasting or making low-carb rice.",
@@ -346,11 +348,11 @@
       "tags": ["Garlic", "Aromatic", "Seasoning"]
     },
     "image": [
-      "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183",
-      "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183",
-      "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183",
-      "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183",
-      "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183"
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg"
     ]
   },
   {
@@ -362,6 +364,7 @@
     "discount_percentage": 13,
     "rating": 4,
     "reviews_count": 19,
+    "isSale":58,
     "stock_status": "In Stock",
     "category": "Vegetables",
     "description": "Refreshing and hydrating green cucumbers. Ideal for salads, pickling, or adding to spa-style water.",

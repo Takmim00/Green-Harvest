@@ -10,12 +10,12 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       )
     : 0;
   return (
-    <div
+   <div
       className="bg-white shadow hover:shadow-md transition-shadow rounded-2xl border border-gray-200 hover:border-[#00B307] 
 "
     >
       {/* Image Section */}
-      <div className="relative h-56 rounded-t-lg overflow-hidden group">
+      <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
           src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
