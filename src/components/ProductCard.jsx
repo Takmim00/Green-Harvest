@@ -15,7 +15,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
 "
     >
       {/* Image Section */}
-      <div className="relative h-48 rounded-t-lg overflow-hidden group">
+      <div className="relative h-56 rounded-t-lg overflow-hidden group">
         <img
           src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
