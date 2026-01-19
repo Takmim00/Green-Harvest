@@ -52,7 +52,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-4 " >
         <h3 className="font-semibold text-gray-900 mb-2 text-sm">
           {product.name}
         </h3>

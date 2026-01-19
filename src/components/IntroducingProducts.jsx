@@ -50,15 +50,31 @@ const IntroducingProducts = () => {
   }
 
   return (
-    <div className="w-11/12 mx-auto pb-10 ">
-      {/* Header */}
-      <div className="">
-        <h1 className="text-start text-4xl font-bold text-gray-900 mb-8">
-          Featured Products
-        </h1>
+    <div className="relative overflow-hidden">
+      {/* Left Decorative Fruit Image */}
+      <img
+        src="/Group 6.png"
+        alt="Fruit Decoration"
+        className="
+    hidden lg:block
+    absolute
+    -left-20
+    top-1/2
+    -translate-y-1/2 
+    opacity-80
+    pointer-events-none
+  "
+      />
 
-        {/* Category Filter */}
-        {/* <div className="flex justify-center gap-6 flex-wrap">
+      <div className="w-11/12 mx-auto pb-10 ">
+        {/* Header */}
+        <div className="">
+          <h1 className="text-start text-4xl font-bold text-gray-900 mb-8">
+            Featured Products
+          </h1>
+
+          {/* Category Filter */}
+          {/* <div className="flex justify-center gap-6 flex-wrap">
           {CATEGORIES.map((category) => (
             <button
               key={category.id}
@@ -74,24 +90,25 @@ const IntroducingProducts = () => {
             </button>
           ))}
         </div> */}
-      </div>
+        </div>
 
-      {/* Products Grid */}
-      <div className="">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {filteredProducts.slice(0, 4).map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isFavorite={favorites.includes(product.id)}
-              onToggleFavorite={() => toggleFavorite(product.id)}
-              onView={(product) => setSelectedProduct(product)}
+        {/* Products Grid */}
+        <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {filteredProducts.slice(0, 4).map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isFavorite={favorites.includes(product.id)}
+                onToggleFavorite={() => toggleFavorite(product.id)}
+                onView={(product) => setSelectedProduct(product)}
+              />
+            ))}
+            <ProductModal
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
             />
-          ))}
-          <ProductModal
-            product={selectedProduct}
-            onClose={() => setSelectedProduct(null)}
-          />
+          </div>
         </div>
       </div>
     </div>
