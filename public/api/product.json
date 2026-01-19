@@ -1,410 +1,10 @@
 [
   {
     "id": 1,
-    "name": "Chinese Cabbage",
-    "sku": "251584",
-    "current_price": 17.28,
-    "original_price": 48.0,
-    "discount_percentage": 64,
-    "rating": 4,
-    "reviews_count": 4,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum, Nulla varius magna a consequat pulvinar.",
-    "additional_info": {
-      "weight": "03 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 5413,
-      "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"]
-    },
-    "image_url": "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Green Lettuce",
-    "sku": "251585",
-    "current_price": 14.99,
-    "original_price": 14.99,
-    "discount_percentage": 0,
-    "rating": 4,
-    "reviews_count": 12,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Fresh and crisp green lettuce, harvested daily to ensure maximum crunch and nutritional value for your salads.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 1200,
-      "tags": ["Salad", "Fresh", "Lettuce", "Green"]
-    },
-    "image_url": "https://media.istockphoto.com/id/535555613/photo/fresh-healthy-organic-green-leaf-lettuce.jpg?s=612x612&w=0&k=20&c=7_riH_Z6hRiFPBU6sKgJzAzDt87UDShsNOz7EMg03cM="
-  },
-  {
-    "id": 3,
-    "name": "Green Capsicum",
-    "sku": "251586",
-    "current_price": 14.99,
-    "original_price": 20.99,
-    "discount_percentage": 28,
-    "rating": 4,
-    "reviews_count": 8,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Premium quality green capsicum with a smooth texture, perfect for traditional slow-cooked stews and grilling.",
-    "additional_info": {
-      "weight": "1 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 850,
-      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic"]
-    },
-    "image_url": "https://media.istockphoto.com/id/657619298/photo/raw-green-organic-bell-peppers.jpg?s=612x612&w=0&k=20&c=ApF1UfWthQf6lVVlZd3KDLlkngmz7jXxHIo2a8GejDI="
-  },
-  {
-    "id": 4,
-    "name": "Green Chilli",
-    "sku": "251587",
-    "current_price": 14.99,
-    "original_price": 14.99,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 15,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Hand-picked spicy green chillies that add a vibrant kick and authentic heat to any culinary creation.",
-    "additional_info": {
-      "weight": "0.25 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 3000,
-      "tags": ["Spicy", "Chilli", "Hot", "Vegetables"]
-    },
-    "image_url": "http://googleusercontent.com/image_collection/image_retrieval/8254174019916904202_0"
-  },
-  {
-    "id": 5,
-    "name": "Classic Eggplant",
-    "sku": "251588",
-    "current_price": 14.99,
-    "original_price": 14.99,
-    "discount_percentage": 0,
-    "rating": 4,
-    "reviews_count": 21,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Glossy, deep-purple eggplants known for their meaty interior and ability to absorb rich flavors during cooking.",
-    "additional_info": {
-      "weight": "1.5 kg",
-      "color": "Purple",
-      "type": "Organic",
-      "stock_count": 1100,
-      "tags": ["Eggplant", "Aubergine", "Purple", "Vegetables"]
-    },
-    "image_url": "https://nzveggieplants.co.nz/cdn/shop/files/Screenshot-20231010_164311_Google_759x700.jpg?v=1756610605"
-  },
-  {
-    "id": 6,
-    "name": "Fresh Cauliflower",
-    "sku": "251589",
-    "current_price": 17.0,
-    "original_price": 20.0,
-    "discount_percentage": 15,
-    "rating": 5,
-    "reviews_count": 9,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Farm-fresh white cauliflower heads, rich in fiber and vitamins, perfect for roasting or making low-carb rice.",
-    "additional_info": {
-      "weight": "1 kg",
-      "color": "White",
-      "type": "Organic",
-      "stock_count": 600,
-      "tags": ["Cauliflower", "White", "Healthy"]
-    },
-    "image_url": "https://cdn.pixabay.com/photo/2022/01/19/08/46/cauliflower-6949190_640.jpg"
-  },
-  {
-    "id": 7,
-    "name": "Red Bell Pepper",
-    "sku": "251590",
-    "current_price": 12.5,
-    "original_price": 15.0,
-    "discount_percentage": 16,
-    "rating": 4,
-    "reviews_count": 18,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Sweet and crunchy red bell peppers, packed with Vitamin C and perfect for stuffing or slicing into stir-fries.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Red",
-      "type": "Organic",
-      "stock_count": 940,
-      "tags": ["Pepper", "Red", "Sweet"]
-    },
-    "image_url": "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png"
-  },
-  {
-    "id": 8,
-    "name": "Organic Carrots",
-    "sku": "251591",
-    "current_price": 8.99,
-    "original_price": 8.99,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 34,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Naturally sweet, earth-grown carrots harvested at peak ripeness for the best flavor and beta-carotene content.",
-    "additional_info": {
-      "weight": "1 kg",
-      "color": "Orange",
-      "type": "Organic",
-      "stock_count": 2200,
-      "tags": ["Carrot", "Orange", "Root Vegetable"]
-    },
-    "image_url": "https://example.com/images/carrots.jpg"
-  },
-  {
-    "id": 9,
-    "name": "Broccoli Florets",
-    "sku": "251592",
-    "current_price": 11.2,
-    "original_price": 14.0,
-    "discount_percentage": 20,
-    "rating": 4,
-    "reviews_count": 27,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Nutrient-dense green broccoli florets. Carefully selected for firm stems and tightly packed heads.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 450,
-      "tags": ["Broccoli", "Green", "Superfood"]
-    },
-    "image_url": "https://example.com/images/broccoli.jpg"
-  },
-  {
-    "id": 10,
-    "name": "Fresh Spinach",
-    "sku": "251593",
-    "current_price": 5.5,
-    "original_price": 5.5,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 50,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Tender and iron-rich baby spinach leaves. Pre-washed and ready to use in your favorite healthy smoothies.",
-    "additional_info": {
-      "weight": "0.2 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 1500,
-      "tags": ["Spinach", "Leafy", "Green"]
-    },
-    "image_url": "https://example.com/images/spinach.jpg"
-  },
-  {
-    "id": 11,
-    "name": "Yellow Onions",
-    "sku": "251594",
-    "current_price": 4.99,
-    "original_price": 4.99,
-    "discount_percentage": 0,
-    "rating": 4,
-    "reviews_count": 65,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Pungent and flavorful yellow onions, an essential base for almost any savory dish or slow-simmered soup.",
-    "additional_info": {
-      "weight": "2 kg",
-      "color": "Yellow",
-      "type": "Organic",
-      "stock_count": 4000,
-      "tags": ["Onion", "Yellow", "Cooking"]
-    },
-    "image_url": "https://example.com/images/onions.jpg"
-  },
-  {
-    "id": 12,
-    "name": "Red Tomatoes",
-    "sku": "251595",
-    "current_price": 9.0,
-    "original_price": 12.0,
-    "discount_percentage": 25,
-    "rating": 5,
-    "reviews_count": 42,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Vine-ripened tomatoes with a juicy interior and vibrant red skin. Perfect for fresh salsa or pasta sauces.",
-    "additional_info": {
-      "weight": "1 kg",
-      "color": "Red",
-      "type": "Organic",
-      "stock_count": 1800,
-      "tags": ["Tomato", "Red", "Juicy"]
-    },
-    "image_url": "https://example.com/images/tomatoes.jpg"
-  },
-  {
-    "id": 13,
-    "name": "Garlic Bulbs",
-    "sku": "251596",
-    "current_price": 2.99,
-    "original_price": 2.99,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 88,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Aromatic and high-quality garlic bulbs, known for their strong flavor profile and health-boosting properties.",
-    "additional_info": {
-      "weight": "0.1 kg",
-      "color": "White",
-      "type": "Organic",
-      "stock_count": 5000,
-      "tags": ["Garlic", "Aromatic", "Seasoning"]
-    },
-    "image_url": "https://example.com/images/garlic.jpg"
-  },
-  {
-    "id": 14,
-    "name": "Cucumber",
-    "sku": "251597",
-    "current_price": 6.5,
-    "original_price": 7.5,
-    "discount_percentage": 13,
-    "rating": 4,
-    "reviews_count": 19,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Refreshing and hydrating green cucumbers. Ideal for salads, pickling, or adding to spa-style water.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 1300,
-      "tags": ["Cucumber", "Fresh", "Hydrating"]
-    },
-    "image_url": "https://example.com/images/cucumber.jpg"
-  },
-  {
-    "id": 15,
-    "name": "Ginger Root",
-    "sku": "251598",
-    "current_price": 13.0,
-    "original_price": 13.0,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 31,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Fresh and spicy ginger root, essential for Asian cuisine and recognized for its digestive benefits.",
-    "additional_info": {
-      "weight": "0.25 kg",
-      "color": "Brown",
-      "type": "Organic",
-      "stock_count": 700,
-      "tags": ["Ginger", "Spice", "Root"]
-    },
-    "image_url": "https://example.com/images/ginger.jpg"
-  },
-  {
-    "id": 16,
-    "name": "Sweet Corn",
-    "sku": "251599",
-    "current_price": 5.0,
-    "original_price": 5.0,
-    "discount_percentage": 0,
-    "rating": 5,
-    "reviews_count": 55,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Golden, tender sweet corn on the cob. Naturally sweet and perfect for backyard grilling or boiling.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Yellow",
-      "type": "Organic",
-      "stock_count": 1600,
-      "tags": ["Corn", "Sweet", "Cob"]
-    },
-    "image_url": "https://example.com/images/corn.jpg"
-  },
-  {
-    "id": 17,
-    "name": "Russet Potatoes",
-    "sku": "251600",
-    "current_price": 10.99,
-    "original_price": 10.99,
-    "discount_percentage": 0,
-    "rating": 4,
-    "reviews_count": 102,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Starchy Russet potatoes, excellent for mashing, baking, or frying into crisp golden-brown chips.",
-    "additional_info": {
-      "weight": "2.5 kg",
-      "color": "Brown",
-      "type": "Organic",
-      "stock_count": 3500,
-      "tags": ["Potato", "Starchy", "Baking"]
-    },
-    "image_url": "https://example.com/images/potatoes.jpg"
-  },
-  {
-    "id": 18,
-    "name": "Zucchini",
-    "sku": "251601",
-    "current_price": 11.5,
-    "original_price": 11.5,
-    "discount_percentage": 0,
-    "rating": 4,
-    "reviews_count": 14,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Mild and versatile green zucchini. Great for spiralizing into 'zoodles' or sautéing with garlic and herbs.",
-    "additional_info": {
-      "weight": "0.5 kg",
-      "color": "Green",
-      "type": "Organic",
-      "stock_count": 900,
-      "tags": ["Zucchini", "Green", "Squash"]
-    },
-    "image_url": "https://example.com/images/zucchini.jpg"
-  },
-  {
-    "id": 19,
-    "name": "Red Onion",
-    "sku": "251602",
-    "current_price": 5.5,
-    "original_price": 6.5,
-    "discount_percentage": 15,
-    "rating": 4,
-    "reviews_count": 48,
-    "stock_status": "In Stock",
-    "category": "Vegetables",
-    "description": "Sharp and colorful red onions, perfect for adding a raw bite to sandwiches or pickling for tacos.",
-    "additional_info": {
-      "weight": "1 kg",
-      "color": "Red",
-      "type": "Organic",
-      "stock_count": 2100,
-      "tags": ["Onion", "Red", "Salad"]
-    },
-    "image_url": "https://example.com/images/red_onion.jpg"
-  },
-  {
-    "id": 20,
     "name": "Green Apple",
     "sku": "251603",
     "current_price": 14.99,
     "original_price": 20.99,
-    "discount_percentage": 28,
     "rating": 4,
     "reviews_count": 30,
     "stock_status": "In Stock",
@@ -417,6 +17,512 @@
       "stock_count": 750,
       "tags": ["Apple", "Green", "Fruit"]
     },
-    "image_url": "https://example.com/images/green_apple.jpg"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Surjapur Mango",
+    "sku": "251603",
+    "current_price": 14.99,
+    "original_price": 20.99,
+    "rating": 4,
+    "isSale": 48,
+    "reviews_count": 30,
+    "stock_status": "In Stock",
+    "category": "Fruits",
+    "description": "Tart and crunchy Surjapur Mango, ideal for a healthy snack or for use in traditional Mango pies.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "mango",
+      "type": "Organic",
+      "stock_count": 750,
+      "tags": ["Surjapur", "Mango", "Green", "Fruit"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Red Tomatoes",
+    "sku": "251595",
+    "current_price": 9.0,
+    "original_price": 12.0,
+    "rating": 5,
+    "reviews_count": 42,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Vine-ripened tomatoes with a juicy interior and vibrant red skin. Perfect for fresh salsa or pasta sauces.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "Red",
+      "type": "Organic",
+      "stock_count": 1800,
+      "tags": ["Tomato", "Red", "Juicy"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Fresh Cauliflower",
+    "sku": "251589",
+    "current_price": 17.0,
+    "original_price": 20.0,
+    "rating": 5,
+    "reviews_count": 9,
+    "isSale": 38,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Farm-fresh white cauliflower heads, rich in fiber and vitamins, perfect for roasting or making low-carb rice.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "White",
+      "type": "Organic",
+      "stock_count": 600,
+      "tags": ["Cauliflower", "White", "Healthy"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Green Lettuce",
+    "sku": "251585",
+    "current_price": 14.99,
+    "original_price": 14.99,
+    "rating": 4,
+    "reviews_count": 12,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Fresh and crisp green lettuce, harvested daily to ensure maximum crunch and nutritional value for your salads.",
+    "additional_info": {
+      "weight": "0.5 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 1200,
+      "tags": ["Salad", "Fresh", "Lettuce", "Green"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Green Capsicum",
+    "sku": "251586",
+    "current_price": 14.99,
+    "original_price": 20.99,
+    "rating": 4,
+    "reviews_count": 8,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Premium quality green capsicum with a smooth texture, perfect for traditional slow-cooked stews and grilling.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 850,
+      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png"
+    ],
+    "image_2": "https://media.istockphoto.com/id/657619298/photo/raw-green-organic-bell-peppers.jpg?s=612x612&w=0&k=20&c=ApF1UfWthQf6lVVlZd3KDLlkngmz7jXxHIo2a8GejDI="
+  },
+  {
+    "id": 7,
+    "name": "Green Chilli",
+    "sku": "251587",
+    "current_price": 14.99,
+    "original_price": 14.99,
+    "rating": 5,
+    "reviews_count": 15,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Hand-picked spicy green chillies that add a vibrant kick and authentic heat to any culinary creation.",
+    "additional_info": {
+      "weight": "0.25 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 3000,
+      "tags": ["Spicy", "Chilli", "Hot", "Vegetables"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png"
+    ],
+    "image_2": "http://googleusercontent.com/image_collection/image_retrieval/8254174019916904202_0"
+  },
+  {
+    "id": 8,
+    "name": "Eggplant",
+    "sku": "251588",
+    "current_price": 14.99,
+    "original_price": 14.99,
+    "rating": 4,
+    "reviews_count": 21,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Glossy, deep-purple eggplants known for their meaty interior and ability to absorb rich flavors during cooking.",
+    "additional_info": {
+      "weight": "1.5 kg",
+      "color": "Purple",
+      "type": "Organic",
+      "stock_count": 1100,
+      "tags": ["Eggplant", "Aubergine", "Purple", "Vegetables"]
+    },
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png"
+    ],
+    "image_2": "https://nzveggieplants.co.nz/cdn/shop/files/Screenshot-20231010_164311_Google_759x700.jpg?v=1756610605"
+  },
+  {
+    "id": 9,
+    "name": "Organic Carrots",
+    "sku": "251591",
+    "current_price": 8.99,
+    "original_price": 8.99,
+    "rating": 5,
+    "reviews_count": 34,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Naturally sweet, earth-grown carrots harvested at peak ripeness for the best flavor and beta-carotene content.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "Orange",
+      "type": "Organic",
+      "stock_count": 2200,
+      "tags": ["Carrot", "Orange", "Root Vegetable"]
+    },
+    "image": [
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Fresh Spinach",
+    "sku": "251593",
+    "current_price": 5.5,
+    "original_price": 5.5,
+    "rating": 5,
+    "reviews_count": 50,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Tender and iron-rich baby spinach leaves. Pre-washed and ready to use in your favorite healthy smoothies.",
+    "additional_info": {
+      "weight": "0.2 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 1500,
+      "tags": ["Spinach", "Leafy", "Green"]
+    },
+    "image": [
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Yellow Onions",
+    "sku": "251594",
+    "current_price": 4.99,
+    "original_price": 4.99,
+    "rating": 4,
+    "reviews_count": 65,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Pungent and flavorful yellow onions, an essential base for almost any savory dish or slow-simmered soup.",
+    "additional_info": {
+      "weight": "2 kg",
+      "color": "Yellow",
+      "type": "Organic",
+      "stock_count": 4000,
+      "tags": ["Onion", "Yellow", "Cooking"]
+    },
+    "image": [
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Red Bell Pepper",
+    "sku": "251590",
+    "current_price": 12.5,
+    "original_price": 15.0,
+    "rating": 4,
+    "reviews_count": 18,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Sweet and crunchy red bell peppers, packed with Vitamin C and perfect for stuffing or slicing into stir-fries.",
+    "additional_info": {
+      "weight": "0.5 kg",
+      "color": "Red",
+      "type": "Organic",
+      "stock_count": 940,
+      "tags": ["Pepper", "Red", "Sweet"]
+    },
+    "image": [
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Garlic Bulbs",
+    "sku": "251596",
+    "current_price": 2.99,
+    "original_price": 2.99,
+    "rating": 5,
+    "reviews_count": 88,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Aromatic and high-quality garlic bulbs, known for their strong flavor profile and health-boosting properties.",
+    "additional_info": {
+      "weight": "0.1 kg",
+      "color": "White",
+      "type": "Organic",
+      "stock_count": 5000,
+      "tags": ["Garlic", "Aromatic", "Seasoning"]
+    },
+    "image": [
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Cucumber",
+    "sku": "251597",
+    "current_price": 6.5,
+    "original_price": 7.5,
+    "rating": 4,
+    "reviews_count": 19,
+    "isSale": 58,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Refreshing and hydrating green cucumbers. Ideal for salads, pickling, or adding to spa-style water.",
+    "additional_info": {
+      "weight": "0.5 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 1300,
+      "tags": ["Cucumber", "Fresh", "Hydrating"]
+    },
+    "image": [
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Ginger Root",
+    "sku": "251598",
+    "current_price": 13.0,
+    "original_price": 13.0,
+    "rating": 5,
+    "reviews_count": 31,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Fresh and spicy ginger root, essential for Asian cuisine and recognized for its digestive benefits.",
+    "additional_info": {
+      "weight": "0.25 kg",
+      "color": "Brown",
+      "type": "Organic",
+      "stock_count": 700,
+      "tags": ["Ginger", "Spice", "Root"]
+    },
+    "image": [
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Sweet Corn",
+    "sku": "251599",
+    "current_price": 5.0,
+    "original_price": 5.0,
+    "rating": 5,
+    "reviews_count": 55,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Golden, tender sweet corn on the cob. Naturally sweet and perfect for backyard grilling or boiling.",
+    "additional_info": {
+      "weight": "0.5 kg",
+      "color": "Yellow",
+      "type": "Organic",
+      "stock_count": 1600,
+      "tags": ["Corn", "Sweet", "Cob"]
+    },
+    "image": [
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Russet Potatoes",
+    "sku": "251600",
+    "current_price": 10.99,
+    "original_price": 10.99,
+    "rating": 4,
+    "reviews_count": 102,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Starchy Russet potatoes, excellent for mashing, baking, or frying into crisp golden-brown chips.",
+    "additional_info": {
+      "weight": "2.5 kg",
+      "color": "Brown",
+      "type": "Organic",
+      "stock_count": 3500,
+      "tags": ["Potato", "Starchy", "Baking"]
+    },
+    "image": [
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Zucchini",
+    "sku": "251601",
+    "current_price": 11.5,
+    "original_price": 11.5,
+    "rating": 4,
+    "reviews_count": 14,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Mild and versatile green zucchini. Great for spiralizing into 'zoodles' or sautéing with garlic and herbs.",
+    "additional_info": {
+      "weight": "0.5 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 900,
+      "tags": ["Zucchini", "Green", "Squash"]
+    },
+    "image": [
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Red Onion",
+    "sku": "251602",
+    "current_price": 5.5,
+    "original_price": 6.5,
+    "rating": 4,
+    "reviews_count": 48,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Sharp and colorful red onions, perfect for adding a raw bite to sandwiches or pickling for tacos.",
+    "additional_info": {
+      "weight": "1 kg",
+      "color": "Red",
+      "type": "Organic",
+      "stock_count": 2100,
+      "tags": ["Onion", "Red", "Salad"]
+    },
+    "image": [
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Chinese Cabbage",
+    "sku": "251584",
+    "current_price": 17.28,
+    "original_price": 48.0,
+    "rating": 4,
+    "reviews_count": 4,
+    "stock_status": "In Stock",
+    "category": "Vegetables",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum, Nulla varius magna a consequat pulvinar.",
+    "additional_info": {
+      "weight": "03 kg",
+      "color": "Green",
+      "type": "Organic",
+      "stock_count": 5413,
+      "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"]
+    },
+    "image": [
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg"
+    ]
   }
 ]
