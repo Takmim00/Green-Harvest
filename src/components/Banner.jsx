@@ -145,7 +145,6 @@ export default function Banner() {
         alt="leaf decoration"
         className="
     absolute
-    
     -translate-x-1/2
    -bottom-15
    right-0
