@@ -95,7 +95,7 @@
       "color": "White",
       "type": "Organic",
       "stock_count": 600,
-      "tags": ["Cauliflower", "White", "Healthy"]
+      "tags": ["Cauliflower", "White", "Healthy", "Vegetarian"]
     },
     "image": [
       "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
@@ -121,7 +121,7 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 1200,
-      "tags": ["Salad", "Fresh", "Lettuce", "Green"]
+      "tags": ["Salad", "Fresh", "Lettuce", "Green", "Vegetarian"]
     },
     "image": [
       "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
@@ -147,7 +147,7 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 850,
-      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic"]
+      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic", "Vegetarian"]
     },
     "image": [
       "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
@@ -174,7 +174,7 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 3000,
-      "tags": ["Spicy", "Chilli", "Hot", "Vegetables"]
+      "tags": ["Spicy", "Chilli", "Hot", "Vegetarian"]
     },
     "image": [
       "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
@@ -201,7 +201,7 @@
       "color": "Purple",
       "type": "Organic",
       "stock_count": 1100,
-      "tags": ["Eggplant", "Aubergine", "Purple", "Vegetables"]
+      "tags": ["Eggplant", "Aubergine", "Purple","Vegetarian"]
     },
     "image": [
       "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
@@ -228,7 +228,7 @@
       "color": "Orange",
       "type": "Organic",
       "stock_count": 2200,
-      "tags": ["Carrot", "Orange", "Root Vegetable"]
+      "tags": ["Carrot", "Orange", "Root Vegetable", "Vegetarian"]
     },
     "image": [
       "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
@@ -254,7 +254,7 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 1500,
-      "tags": ["Spinach", "Leafy", "Green"]
+      "tags": ["Spinach", "Leafy", "Green", "Vegetarian"]
     },
     "image": [
       "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
@@ -306,7 +306,7 @@
       "color": "Red",
       "type": "Organic",
       "stock_count": 940,
-      "tags": ["Pepper", "Red", "Sweet"]
+      "tags": ["Pepper", "Red", "Sweet", "Vegetarian"]
     },
     "image": [
       "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",

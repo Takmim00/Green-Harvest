@@ -85,8 +85,8 @@ const IntroducingProducts = () => {
 
         {/* Products Grid */}
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {filteredProducts.slice(0, 4).map((product) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {filteredProducts.slice(0, 5).map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}

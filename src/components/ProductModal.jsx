@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDown, Heart, Star, X } from "lucide-react";
 import { useState } from "react";
 import { BsChevronUp, BsTwitterX } from "react-icons/bs";
@@ -5,7 +7,7 @@ import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Farmary from "../assets/Group 19.png";
 
-const ProductModal = ({ product, onClose }) => {
+const ProductModal = ({ product, onClose, isOpen }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -22,7 +24,7 @@ const ProductModal = ({ product, onClose }) => {
 
     console.log("Added to cart:", cartItem);
   };
-  if (!product) return null;
+  if (!product || !isOpen) return null;
   const images = Array.isArray(product.image) ? product.image : [product.image];
   const discountPercent = product.original_price
     ? Math.round(
@@ -65,7 +67,7 @@ const ProductModal = ({ product, onClose }) => {
                   }`}
                 >
                   <img
-                    src={img}
+                    src={img || "/placeholder.svg"}
                     alt={`product-${index}`}
                     className="w-full h-full object-cover"
                   />
@@ -81,7 +83,7 @@ const ProductModal = ({ product, onClose }) => {
 
             <div className="flex-1 flex items-center justify-center bg-white min-h-105">
               <img
-                src={images[selectedImage]}
+                src={images[selectedImage] || "/placeholder.svg"}
                 alt={`product-main-${selectedImage}`}
                 className="w-full h-full object-contain"
               />
@@ -140,7 +142,7 @@ const ProductModal = ({ product, onClose }) => {
                 <span className="text-gray-700 font-medium">Brand:</span>
                 <div className="flex items-center gap-1">
                   <span className="text-lg">
-                    <img src={Farmary} alt="" />
+                    <img src={Farmary || "/placeholder.svg"} alt="" />
                   </span>
                 </div>
               </div>

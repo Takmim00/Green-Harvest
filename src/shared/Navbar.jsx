@@ -117,37 +117,37 @@ export default function Navbar() {
               {/* Menu */}
               <div className="flex items-center">
                 <Link
-                  href="/"
+                  to="/"
                   className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   Home
                 </Link>
                 <Link
-                  href="/shop"
+                  to="/shop"
                   className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   Shop <ChevronDown size={16} />
                 </Link>
                 <Link
-                  href="/pages"
+                  to="/pages"
                   className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   Pages <ChevronDown size={16} />
                 </Link>
                 <Link
-                  href="/blog"
+                  to="/blog"
                   className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   Blog <ChevronDown size={16} />
                 </Link>
                 <Link
-                  href="/about"
+                  to="/about"
                   className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   About Us
                 </Link>
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
                 >
                   Contact Us
@@ -170,37 +170,37 @@ export default function Navbar() {
                 All Categories
               </button>
               <Link
-                href="/"
+                to="/"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 Home
               </Link>
               <Link
-                href="/shop"
+                to="/shop"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 Shop
               </Link>
               <Link
-                href="/pages"
+                to="/pages"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 Pages
               </Link>
               <Link
-                href="/blog"
+                to="/blog"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 Blog
               </Link>
               <Link
-                href="/about"
+                to="/about"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 About Us
               </Link>
               <Link
-                href="/contact"
+                to="/contact"
                 className="px-4 py-2 hover:bg-green-50 text-gray-700"
               >
                 Contact Us
