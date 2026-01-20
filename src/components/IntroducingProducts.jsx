@@ -69,7 +69,7 @@ const IntroducingProducts = () => {
 
       <div className="max-w-11/12 mx-auto pb-10 ">
         {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-8">
           <div className="flex justify-center md:justify-start">
             <h1 className="text-4xl font-bold text-gray-900">
               Featured Products

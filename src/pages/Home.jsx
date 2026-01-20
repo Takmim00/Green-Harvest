@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
 import FeatureSection from "../components/FeatureSection";
+import TopCategories from "../components/TopCategories";
 import IntroducingProducts from './../components/IntroducingProducts';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <FeatureSection />
       <IntroducingProducts/>
+      <TopCategories/>
     </div>
   );
 };
