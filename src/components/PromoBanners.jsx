@@ -40,8 +40,10 @@ const PromoBanners = () => {
   }, []);
 
   return (
-    <section className="relative w-full  bg-cover bg-center"
-      style={{ backgroundImage: "url(/PromoBanner.png)" }}>
+    <section
+      className="relative w-full  bg-cover bg-center"
+      style={{ backgroundImage: "url(/PromoBanner.png)" }}
+    >
       <div className="py-12 px-4 md:px-8 lg:px-16 max-w-11/12 mx-auto">
         <div className="grid md:grid-cols-2 gap-6">
           {/* Fruit & Vegetable Banner */}
@@ -110,12 +112,13 @@ const PromoBanners = () => {
                   { value: timeLeft.secs, label: "SECS" },
                 ].map((item, index) => (
                   <div key={index} className="text-center">
-                    <div className="bg-white text-gray-900 rounded-lg w-12 h-12 flex items-center justify-center font-bold text-lg">
+                    <div className="bg-white text-[#00B307]
+ text-xl rounded-lg w-14 h-14 flex items-center justify-center flex-col">
                       {String(item.value).padStart(2, "0")}
+                      <span className=" text-[10px] block">
+                        {item.label}
+                      </span>
                     </div>
-                    <span className="text-white/60 text-[10px] mt-1 block">
-                      {item.label}
-                    </span>
                   </div>
                 ))}
               </div>
