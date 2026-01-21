@@ -1,4 +1,5 @@
 import Banner from "../components/Banner";
+import BestSellerProducts from "../components/BestSellerProducts";
 import FeatureSection from "../components/FeatureSection";
 import PromoBanners from "../components/PromoBanners";
 import Stats from "../components/Stats";
@@ -16,6 +17,7 @@ const Home = () => {
       <TrustedStore/>
       <Stats/>
       <PromoBanners/>
+      <BestSellerProducts/>
     </div>
   );
 };

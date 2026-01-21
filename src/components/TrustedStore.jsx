@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "react-router";
 
 const TrustedStore = () => {
   return (
@@ -78,8 +79,8 @@ const TrustedStore = () => {
               </div>
             </div>
 
-            <a
-              href="/shop"
+            <Link
+              to="/shop"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
             >
               Shop Now
@@ -96,7 +97,7 @@ const TrustedStore = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

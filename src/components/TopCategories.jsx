@@ -1,4 +1,6 @@
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const categories = [
   {
@@ -172,25 +174,14 @@ const TopCategories = () => {
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">
             Shop by Top Categories
           </h2>
-          <a
-            href="/shop"
-            className="text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
-          >
-            View All
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex justify-center md:justify-end">
+            <Link
+              to="/shop"
+              className="text-green-600 hover:text-green-700 flex items-center gap-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </a>
+              View All <ArrowRight />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">

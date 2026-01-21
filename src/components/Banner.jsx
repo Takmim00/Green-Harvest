@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const slides = [
   {
@@ -100,9 +101,9 @@ export default function Banner() {
               {slide.description}
             </p>
 
-            <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full flex justify-center items-center gap-2">
+            <Link to='/shop' className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2">
               Shop now <ArrowRight />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ const stats = [
 const Stats = () => {
   return (
     <section
-      className="relative w-full  bg-cover bg-center py-10"
+      className="relative inset-0 w-full  bg-cover bg-center bg-no-repeat py-10"
       style={{ backgroundImage: "url(/STATSBG.png)" }}
     >
       <div className="max-w-11/12 mx-auto px-4 md:px-8 lg:px-16">

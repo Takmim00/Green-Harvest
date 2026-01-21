@@ -88,7 +88,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
           </div>
         </div>
 
-        {/* Rating */}
+      
         <div>
           <button className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
             <HiOutlineShoppingBag size={22} />

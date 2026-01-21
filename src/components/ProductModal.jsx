@@ -36,7 +36,7 @@ const ProductModal = ({ product, onClose, isOpen }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-y-auto max-h-[90vh]">
+      <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-hidden  max-h-[90vh]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -165,8 +165,7 @@ const ProductModal = ({ product, onClose, isOpen }) => {
 
             {/* Description */}
             <p className="text-sm text-gray-600 leading-relaxed">
-              Class aptent taciti sociosqu ad litora torquent per conubia
-              nostra, per inceptos himenaeos.
+              {product.description}
             </p>
 
             {/* Quantity & Add to Cart */}

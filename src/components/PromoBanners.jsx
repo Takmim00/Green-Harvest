@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const PromoBanners = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -41,10 +42,10 @@ const PromoBanners = () => {
 
   return (
     <section
-      className="relative w-full  bg-cover bg-center"
+      className="relative block w-full mask-[linear-gradient(to_bottom,black_85%,transparent)]  bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url(/PromoBanner.png)" }}
     >
-      <div className="py-12 px-4 md:px-8 lg:px-16 max-w-11/12 mx-auto">
+      <div className="py-16 px-4 md:px-8 lg:px-16 max-w-11/12 mx-auto">
         <div className="grid md:grid-cols-2 gap-6">
           {/* Fruit & Vegetable Banner */}
           <div className="relative bg-gray-900 rounded-xl overflow-hidden h-64 md:h-72">
@@ -66,8 +67,8 @@ const PromoBanners = () => {
                   $7.99
                 </span>
               </p>
-              <a
-                href="/shop"
+              <Link
+                to="/shop"
                 className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors w-fit"
               >
                 Shop Now
@@ -84,7 +85,7 @@ const PromoBanners = () => {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -123,8 +124,8 @@ const PromoBanners = () => {
                 ))}
               </div>
 
-              <a
-                href="/shop"
+              <Link
+                to="/shop"
                 className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors w-fit"
               >
                 Shop Now
@@ -141,7 +142,7 @@ const PromoBanners = () => {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

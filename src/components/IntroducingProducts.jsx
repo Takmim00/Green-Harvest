@@ -1,7 +1,8 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight} from "lucide-react";
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
+import { Link } from "react-router";
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -16,6 +17,7 @@ const IntroducingProducts = () => {
   const [favorites, setFavorites] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //  Fetch
   useEffect(() => {
@@ -77,9 +79,12 @@ const IntroducingProducts = () => {
           </div>
 
           <div className="flex justify-center md:justify-end">
-            <button className="text-green-600 hover:text-green-700 flex items-center gap-2">
+            <Link
+              to="/shop"
+              className="text-green-600 hover:text-green-700 flex items-center gap-2"
+            >
               View All <ArrowRight />
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -92,14 +97,21 @@ const IntroducingProducts = () => {
                 product={product}
                 isFavorite={favorites.includes(product.id)}
                 onToggleFavorite={() => toggleFavorite(product.id)}
-                onView={(product) => setSelectedProduct(product)}
+                onView={(product) => {
+                  setSelectedProduct(product);
+                  setIsModalOpen(true);
+                }}
               />
             ))}
-            <ProductModal
-              product={selectedProduct}
-              onClose={() => setSelectedProduct(null)}
-            />
           </div>
+          <ProductModal
+            product={selectedProduct}
+            isOpen={isModalOpen}
+            onClose={() => {
+              setSelectedProduct(null);
+              setIsModalOpen(false);
+            }}
+          />
         </div>
       </div>
     </div>
