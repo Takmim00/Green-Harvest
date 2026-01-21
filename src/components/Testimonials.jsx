@@ -47,23 +47,25 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="relative w-full  bg-[linear-gradient(180deg,#ffffff_0%,#f2f4f3_63%),rgba(32,181,38,0.1)] bg-cover bg-no-repeat py-16"
-      style={{ backgroundImage: "url(/TestimonialBG.png)" }}>
+    <section
+      className="relative w-full  bg-[linear-gradient(180deg,#ffffff_0%,#f2f4f3_63%),rgba(32,181,38,0.1)] bg-cover bg-no-repeat py-16"
+      style={{ backgroundImage: "url(/TestimonialBG.png)" }}
+    >
       <div className="px-4 ">
         <div className="max-w-11/12 mx-auto">
           {/* Header */}
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <span className="text-green-500 text-sm font-medium tracking-wider uppercase">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
+            <div className="flex flex-col justify-center  md:justify-start items-center md:items-start text-center">
+              <p className="text-green-500 text-sm font-medium tracking-wider uppercase">
                 TESTIMONIAL
-              </span>
-              <h2 className="text-3xl font-semibold text-gray-900 mt-2">
+              </p>
+              <h2 className="text-2xl md:text-4xl font-semibold text-gray-900 mt-2">
                 What Our Customer Says
               </h2>
             </div>
 
             {/* Navigation Arrows */}
-            <div className="flex items-center gap-2">
+            <div className="flex justify-center md:justify-end">
               <button
                 onClick={handlePrev}
                 className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-gray-300 hover:text-gray-600 transition-colors"

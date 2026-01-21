@@ -51,7 +51,7 @@ export default function Navbar() {
             </Link>
 
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-md mx-4">
+            <div className="hidden md:flex flex-1 md:max-w-md mx-4">
               <div className="flex w-full">
                 <input
                   type="text"

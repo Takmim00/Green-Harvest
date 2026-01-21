@@ -73,7 +73,7 @@ const IntroducingProducts = () => {
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
               Featured Products
             </h1>
           </div>

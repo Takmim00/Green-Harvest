@@ -170,10 +170,12 @@ const TopCategories = () => {
     select-none
   "
         />
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
+          <div className="flex justify-center md:justify-start">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
             Shop by Top Categories
           </h2>
+          </div>
           <div className="flex justify-center md:justify-end">
             <Link
               to="/shop"

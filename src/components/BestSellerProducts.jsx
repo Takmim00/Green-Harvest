@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import SmallProductCard from "./SmallProductCard";
-import { Link } from "react-router";
 
 const BestSellerProducts = () => {
   const [products, setProducts] = useState([]);
@@ -79,16 +79,20 @@ const BestSellerProducts = () => {
   return (
     <section className="py-12 px-4 max-w-11/12 mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          Best Seller Products
-        </h2>
-        <Link
-          to="/shop"
-          className="flex items-center gap-1 text-green-600 hover:text-green-700 text-sm font-medium"
-        >
-          View All <ArrowRight size={16} />
-        </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
+        <div className="flex justify-center md:justify-start">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
+            Best Seller Products
+          </h2>
+        </div>
+        <div className="flex justify-center md:justify-end">
+          <Link
+            to="/shop"
+            className="flex items-center gap-1 text-green-600 hover:text-green-700 text-sm font-medium"
+          >
+            View All <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
 
       {/* Top Row - Product Cards using shared ProductCard component */}
