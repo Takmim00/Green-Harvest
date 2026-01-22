@@ -1,6 +1,8 @@
 import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useNavigate } from "react-router";
 const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
+  const navigate = useNavigate();
   const discountPercent = product.original_price
     ? Math.round(
         ((product.original_price - product.current_price) /
@@ -90,7 +92,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
 
       
         <div>
-          <button className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
+          <button onClick={() => navigate(`/product/${product.id}`)} className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
             <HiOutlineShoppingBag size={22} />
           </button>
         </div>

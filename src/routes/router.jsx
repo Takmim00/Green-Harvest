@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import Main from "../layout/Main";
 import Home from "../pages/Home";
-import SingleProduct from "../pages/SingleProduct";
+import ProductDetails from "../pages/ProductDetails";
 import Shops from "../pages/Shops";
 import Wishlist from "../pages/PaymentSctions/Wishlist";
 
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <SingleProduct />,
+        element: <ProductDetails />,
       },
       {
         path: "/wishlist",
