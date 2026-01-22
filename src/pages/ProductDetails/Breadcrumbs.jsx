@@ -4,7 +4,7 @@ import BreadcrumbsPng from "../../../public/Breadcrumbs.png";
 const Breadcrumbs = () => {
   return (
     <div className="">
-      <div className="relative h-[120px] overflow-hidden flex items-center">
+      <div className="relative h-30 overflow-hidden flex items-center">
         {/* Background Texture & Images */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center"
