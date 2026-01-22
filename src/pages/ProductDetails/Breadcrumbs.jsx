@@ -1,16 +1,15 @@
 import { Home, ChevronRight } from "lucide-react";
 import React from "react";
-
+import BreadcrumbsPng from "../../../public/Breadcrumbs.png";
 const Breadcrumbs = () => {
   return (
     <div className="">
-      <div className="relative h-[120px] bg-[#1A1A1A] overflow-hidden flex items-center">
+      <div className="relative h-[120px] overflow-hidden flex items-center">
         {/* Background Texture & Images */}
         <div
-          className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
+          className="absolute inset-0 z-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              'url("https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2000&auto=format&fit=crop")',
+            backgroundImage: `url(${BreadcrumbsPng})`,
           }}
         ></div>
 
