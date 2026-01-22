@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,16 +9,15 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
+import { Heart, Minus, Plus } from "lucide-react";
 import { BsInstagram, BsTwitterX } from "react-icons/bs";
-import { Heart, Minus, Plus, Share2 } from "lucide-react";
+import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
-import Newsletter from "./ProductDetails/Newsletter";
 
-const SingleProduct = () => {
+const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -26,9 +25,14 @@ const SingleProduct = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
+    fetch("/api/product.json")
       .then((res) => res.json())
-      .then((data) => setProduct(data));
+      .then((data) => {
+        const foundProduct = data.find(
+          (item) => String(item.id) === String(id),
+        );
+        setProduct(foundProduct);
+      });
   }, [id]);
 
   const increaseQty = () => setQuantity((q) => q + 1);
@@ -41,12 +45,19 @@ const SingleProduct = () => {
       </div>
     );
   }
+  const discountPercent = product.original_price
+    ? Math.round(
+        ((product.original_price - product.current_price) /
+          product.original_price) *
+          100,
+      )
+    : 0;
 
   return (
-    <div className="">
-      <div className="container">
+    <div className="max-w-7xl mx-auto">
+      
         {/* product info */}
-        <div className="grid lg:grid-cols-2 mt-6">
+        <div className="grid   md:grid-cols-2 gap-6 mt-6">
           <div className="prductSlider grid lg:grid-cols-5 gap-3">
             {/* thumd */}
             <div className="lg:col-span-1 col-span-5 max-w-[100vw] thumbnailSlider order-2 lg:order-1">
@@ -69,7 +80,7 @@ const SingleProduct = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper"
               >
-                {product?.images.map((thumb) => (
+                {product?.image?.map((thumb) => (
                   <SwiperSlide key={thumb} className="p-2">
                     <img
                       className="max-w-21.25 block ms-auto rounded-sm opacity-70"
@@ -93,7 +104,7 @@ const SingleProduct = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
               >
-                {product?.images.map((main) => (
+                {product?.image?.map((main) => (
                   <SwiperSlide key={main}>
                     <img className="max-w-full lg:max-w-125" src={main} />
                   </SwiperSlide>
@@ -105,10 +116,10 @@ const SingleProduct = () => {
           <div className="productInfo flex flex-col lg:space-y-2 sm:space-y-5 space-y-4">
             <div className="title flex items-center gap-3">
               <h2 className="font-semibold text-xl sm:text-2xl lg:text-[36px] leading-tight">
-                {product?.title}
+                {product?.name}
               </h2>
               <p className="px-3 py-1 rounded-sm bg-[#20b52633] text-xs sm:text-sm text-branding-success-dark">
-                {product?.availabilityStatus}
+                {product?.stock_status}
               </p>
             </div>
             {/* Rating and SKU */}
@@ -128,29 +139,25 @@ const SingleProduct = () => {
                 )}
               </div>
               <span className="text-sm text-gray-700">
-                {product?.reviews.length} Review
+                {product?.reviews_count} Review
               </span>
               <span className="hidden sm:inline text-gray-400">•</span>
               <span className="text-sm text-gray-700">SKU: {product?.sku}</span>
             </div>
             {/*Price  */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <span className="line-through text-gray-400 text-base sm:text-lg">
-                $
-                {(
-                  product?.price -
-                  Math.round(
-                    product?.price * (product?.discountPercentage / 100),
-                  )
-                ).toFixed(2)}
-              </span>
-              <span className="text-2xl sm:text-3xl font-bold text-gray-900">
-                ${product?.price}
-              </span>
-              <span className="bg-rose-50 text-red-600 text-xs sm:text-sm font-semibold px-2 py-1 rounded-full">
-                {product?.discountPercentage}% Off
-              </span>
-            </div>
+            <div className="flex items-center gap-3">
+                {product.original_price && (
+                  <span className="line-through text-gray-400 text-lg">
+                    ${product.original_price}
+                  </span>
+                )}
+                <span className="text-3xl text-green-600">
+                  ${product.current_price}
+                </span>
+                <span className="bg-red-100 text-red-600 text-sm rounded-full px-2 py-1">
+                  {discountPercent}% Off
+                </span>
+              </div>
 
             <div className="border-t border-gray-200 my-4" />
             {/* Brand & Share */}
@@ -269,15 +276,13 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
-      </div>
+      
       {/* Description Tabs Section */}
       <DescriptionTabs product={product} />
 
       <RelatedCard product={product} />
-
-      <Newsletter />
     </div>
   );
 };
 
-export default SingleProduct;
+export default ProductDetails;

@@ -60,14 +60,14 @@ const DescriptionTabs = ({ product }) => {
   };
 
   return (
-    <div className="singleProductInfo mt-6.25 lg:mt-14.25">
+    <div className="singleProductInfo mt-6 sm:mt-8 md:mt-10 lg:mt-14">
       <div className="border-b border-gray-200">
-        <div className="button_grp grid grid-cols-3 max-w-160 w-full mx-auto items-center justify-center">
+        <div className="button_grp grid grid-cols-3 w-full mx-auto items-center justify-center overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`pb-4 font-medium transition-colors ${
+              className={`pb-3 sm:pb-4 px-2 sm:px-4 font-medium transition-colors text-xs sm:text-sm md:text-base whitespace-nowrap ${
                 activeTab === tab.id
                   ? "border-b-2 border-emerald-500 text-emerald-600"
                   : "text-gray-600 hover:text-gray-900"
@@ -81,12 +81,12 @@ const DescriptionTabs = ({ product }) => {
 
       {/* Description Content */}
       {activeTab === "descriptions" && (
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-12 gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Description */}
-            <div className="col-span-12 lg:col-span-7">
+            <div className="col-span-1 lg:col-span-7">
               <div className="space-y-4">
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
                   Sed commodo odium sit et porta tursi purus lorem tristis. Dui
                   curabitur semper justo eros vel odio vivamusse pellentesque
                   semper ornare fringilla. Nulla nisl volutpat vel faucibus id.
@@ -114,17 +114,17 @@ const DescriptionTabs = ({ product }) => {
                   ].map((item, i) => (
                     <li
                       key={i}
-                      className="flex items-center gap-2 text-gray-700 text-sm p-1"
+                      className="flex items-center gap-2 text-gray-700 text-xs sm:text-sm p-1"
                     >
                       <Check
-                        size={18}
+                        size={16}
                         className="text-white bg-green-600 rounded-full shrink-0 p-0.5"
                       />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm text-gray-700">
+                <p className="text-xs sm:text-sm text-gray-700">
                   Cras et diam maximus, accumsan sapien et, sollicitudin velit.
                   Nulla blandit eros non turpis lobortis iaculis at ut
                   massa.{" "}
@@ -133,9 +133,9 @@ const DescriptionTabs = ({ product }) => {
             </div>
 
             {/* Right Column - Customer Image & Discount Cards */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col gap-6">
+            <div className="col-span-1 lg:col-span-5 flex flex-col gap-4 md:gap-6">
               {/* Customer Image */}
-              <div className="bg-gray-100 rounded-lg overflow-hidden h-64 flex items-center justify-center">
+              <div className="bg-gray-100 rounded-lg overflow-hidden h-40 sm:h-52 md:h-64 flex items-center justify-center">
                 <iframe
                   src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1"
                   alt="Customer with vegetables"
@@ -148,29 +148,32 @@ const DescriptionTabs = ({ product }) => {
               </div>
 
               {/* Discount Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border border-gray-200 rounded-2xl p-4 md:p-5 bg-white">
-                <div className="flex items-center gap-4 p-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 border border-gray-200 rounded-2xl p-3 md:p-4 lg:p-5 bg-white">
+                <div className="flex items-center gap-3 md:gap-4 p-1">
                   <div className="shrink-0">
-                    <SlTag size={24} className="text-green-500" />
+                    <SlTag size={20} className="text-green-500 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                    <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
                       60% Discount
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
+                    <p className="text-[10px] md:text-[11px] text-gray-500 mt-0.5">
                       Save your 64% money with us
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-1">
+                <div className="flex items-center gap-3 md:gap-4 p-1">
                   <div className="shrink-0">
-                    <GiLindenLeaf className="text-green-500" size={24} />
+                    <GiLindenLeaf
+                      className="text-green-500"
+                      size={20}
+                    />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                    <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
                       100% Organic
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
+                    <p className="text-[10px] md:text-[11px] text-gray-500 mt-0.5">
                       100% Organic Vegetables
                     </p>
                   </div>
@@ -182,52 +185,52 @@ const DescriptionTabs = ({ product }) => {
       )}
 
       {activeTab === "additional" && (
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-12 gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Description */}
-            <div className="col-span-12 lg:col-span-7">
-              <ul className="space-y-4">
-                <li className="flex items-start gap-6">
-                  <span className="font-medium text-gray-800 min-w-30">
+            <div className="col-span-1 lg:col-span-7">
+              <ul className="space-y-3 md:space-y-4">
+                <li className="flex items-start gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-20 md:min-w-30 text-xs sm:text-sm md:text-base">
                     Weight:
                   </span>
-                  <span className="text-gray-500 text-sm">
-                    {product.dimensions.width}
+                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">
+                    {product?.dimensions?.width}
                   </span>
                 </li>
 
-                <li className="flex items-start gap-6">
-                  <span className="font-medium text-gray-800 min-w-30">
+                <li className="flex items-start gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-20 md:min-w-30 text-xs sm:text-sm md:text-base">
                     color:
                   </span>
-                  <span className="text-gray-500 text-sm">7–10 days</span>
+                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">7–10 days</span>
                 </li>
 
-                <li className="flex items-start gap-6">
-                  <span className="font-medium text-gray-800 min-w-[120px]">
+                <li className="flex items-start gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-20 md:min-w-[120px] text-xs sm:text-sm md:text-base">
                     Type:
                   </span>
-                  <span className="text-gray-500 text-sm">
+                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">
                     Keep refrigerated
                   </span>
                 </li>
 
-                <li className="flex items-start gap-6">
-                  <span className="font-medium text-gray-800 min-w-[120px]">
+                <li className="flex items-start gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-20 md:min-w-[120px] text-xs sm:text-sm md:text-base">
                     Stock Status:
                   </span>
-                  <span className="text-gray-500 text-sm">
-                    {product.availabilityStatus}
+                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">
+                    {product?.availabilityStatus}
                   </span>
                 </li>
-                <li className="flex items-start gap-6">
-                  <span className="font-medium text-gray-800 min-w-[120px]">
+                <li className="flex items-start gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-20 md:min-w-[120px] text-xs sm:text-sm md:text-base">
                     Tags:
                   </span>
-                  <span className="text-gray-500 text-sm">
-                    {product.tags[0]} ,{" "}
+                  <span className="text-gray-500 text-xs sm:text-sm md:text-base">
+                    {product?.tags?.[0]} ,{" "}
                     <span className="text-black underline">
-                      {product.tags[1]}{" "}
+                      {product?.tags?.[1]}{" "}
                     </span>
                     , Cabbage, Green, Cabbage,
                   </span>
@@ -236,9 +239,9 @@ const DescriptionTabs = ({ product }) => {
             </div>
 
             {/* Right Column - Customer Image & Discount Cards */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col gap-6">
+            <div className="col-span-1 lg:col-span-5 flex flex-col gap-4 md:gap-6">
               {/* Customer Image */}
-              <div className="bg-gray-100 rounded-lg overflow-hidden h-64 flex items-center justify-center">
+              <div className="bg-gray-100 rounded-lg overflow-hidden h-40 sm:h-52 md:h-64 flex items-center justify-center">
                 <iframe
                   src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1"
                   alt="Customer with vegetables"
@@ -251,29 +254,32 @@ const DescriptionTabs = ({ product }) => {
               </div>
 
               {/* Discount Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border border-gray-200 rounded-2xl p-4 md:p-5 bg-white">
-                <div className="flex items-center gap-4 p-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 border border-gray-200 rounded-2xl p-3 md:p-4 lg:p-5 bg-white">
+                <div className="flex items-center gap-3 md:gap-4 p-1">
                   <div className="shrink-0">
-                    <SlTag size={24} className="text-green-500" />
+                    <SlTag size={20} className="text-green-500 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                    <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
                       60% Discount
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
+                    <p className="text-[10px] md:text-[11px] text-gray-500 mt-0.5">
                       Save your 64% money with us
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-1">
+                <div className="flex items-center gap-3 md:gap-4 p-1">
                   <div className="shrink-0">
-                    <GiLindenLeaf className="text-green-500" size={24} />
+                    <GiLindenLeaf
+                      className="text-green-500"
+                      size={20}
+                    />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                    <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
                       100% Organic
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
+                    <p className="text-[10px] md:text-[11px] text-gray-500 mt-0.5">
                       100% Organic Vegetables
                     </p>
                   </div>
@@ -285,37 +291,37 @@ const DescriptionTabs = ({ product }) => {
       )}
 
       {activeTab === "feedback" && (
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-12 gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Description */}
-            <div className="col-span-12 lg:col-span-7">
-              {product.reviews.slice(0, visibleReviews).map((review, index) => (
+            <div className="col-span-1 lg:col-span-7">
+              {product?.reviews?.slice(0, visibleReviews).map((review, index) => (
                 <div
                   key={index}
-                  className="py-6 border-b border-gray-200 last:border-0"
+                  className="py-4 md:py-6 border-b border-gray-200 last:border-0"
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-start justify-between gap-3 md:gap-0">
+                    <div className="flex items-center gap-2 md:gap-3 min-w-0">
                       <img
                         src={
                           review.avatar ||
-                          `https://ui-avatars.com/api/?name=${review.name}`
+                          `https://ui-avatars.com/api/?name=${review?.name || "/placeholder.svg"}`
                         }
-                        alt={review.name}
-                        className="w-10 h-10 rounded-full object-cover"
+                        alt={review?.name}
+                        className="w-8 md:w-10 h-8 md:h-10 rounded-full object-cover shrink-0"
                       />
 
-                      <div>
-                        <h4 className="font-semibold text-gray-900 text-sm">
-                          {review.reviewerName}
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-gray-900 text-xs md:text-sm truncate">
+                          {review?.reviewerName}
                         </h4>
 
                         <div className="flex gap-0.5 mt-1">
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              className={`w-4 h-4 ${
-                                i < review.rating
+                              className={`w-3 md:w-4 h-3 md:h-4 ${
+                                i < review?.rating
                                   ? "text-orange-400"
                                   : "text-gray-200"
                               }`}
@@ -329,18 +335,18 @@ const DescriptionTabs = ({ product }) => {
                       </div>
                     </div>
 
-                    <span className="text-xs text-gray-400">{review.date}</span>
+                    <span className="text-[10px] md:text-xs text-gray-400 shrink-0">{review?.date}</span>
                   </div>
 
-                  <p className="mt-4 text-sm text-gray-500">{review.comment}</p>
+                  <p className="mt-3 md:mt-4 text-xs md:text-sm text-gray-500">{review?.comment}</p>
                 </div>
               ))}
 
-              <div className="mt-8 flex justify-center md:justify-start">
+              <div className="mt-6 md:mt-8 flex justify-center md:justify-start">
                 <button
                   onClick={handleLoadMore}
                   disabled={loading || visibleReviews >= Review.length}
-                  className={`px-8 py-3 font-semibold text-sm rounded-full transition-all duration-200 ${
+                  className={`px-6 md:px-8 py-2 md:py-3 font-semibold text-xs md:text-sm rounded-full transition-all duration-200 ${
                     loading
                       ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                       : "bg-[#EDFBEA] text-[#00B207] hover:bg-[#00B207] hover:text-white"
