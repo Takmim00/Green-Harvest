@@ -4,6 +4,7 @@ import {
   Paintbrush as Pinterest,
   Twitter,
 } from "lucide-react";
+import { Link } from "react-router";
 
 export default function Footer() {
   const instagramImages = [
@@ -21,6 +22,44 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#002603] text-gray-700 relative overflow-hidden">
+       <section className="bg-[#edf2ee] py-6">
+      <div className="max-w-11/12 mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Logo */}
+          <div className="flex items-center gap-2 shrink-0">
+             <Link href="/" className="shrink-0">
+              <div className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
+                <span className="text-green-500">🍃</span> Ecobazar
+              </div>
+            </Link>
+          </div>
+
+          {/* Text */}
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-semibold text-gray-800">
+              Subscribe our Newsletter
+            </h3>
+            <p className="text-sm text-gray-500 mt-0.5">
+              Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
+            </p>
+          </div>
+
+          {/* Email Form */}
+          <div className="flex w-full md:w-auto">
+            <div className="relative flex items-center bg-white rounded-full overflow-hidden shadow-sm border border-gray-200 w-full md:w-100">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="w-full py-3.5 px-5 text-sm text-gray-600 outline-none bg-transparent"
+              />
+              <button className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-6 py-3.5 rounded-full  transition-colors whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       {/* Left Side Image */}
       <img
         src="/footer-left.png"

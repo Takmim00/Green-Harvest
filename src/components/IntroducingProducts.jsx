@@ -1,7 +1,8 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight} from "lucide-react";
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
+import { Link } from "react-router";
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -16,6 +17,7 @@ const IntroducingProducts = () => {
   const [favorites, setFavorites] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //  Fetch
   useEffect(() => {
@@ -67,39 +69,49 @@ const IntroducingProducts = () => {
   "
       />
 
-      <div className="max-w-11/12 mx-auto pb-10 ">
+      <div className="max-w-11/12 mx-auto pb-16 ">
         {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
               Featured Products
             </h1>
           </div>
 
           <div className="flex justify-center md:justify-end">
-            <button className="text-green-600 hover:text-green-700 flex items-center gap-2">
+            <Link
+              to="/shop"
+              className="text-green-600 hover:text-green-700 flex items-center gap-2"
+            >
               View All <ArrowRight />
-            </button>
+            </Link>
           </div>
         </div>
 
         {/* Products Grid */}
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {filteredProducts.slice(0, 4).map((product) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {filteredProducts.slice(0, 5).map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
                 isFavorite={favorites.includes(product.id)}
                 onToggleFavorite={() => toggleFavorite(product.id)}
-                onView={(product) => setSelectedProduct(product)}
+                onView={(product) => {
+                  setSelectedProduct(product);
+                  setIsModalOpen(true);
+                }}
               />
             ))}
-            <ProductModal
-              product={selectedProduct}
-              onClose={() => setSelectedProduct(null)}
-            />
           </div>
+          <ProductModal
+            product={selectedProduct}
+            isOpen={isModalOpen}
+            onClose={() => {
+              setSelectedProduct(null);
+              setIsModalOpen(false);
+            }}
+          />
         </div>
       </div>
     </div>

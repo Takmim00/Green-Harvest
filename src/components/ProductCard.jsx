@@ -9,7 +9,15 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       )
     : 0;
   return (
-    <div className="bg-white shadow hover:shadow-md transition-shadow rounded-2xl border border-gray-200 hover:border-[#00B307]">
+    <div  className="
+    bg-white 
+    rounded-2xl 
+    border border-gray-200 
+    shadow-sm
+    transition-all duration-300
+    hover:border-[#00B307]
+    hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)]
+  ">
       {/* Image Section */}
       <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
@@ -80,7 +88,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
           </div>
         </div>
 
-        {/* Rating */}
+      
         <div>
           <button className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
             <HiOutlineShoppingBag size={22} />

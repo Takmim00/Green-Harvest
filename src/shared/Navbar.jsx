@@ -8,7 +8,7 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,7 +51,7 @@ export default function Navbar() {
             </Link>
 
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-md mx-4">
+            <div className="hidden md:flex flex-1 md:max-w-md mx-4">
               <div className="flex w-full">
                 <input
                   type="text"
@@ -116,42 +116,96 @@ export default function Navbar() {
 
               {/* Menu */}
               <div className="flex items-center">
-                <Link
-                  href="/"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                {/* Home */}
+                <NavLink
+                  to="/"
+                  end
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                          ${
+                            isActive
+                              ? "bg-green-50 text-green-600 font-semibold "
+                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                          }`
+                  }
                 >
                   Home
-                </Link>
-                <Link
-                  href="/shop"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Shop */}
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                  }
                 >
                   Shop <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/pages"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Pages */}
+                <NavLink
+                  to="/pages"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                  }
                 >
                   Pages <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/blog"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Blog */}
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                    ${
+                      isActive
+                        ? "bg-green-50 text-green-600 font-semibold "
+                        : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                    }`
+                  }
                 >
                   Blog <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/about"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* About */}
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                  }
                 >
                   About Us
-                </Link>
-                <Link
-                  href="/contact"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Contact */}
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                  }
                 >
                   Contact Us
-                </Link>
+                </NavLink>
               </div>
             </div>
 
@@ -169,42 +223,95 @@ export default function Navbar() {
                 <span>☰</span>
                 All Categories
               </button>
-              <Link
-                href="/"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                          ${
+                            isActive
+                              ? "bg-green-50 text-green-600 font-semibold "
+                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                          }`
+                }
               >
                 Home
-              </Link>
-              <Link
-                href="/shop"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              </NavLink>
+
+              {/* Shop */}
+              <NavLink
+                to="/shop"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                }
               >
-                Shop
-              </Link>
-              <Link
-                href="/pages"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Shop <ChevronDown size={16} />
+              </NavLink>
+
+              {/* Pages */}
+              <NavLink
+                to="/pages"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                }
               >
-                Pages
-              </Link>
-              <Link
-                href="/blog"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Pages <ChevronDown size={16} />
+              </NavLink>
+
+              {/* Blog */}
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                    ${
+                      isActive
+                        ? "bg-green-50 text-green-600 font-semibold "
+                        : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                    }`
+                }
               >
-                Blog
-              </Link>
-              <Link
-                href="/about"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Blog <ChevronDown size={16} />
+              </NavLink>
+
+              {/* About */}
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                }
               >
                 About Us
-              </Link>
-              <Link
-                href="/contact"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              </NavLink>
+
+              {/* Contact */}
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                }
               >
                 Contact Us
-              </Link>
+              </NavLink>
             </div>
           )}
         </div>
