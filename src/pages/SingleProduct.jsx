@@ -17,6 +17,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
 import Newsletter from "./ProductDetails/Newsletter";
+import Breadcrumbs from "./ProductDetails/Breadcrumbs";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -44,6 +45,7 @@ const SingleProduct = () => {
 
   return (
     <div className="">
+      <Breadcrumbs />
       <div className="container">
         {/* product info */}
         <div className="grid lg:grid-cols-2 mt-6">
@@ -275,7 +277,7 @@ const SingleProduct = () => {
 
       <RelatedCard product={product} />
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
   );
 };
