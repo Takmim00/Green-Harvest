@@ -1,69 +1,40 @@
+import { ChevronDown, Heart, Star, X } from "lucide-react";
 import { useState } from "react";
-import {
-  X,
-  ChevronDown,
-  Star,
-  ChevronDownSquareIcon,
-  Heart,
-} from "lucide-react";
-import {
-  FaFacebook,
-  FaFacebookF,
-  FaInstagram,
-  FaPinterestP,
-} from "react-icons/fa";
 import { BsChevronUp, BsTwitterX } from "react-icons/bs";
-import greenApple from "../assets/Product Image.png";
-import Farmary from "../assets/Group 19.png";
+import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-const galleryImages = [
-  {
-    id: 1,
-    image: greenApple,
-    alt: "Chinese Cabbage - Main",
-    brand: Farmary,
-  },
-  {
-    id: 2,
-    image: "/images/cabbage-thumb-1.jpg",
-    alt: "Chinese Cabbage - Detail",
-  },
-  {
-    id: 3,
-    image: "/images/cabbage-thumb-2.jpg",
-    alt: "Chinese Cabbage - Leaves",
-  },
-  {
-    id: 4,
-    image: "/images/cabbage-thumb-2.jpg",
-    alt: "Chinese Cabbage - Side",
-  },
-];
+import Farmary from "../assets/Group 19.png";
 
-const ProductModal = ({ product, onClose }) => {
+const ProductModal = ({ product, onClose, isOpen }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-
   const handleAddToCart = () => {
     const cartItem = {
       id: product.id,
       name: product.name,
       price: product.price,
       quantity,
-      image: galleryImages[selectedImage].image,
+      image: images[selectedImage],
     };
 
     console.log("Added to cart:", cartItem);
   };
-
-  if (!product) return null;
+  if (!product || !isOpen) return null;
+  const images = Array.isArray(product.image) ? product.image : [product.image];
+  const discountPercent = product.original_price
+    ? Math.round(
+        ((product.original_price - product.current_price) /
+          product.original_price) *
+          100,
+      )
+    : 0;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-y-auto max-h-[90vh]">
+      <div className="bg-white rounded-xl w-full max-w-5xl p-8 relative overflow-hidden  max-h-[90vh]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -83,9 +54,9 @@ const ProductModal = ({ product, onClose }) => {
                   className=" hover:bg-gray-300 rounded-full"
                 />
               </button>
-              {galleryImages.map((item, index) => (
+              {images.map((img, index) => (
                 <button
-                  key={item.id}
+                  key={img}
                   onClick={() => setSelectedImage(index)}
                   className={`w-20 h-20 rounded-lg border-2 overflow-hidden ${
                     selectedImage === index
@@ -94,8 +65,8 @@ const ProductModal = ({ product, onClose }) => {
                   }`}
                 >
                   <img
-                    src={item.image}
-                    alt={item.alt}
+                    src={img || "/placeholder.svg"}
+                    alt={`product-${index}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -110,8 +81,8 @@ const ProductModal = ({ product, onClose }) => {
 
             <div className="flex-1 flex items-center justify-center bg-white min-h-105">
               <img
-                src={galleryImages[selectedImage].image}
-                alt={galleryImages[selectedImage].alt}
+                src={images[selectedImage] || "/placeholder.svg"}
+                alt={`product-main-${selectedImage}`}
                 className="w-full h-full object-contain"
               />
             </div>
@@ -124,7 +95,7 @@ const ProductModal = ({ product, onClose }) => {
                 {product.name}
               </h2>
               <span className="bg-green-200 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-md">
-                In Stock
+                {product.stock_status}
               </span>
             </div>
 
@@ -143,22 +114,22 @@ const ProductModal = ({ product, onClose }) => {
                 {product.rating} Reviews
               </span>
               <span className="text-sm text-gray-500">•</span>
-              <span className="text-sm text-gray-700">SKU: 2,51,594</span>
+              <span className="text-sm text-gray-700">SKU: {product.sku}</span>
             </div>
 
             {/* Price */}
             <div>
               <div className="flex items-center gap-3">
-                {product.originalPrice && (
+                {product.original_price && (
                   <span className="line-through text-gray-400 text-lg">
-                    ${product.originalPrice}
+                    ${product.original_price}
                   </span>
                 )}
                 <span className="text-3xl text-green-600">
-                  ${product.price}
+                  ${product.current_price}
                 </span>
                 <span className="bg-red-100 text-red-600 text-sm rounded-full px-2 py-1">
-                  64% Off
+                  {discountPercent}% Off
                 </span>
               </div>
             </div>
@@ -169,7 +140,7 @@ const ProductModal = ({ product, onClose }) => {
                 <span className="text-gray-700 font-medium">Brand:</span>
                 <div className="flex items-center gap-1">
                   <span className="text-lg">
-                    <img src={Farmary} alt="" />
+                    <img src={Farmary || "/placeholder.svg"} alt="" />
                   </span>
                 </div>
               </div>
@@ -192,8 +163,7 @@ const ProductModal = ({ product, onClose }) => {
 
             {/* Description */}
             <p className="text-sm text-gray-600 leading-relaxed">
-              Class aptent taciti sociosqu ad litora torquent per conubia
-              nostra, per inceptos himenaeos.
+              {product.description}
             </p>
 
             {/* Quantity & Add to Cart */}
@@ -208,7 +178,7 @@ const ProductModal = ({ product, onClose }) => {
                   >
                     −
                   </button>
-                  <span className="px-5 py-2 font-semibold min-w-[40px] text-center">
+                  <span className="px-5 py-2 font-semibold min-w-10 text-center">
                     {quantity}
                   </span>
                   <button

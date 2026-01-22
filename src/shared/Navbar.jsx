@@ -8,7 +8,7 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="w-full">
       {/* Top Bar */}
       <div className="bg-gray-800 text-white text-xs py-2.5">
-        <div className="max-w-11/12 mx-auto px-4 flex justify-between items-center">
+        <div className="max-w-11/12 mx-auto  flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="hidden sm:inline">
               📍 Store location: Lincoln: 344, Illinois, Chicago, USA
@@ -41,17 +41,17 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-11/12 mx-auto px-4 py-4">
+        <div className="max-w-11/12 mx-auto  py-4">
           <div className="flex items-center justify-between gap-4 ">
             {/* Logo */}
             <Link href="/" className="shrink-0">
-              <div className="text-2xl font-bold text-green-600 flex items-center gap-2">
+              <div className="md:text-2xl font-bold text-green-600 flex items-center gap-2">
                 <span className="text-green-500">🍃</span> Ecobazar
               </div>
             </Link>
 
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-md mx-4">
+            <div className="hidden md:flex flex-1 md:max-w-md mx-4">
               <div className="flex w-full">
                 <input
                   type="text"
@@ -100,7 +100,7 @@ export default function Navbar() {
 
       {/* Secondary Navigation */}
       <div className="bg-gray-50 sticky top-16 md:top-24 z-30">
-        <div className="max-w-11/12 mx-auto px-4">
+        <div className="max-w-11/12 mx-auto ">
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center justify-between">
             {/* Left Side: Categories + Menu */}
@@ -116,42 +116,96 @@ export default function Navbar() {
 
               {/* Menu */}
               <div className="flex items-center">
-                <Link
-                  href="/"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                {/* Home */}
+                <NavLink
+                  to="/"
+                  end
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                          ${
+                            isActive
+                              ? "bg-green-50 text-green-600 font-semibold "
+                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                          }`
+                  }
                 >
                   Home
-                </Link>
-                <Link
-                  href="/shop"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Shop */}
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                  }
                 >
                   Shop <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/pages"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Pages */}
+                <NavLink
+                  to="/pages"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                  }
                 >
                   Pages <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/blog"
-                  className="px-4 py-3 flex items-center gap-1 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Blog */}
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    `px-4 py-3 flex items-center gap-1 transition
+                    ${
+                      isActive
+                        ? "bg-green-50 text-green-600 font-semibold "
+                        : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                    }`
+                  }
                 >
                   Blog <ChevronDown size={16} />
-                </Link>
-                <Link
-                  href="/about"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* About */}
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                  }
                 >
                   About Us
-                </Link>
-                <Link
-                  href="/contact"
-                  className="px-4 py-3 hover:bg-green-50 text-gray-700 hover:text-green-600"
+                </NavLink>
+
+                {/* Contact */}
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                  }
                 >
                   Contact Us
-                </Link>
+                </NavLink>
               </div>
             </div>
 
@@ -169,42 +223,95 @@ export default function Navbar() {
                 <span>☰</span>
                 All Categories
               </button>
-              <Link
-                href="/"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                          ${
+                            isActive
+                              ? "bg-green-50 text-green-600 font-semibold "
+                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                          }`
+                }
               >
                 Home
-              </Link>
-              <Link
-                href="/shop"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              </NavLink>
+
+              {/* Shop */}
+              <NavLink
+                to="/shop"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                }
               >
-                Shop
-              </Link>
-              <Link
-                href="/pages"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Shop <ChevronDown size={16} />
+              </NavLink>
+
+              {/* Pages */}
+              <NavLink
+                to="/pages"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                        ${
+                          isActive
+                            ? "bg-green-50 text-green-600 font-semibold "
+                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        }`
+                }
               >
-                Pages
-              </Link>
-              <Link
-                href="/blog"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Pages <ChevronDown size={16} />
+              </NavLink>
+
+              {/* Blog */}
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  `px-4 py-3 flex items-center gap-1 transition
+                    ${
+                      isActive
+                        ? "bg-green-50 text-green-600 font-semibold "
+                        : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                    }`
+                }
               >
-                Blog
-              </Link>
-              <Link
-                href="/about"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+                Blog <ChevronDown size={16} />
+              </NavLink>
+
+              {/* About */}
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                }
               >
                 About Us
-              </Link>
-              <Link
-                href="/contact"
-                className="px-4 py-2 hover:bg-green-50 text-gray-700"
+              </NavLink>
+
+              {/* Contact */}
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                }
               >
                 Contact Us
-              </Link>
+              </NavLink>
             </div>
           )}
         </div>
