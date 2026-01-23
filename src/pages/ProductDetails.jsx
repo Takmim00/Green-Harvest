@@ -7,6 +7,7 @@ import { BsInstagram, BsTwitterX } from "react-icons/bs";
 import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import RelatedCard from "./ProductDetails/RelatedCard";
+import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -54,19 +55,18 @@ const ProductDetails = () => {
     <div className="w-11/12 md:max-w-7xl mx-auto">
       {/* product info */}
       <div className="grid   md:grid-cols-2 gap-6 mt-6">
-        <div className="grid lg:grid-cols-5 gap-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4">
           {/* Thumbnail column */}
-          <div className="lg:col-span-1 flex flex-col items-center gap-2">
+          <div className="lg:col-span-1 order-2 lg:order-1 flex flex-col items-center gap-2">
             {/* Up arrow */}
             <button
               onClick={scrollUp}
-              className="p-1  rounded hover:bg-gray-100"
+              className="hidden lg:block p-1 rounded hover:bg-gray-100"
             >
               <ChevronUp size={18} />
             </button>
-
             {/* Thumbnails */}
-            <div className="flex lg:flex-col gap-2 overflow-hidden">
+            <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-hidden">
               {product?.image?.map((img, index) => (
                 <button
                   key={img}
@@ -80,18 +80,16 @@ const ProductDetails = () => {
                 </button>
               ))}
             </div>
-
             {/* Down arrow */}
             <button
               onClick={scrollDown}
-              className="p-1  rounded hover:bg-gray-100"
+              className="hidden lg:block p-1 rounded hover:bg-gray-100"
             >
               <ChevronDown size={18} />
             </button>
           </div>
-
           {/* Main Image */}
-          <div className="lg:col-span-4 flex items-center justify-center  rounded bg-white h-65 sm:h-90 lg:h-125">
+          <div className="lg:col-span-4 order-1 lg:order-2 flex items-center justify-center rounded bg-white h-65 sm:h-90 lg:h-125">
             <img
               src={product?.image?.[activeIndex]}
               className="w-full h-full object-contain"
@@ -99,8 +97,6 @@ const ProductDetails = () => {
             />
           </div>
         </div>
-
-       
         <div className="productInfo flex flex-col space-y-3 sm:space-y-4 lg:space-y-2">
           <div className="title flex flex-wrap items-center gap-2 sm:gap-3">
             <h2 className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-[36px] leading-tight">
@@ -194,25 +190,25 @@ const ProductDetails = () => {
                 onClick={decreaseQty}
                 className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full"
               >
-                <Minus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                <Minus className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>
-              <span className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-center min-w-[40px] sm:min-w-[50px] md:min-w-15 font-medium text-gray-700 text-sm sm:text-base">
+              <span className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-center min-w-10  sm:min-w-10 md:min-w-15 font-medium text-gray-700 text-sm sm:text-base">
                 {quantity}
               </span>
               <button
                 onClick={increaseQty}
                 className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full"
               >
-                <Plus className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>
             </div>
 
             <button
               // onClick={handleAddToCart}
-              className="flex-1 min-w-[140px] sm:min-w-[180px] flex items-center justify-center gap-1 sm:gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 rounded-full transition group text-sm sm:text-base"
+              className="flex-1 min-w-35 sm:min-w-45 flex items-center justify-center gap-1 sm:gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 rounded-full transition group text-sm sm:text-base"
             >
               <span>Add to Cart</span>
-              <HiOutlineShoppingBag className="w-5 h-5 sm:w-[22px] sm:h-[22px] group-hover:translate-x-1 transition" />
+              <HiOutlineShoppingBag className="w-5 h-5 sm:w-5.5 sm:h-5.5 group-hover:translate-x-1 transition" />
             </button>
 
             <button
@@ -288,7 +284,7 @@ const ProductDetails = () => {
       </div>
 
       {/* Description Tabs Section */}
-      {/* <DescriptionTabs product={product} /> */}
+      <DescriptionTabs product={product} />
 
       <RelatedCard product={product} />
     </div>
