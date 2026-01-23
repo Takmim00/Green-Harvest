@@ -41,7 +41,7 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-11/12 md:max-w-7xl mx-auto  py-4">
+        <div className="max-w-11/12 md:max-w-7xl mx-auto py-0 md:py-4">
           <div className="flex items-center justify-between gap-4 ">
             {/* Logo */}
             <Link href="/" className="shrink-0">
@@ -84,9 +84,9 @@ export default function Navbar() {
             </div>
           </div>
 
+       
           {/* Mobile Search */}
-          {/* Mobile Search */}
-          <div className="md:hidden w-full my-2 px-2">
+          <div className="md:hidden w-full my-1 px-2">
             <div className="flex w-full">
               <input
                 type="text"
