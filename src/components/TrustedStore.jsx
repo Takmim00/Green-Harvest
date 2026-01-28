@@ -7,7 +7,7 @@ const TrustedStore = () => {
       className="relative w-full  bg-cover bg-center"
       style={{ backgroundImage: "url(/TrustedBG.png)" }}
     >
-      <div className="py-16 px-4 md:px-8 lg:px-16 max-w-11/12 mx-auto">
+      <div className="py-16 px-4 md:px-8 lg:px-16 lg:max-w-7xl max-w-11/12 mx-auto">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left Side - Images */}
           <div className="relative flex items-center">
