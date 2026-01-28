@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router";
 import Main from "../layout/Main";
 import Home from "../pages/Home";
 import ProductDetails from "../pages/ProductDetails";
+import ShoppingCart from "../pages/ShopingCart/ShoppingCart";
 import Shops from "../pages/Shops";
 import Wishlist from "../pages/WishListSctions/Wishlist";
-import ShoppingCart from "../pages/ShopingCart/ShoppingCart";
+import Checkout from "../pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shoppingCart",
-        element: <ShoppingCart/>,
+        element: <ShoppingCart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },
