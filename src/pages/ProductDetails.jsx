@@ -286,7 +286,7 @@ const ProductDetails = () => {
       {/* Description Tabs Section */}
       <DescriptionTabs product={product} />
 
-      <RelatedCard product={product} />
+      <RelatedCard currentProduct={product} />
     </div>
   );
 };

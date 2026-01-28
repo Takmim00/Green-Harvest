@@ -77,7 +77,7 @@ const BestSellerProducts = () => {
   );
 
   return (
-    <section className="py-12 px-4 max-w-11/12 mx-auto">
+    <section className="py-12 px-4 lg:max-w-7xl max-w-11/12 mx-auto">
       {/* Header */}
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
         <div className="flex justify-center md:justify-start">

@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="w-full">
       {/* Top Bar */}
       <div className="bg-gray-800 text-white text-xs py-2.5">
-        <div className="max-w-11/12 md:max-w-7xl mx-auto  flex justify-between items-center">
+        <div className="lg:max-w-7xl max-w-11/12 md:max-w-7xl mx-auto  flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="hidden sm:inline">
               📍 Store location: Lincoln: 344, Illinois, Chicago, USA
@@ -41,7 +41,7 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-11/12 md:max-w-7xl mx-auto py-0 md:py-4">
+        <div className="lg:max-w-7xl max-w-11/12 md:max-w-7xl mx-auto py-0 md:py-4">
           <div className="flex items-center justify-between gap-4 ">
             {/* Logo */}
             <Link href="/" className="shrink-0">
@@ -84,7 +84,6 @@ export default function Navbar() {
             </div>
           </div>
 
-       
           {/* Mobile Search */}
           <div className="md:hidden w-full my-1 px-2">
             <div className="flex w-full">
@@ -103,7 +102,7 @@ export default function Navbar() {
 
       {/* Secondary Navigation */}
       <div className="bg-gray-50 sticky top-16 md:top-24 z-30">
-        <div className="max-w-11/12 md:max-w-7xl mx-auto ">
+        <div className="lg:max-w-7xl max-w-11/12 md:max-w-7xl mx-auto ">
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center justify-between">
             {/* Left Side: Categories + Menu */}

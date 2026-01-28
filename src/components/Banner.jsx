@@ -73,7 +73,7 @@ export default function Banner() {
     >
       <div className="absolute inset-0 bg-white/40"></div>
 
-      <div className="relative max-w-11/12 mx-auto px-6 h-full">
+      <div className="relative lg:max-w-7xl max-w-11/12 mx-auto px-6 h-full">
         <div className="grid grid-cols-1 md:grid-cols-2 h-full  md:gap-20 items-center">
           {/* Image */}
           <div className="flex justify-center">
@@ -101,7 +101,10 @@ export default function Banner() {
               {slide.description}
             </p>
 
-            <Link to='/shop' className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2">
+            <Link
+              to="/shop"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2"
+            >
               Shop now <ArrowRight />
             </Link>
           </div>
