@@ -201,7 +201,7 @@ const DescriptionTabs = ({ product }) => {
                 </li>
 
                 <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-[120px] text-[11px] sm:text-xs md:text-sm lg:text-base">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
                     Type:
                   </span>
                   <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
@@ -210,7 +210,7 @@ const DescriptionTabs = ({ product }) => {
                 </li>
 
                 <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-[120px] text-[11px] sm:text-xs md:text-sm lg:text-base">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
                     Stock Status:
                   </span>
                   <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
@@ -218,7 +218,7 @@ const DescriptionTabs = ({ product }) => {
                   </span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-[120px] text-[11px] sm:text-xs md:text-sm lg:text-base">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
                     Tags:
                   </span>
                   <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base flex-1">
