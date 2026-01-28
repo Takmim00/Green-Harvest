@@ -22,11 +22,11 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
       <td className="py-4 px-4 hidden md:table-cell">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-gray-900">
-            ${product.currentPrice.toFixed(2)}
+            ${product?.currentPrice?.toFixed(2)}
           </span>
           {product.originalPrice && (
             <span className="text-gray-400 line-through text-sm">
-              ${product.originalPrice.toFixed(2)}
+              ${product?.originalPrice?.toFixed(2)}
             </span>
           )}
         </div>
@@ -49,7 +49,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
           
           <div className="flex flex-col items-end md:hidden mr-2">
             <span className="font-semibold text-gray-900 text-sm">
-              ${product.currentPrice.toFixed(2)}
+              ${product?.currentPrice?.toFixed(2)}
             </span>
           </div>
 
