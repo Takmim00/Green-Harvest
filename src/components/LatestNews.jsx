@@ -38,10 +38,12 @@ const LatestNews = () => {
   ];
 
   return (
-    <section className="relative w-full  bg-[#edf2ee] bg-cover bg-top bg-no-repeat py-16"
-      style={{ backgroundImage: "url(/LatestBG.png)" }}>
+    <section
+      className="relative w-full  bg-[#edf2ee] bg-cover bg-top bg-no-repeat py-16"
+      style={{ backgroundImage: "url(/LatestBG.png)" }}
+    >
       <div className=" px-4">
-        <div className="max-w-11/12 mx-auto">
+        <div className="lg:max-w-7xl max-w-11/12 mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
             <span className="text-green-500 text-sm font-medium tracking-wider uppercase">

@@ -122,7 +122,7 @@ export default function Shops() {
         className="bg-gray-50 py-4"
         style={{ backgroundImage: "url(/Breadcrumbs.png)" }}
       >
-        <div className="max-w-11/12 mx-auto px-4">
+        <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span className="text-gray-400 hover:text-green-600 cursor-pointer">
               Home
@@ -135,7 +135,7 @@ export default function Shops() {
         </div>
       </div>
 
-      <div className="max-w-11/12 mx-auto px-4 py-8">
+      <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <aside className="w-full lg:w-72 shrink-0">

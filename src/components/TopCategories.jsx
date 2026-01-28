@@ -157,7 +157,7 @@ const TopCategories = () => {
       className="relative w-full  bg-cover bg-center"
       style={{ backgroundImage: "url(/TOPBG.png)" }}
     >
-      <div className="relative py-16 px-4  max-w-11/12 mx-auto">
+      <div className="relative py-16 px-4  lg:max-w-7xl max-w-11/12 mx-auto">
         <img
           src="/Down.png"
           alt="leaf decoration"
@@ -173,8 +173,8 @@ const TopCategories = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
-            Shop by Top Categories
-          </h2>
+              Shop by Top Categories
+            </h2>
           </div>
           <div className="flex justify-center md:justify-end">
             <Link

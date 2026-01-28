@@ -17,14 +17,3 @@ body {
   font-family: "Segoe Script", cursive;
 }
 
-.swiper-slide-thumb-active img {
-  opacity: 1;
-  transition: 0.35s opacity;
-  outline: 3px solid var(--color-green-500);
-}
-
-@media (max-width: 600px) {
-  .prductSlider .swiper {
-    height: auto !important;
-  }
-}

@@ -67,13 +67,13 @@ export default function Banner() {
 
   return (
     <section
-      className="relative w-full h-[80vh] bg-cover bg-[#EDF2EE]
+      className="relative w-full md:h-[80vh] bg-cover bg-[#EDF2EE]
 "
       style={{ backgroundImage: "url(/BG.png)" }}
     >
       <div className="absolute inset-0 bg-white/40"></div>
 
-      <div className="relative max-w-11/12 mx-auto px-6 h-full">
+      <div className="relative lg:max-w-7xl max-w-11/12 mx-auto px-6 pb-12 md:pb-0 h-full ">
         <div className="grid grid-cols-1 md:grid-cols-2 h-full  md:gap-20 items-center">
           {/* Image */}
           <div className="flex justify-center">
@@ -101,32 +101,37 @@ export default function Banner() {
               {slide.description}
             </p>
 
-            <Link to='/shop' className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2">
+            <Link
+              to="/shop"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2"
+            >
               Shop now <ArrowRight />
             </Link>
           </div>
         </div>
+        {/* Navigation */}
+        <button
+          onClick={prevSlide}
+          className="absolute  left-0 md:left-3 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
+             transition-all duration-300 group"
+        >
+          <ArrowLeft
+            size={25}
+            className="text-gray-600 group-hover:text-white"
+          />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-0 md:right-3 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
+             transition-all duration-300 group"
+        >
+          <ArrowRight
+            size={25}
+            className="text-gray-600 group-hover:text-white"
+          />
+        </button>
       </div>
-
-      {/* Navigation */}
-      <button
-        onClick={prevSlide}
-        className="absolute  left-4 md:left-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
-             transition-all duration-300 group"
-      >
-        <ArrowLeft size={25} className="text-gray-600 group-hover:text-white" />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 rounded-full border border-[#DAE6DA] p-2 hover:bg-green-600 hover:border-green-600
-             transition-all duration-300 group"
-      >
-        <ArrowRight
-          size={25}
-          className="text-gray-600 group-hover:text-white"
-        />
-      </button>
 
       {/* Dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
