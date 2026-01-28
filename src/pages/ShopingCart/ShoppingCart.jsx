@@ -21,8 +21,8 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 sm:py-12 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className=" py-8 sm:py-12 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-8">
           My Shopping Cart
         </h1>
