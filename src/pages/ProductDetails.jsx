@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,15 +8,25 @@ import { ChevronDown, ChevronUp, Heart, Minus, Plus } from "lucide-react";
 import { BsInstagram, BsTwitterX } from "react-icons/bs";
 import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import RelatedCard from "./ProductDetails/RelatedCard";
+
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
+import RelatedCard from "./ProductDetails/RelatedCard";
+import { useCart } from "../routes/provider/ShoppingProvider";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product, quantity);
+    }
+  };
+
   useEffect(() => {
     fetch("/api/product.json")
       .then((res) => res.json())
@@ -76,7 +88,11 @@ const ProductDetails = () => {
                   activeIndex === index ? "border-green-500" : "border-gray-200"
                 }`}
                 >
-                  <img src={img} className="w-16 h-16 object-contain" alt="" />
+                  <img
+                    src={img || "/placeholder.svg"}
+                    className="w-16 h-16 object-contain"
+                    alt=""
+                  />
                 </button>
               ))}
             </div>
@@ -91,7 +107,7 @@ const ProductDetails = () => {
           {/* Main Image */}
           <div className="lg:col-span-4 order-1 lg:order-2 flex items-center justify-center rounded bg-white h-65 sm:h-90 lg:h-125">
             <img
-              src={product?.image?.[activeIndex]}
+              src={product?.image?.[activeIndex] || "/placeholder.svg"}
               className="w-full h-full object-contain"
               alt=""
             />
@@ -204,7 +220,7 @@ const ProductDetails = () => {
             </div>
 
             <button
-              // onClick={handleAddToCart}
+              onClick={handleAddToCart}
               className="flex-1 min-w-35 sm:min-w-45 flex items-center justify-center gap-1 sm:gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 rounded-full transition group text-sm sm:text-base"
             >
               <span>Add to Cart</span>

@@ -10,11 +10,15 @@ import {
 } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router";
 import { useWishlist } from "../routes/provider/WishlistProvider";
+import { useCart } from "../routes/provider/ShoppingProvider";
+
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { wishlist } = useWishlist();
+  const { cart, getCartTotal, getCartCount } = useCart();
+
   // 🔥 Route change হলে mobile menu auto close
   useEffect(() => {
     setIsMenuOpen(false);
@@ -86,12 +90,20 @@ export default function Navbar() {
                   </span>
                 )}
               </Link>
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg">
+              <Link
+                to="/shoppingCart"
+                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg relative"
+              >
                 <ShoppingCart size={20} className="text-gray-700" />
+                {getCartCount() > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#00B207] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {getCartCount()}
+                  </span>
+                )}
                 <span className="text-sm font-semibold text-gray-700 hidden sm:inline">
-                  $00.00
+                  ${getCartTotal().toFixed(2)}
                 </span>
-              </button>
+              </Link>
               <button
                 className="md:hidden p-2"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}

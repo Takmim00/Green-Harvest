@@ -3,7 +3,8 @@ import Main from "../layout/Main";
 import Home from "../pages/Home";
 import ProductDetails from "../pages/ProductDetails";
 import Shops from "../pages/Shops";
-import Wishlist from "../pages/PaymentSctions/Wishlist";
+import Wishlist from "../pages/WishListSctions/Wishlist";
+import ShoppingCart from "../pages/ShopingCart/ShoppingCart";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "/shoppingCart",
+        element: <ShoppingCart/>,
       },
     ],
   },

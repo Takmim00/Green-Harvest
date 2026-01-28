@@ -1,5 +1,19 @@
+import { useCart } from "../../routes/provider/ShoppingProvider";
+
+
 const WishlistItem = ({ product, onRemove, onAddToCart }) => {
   const isInStock = product.status === "In Stock";
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      current_price: product.currentPrice,
+    });
+    onAddToCart(product);
+  };
 
   return (
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
@@ -7,7 +21,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-lg overflow-hidden shrink-0">
             <img
-              src={product.image}
+              src={product.image || "/placeholder.svg"}
               alt={product.name}
               className="w-full h-full object-cover"
             />
@@ -46,7 +60,6 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
 
       <td className="py-4 pr-4 sm:pr-6 text-right">
         <div className="flex items-center justify-end gap-2 sm:gap-4">
-          
           <div className="flex flex-col items-end md:hidden mr-2">
             <span className="font-semibold text-gray-900 text-sm">
               ${product?.currentPrice?.toFixed(2)}
@@ -54,7 +67,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
           </div>
 
           <button
-            onClick={() => isInStock && onAddToCart(product)}
+            onClick={() => isInStock && handleAddToCart()}
             disabled={!isInStock}
             className={`px-4 sm:px-6 py-2 rounded-full text-sm font-semibold transition-all shadow-sm ${
               isInStock
