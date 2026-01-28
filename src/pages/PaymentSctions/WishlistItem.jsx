@@ -5,7 +5,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
       <td className="py-4 pl-4 sm:pl-6">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-lg overflow-hidden shrink-0">
             <img
               src={product.image}
               alt={product.name}
