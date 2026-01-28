@@ -1,5 +1,3 @@
-'use client';
-
 import { ChevronLeft, ChevronRight, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
