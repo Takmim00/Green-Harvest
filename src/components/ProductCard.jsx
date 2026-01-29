@@ -1,7 +1,11 @@
 import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useNavigate } from "react-router";
-const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
+import { useWishlist } from "../routes/provider/WishlistProvider";
+const ProductCard = ({ product, onView }) => {
+  const { toggleWishlist, isInWishlist } = useWishlist();
+
+  const favorite = isInWishlist(product.id);
   const navigate = useNavigate();
   const discountPercent = product.original_price
     ? Math.round(
@@ -11,7 +15,8 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
       )
     : 0;
   return (
-    <div  className="
+    <div
+      className="
     bg-white 
     rounded-2xl 
     border border-gray-200 
@@ -19,7 +24,8 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
     transition-all duration-300
     hover:border-[#00B307]
     hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)]
-  ">
+  "
+    >
       {/* Image Section */}
       <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
@@ -36,17 +42,22 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
         )}
 
         {/* Action Buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div
+          className="absolute top-3 right-3 flex flex-col gap-2 transition-opacity
+  opacity-100 md:opacity-0 group-hover:opacity-100"
+        >
           <button
-            onClick={onToggleFavorite}
+            onClick={() => toggleWishlist(product)}
             className="bg-white rounded-full p-2 hover:bg-gray-100"
-            aria-label="Add to favorites"
           >
             <Heart
               size={18}
-              className={`${isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"}`}
+              className={
+                favorite ? "fill-red-500 text-red-500" : "text-gray-600"
+              }
             />
           </button>
+
           <button
             onClick={() => onView(product)}
             className="bg-white rounded-full p-2 hover:bg-gray-100"
@@ -90,9 +101,11 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onView }) => {
           </div>
         </div>
 
-      
         <div>
-          <button onClick={() => navigate(`/product/${product.id}`)} className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
+          <button
+            onClick={() => navigate(`/product/${product.id}`)}
+            className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center "
+          >
             <HiOutlineShoppingBag size={22} />
           </button>
         </div>

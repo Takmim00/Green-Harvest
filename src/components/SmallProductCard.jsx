@@ -1,5 +1,8 @@
 import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useWishlist } from "../routes/provider/WishlistProvider";
+import { useNavigate } from "react-router";
+
 
 const SmallProductCard = ({
   product,
@@ -8,7 +11,12 @@ const SmallProductCard = ({
   showDiscount = false,
   onView,
 }) => {
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const navigate = useNavigate();
+
   if (!product) return null;
+
+  const favorite = isInWishlist(product.id);
 
   const renderStars = (rating) => {
     return (
@@ -64,20 +72,34 @@ const SmallProductCard = ({
       {/* Action Icons - Only show on active */}
       {isActive && (
         <div className="flex items-center gap-1">
-          <button className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition-colors">
+          {/* Add to Cart Button */}
+          <button
+          onClick={() => navigate(`/product/${product.id}`)}
+           className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition-colors">
             <HiOutlineShoppingBag size={14} />
           </button>
+
+          {/* View Details / Modal Button */}
           <button
             onClick={(e) => {
-              e.stopPropagation(); // hover / parent conflict prevent
+              e.stopPropagation(); // prevent parent hover conflict
               onView?.(product);
             }}
             className="w-8 h-8 rounded-full bg-white border border-gray-200 text-gray-500 flex items-center justify-center hover:bg-gray-50 transition-colors"
           >
             <Eye size={14} />
           </button>
-          <button className="w-8 h-8 rounded-full bg-white border border-gray-200 text-gray-500 flex items-center justify-center hover:bg-gray-50 transition-colors">
-            <Heart size={14} />
+
+          {/* Wishlist Toggle */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleWishlist(product);
+            }}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors
+              ${favorite ? "bg-red-500 text-white hover:bg-red-600" : "bg-white border border-gray-200 text-gray-500 hover:bg-gray-50"}`}
+          >
+            <Heart size={14} className={favorite ? "fill-white" : ""} />
           </button>
         </div>
       )}

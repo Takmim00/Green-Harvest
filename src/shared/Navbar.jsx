@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ChevronDown,
@@ -8,10 +8,21 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
+import { useWishlist } from "../routes/provider/WishlistProvider";
+import { useCart } from "../routes/provider/ShoppingProvider";
+
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const { wishlist } = useWishlist();
+  const { cart, getCartTotal, getCartCount } = useCart();
+
+  // 🔥 Route change হলে mobile menu auto close
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav className="w-full">
@@ -66,15 +77,33 @@ export default function Navbar() {
 
             {/* Right Icons */}
             <div className="flex items-center gap-2 sm:gap-4">
-              <button className="p-2 hover:bg-gray-100 rounded-lg hidden sm:block">
+              <Link
+                to="/wishlist"
+                className="p-2 hover:bg-gray-100 rounded-lg relative"
+              >
                 <Heart size={20} className="text-gray-700" />
-              </button>
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg">
+
+                {/* 🔴 Badge */}
+                {wishlist.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {wishlist.length}
+                  </span>
+                )}
+              </Link>
+              <Link
+                to="/shoppingCart"
+                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg relative"
+              >
                 <ShoppingCart size={20} className="text-gray-700" />
+                {getCartCount() > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#00B207] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {getCartCount()}
+                  </span>
+                )}
                 <span className="text-sm font-semibold text-gray-700 hidden sm:inline">
-                  $00.00
+                  ${getCartTotal().toFixed(2)}
                 </span>
-              </button>
+              </Link>
               <button
                 className="md:hidden p-2"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -149,21 +178,6 @@ export default function Navbar() {
                   Shop <ChevronDown size={16} />
                 </NavLink>
 
-                {/* Pages */}
-                <NavLink
-                  to="/pages"
-                  className={({ isActive }) =>
-                    `px-4 py-3 flex items-center gap-1 transition
-                        ${
-                          isActive
-                            ? "bg-green-50 text-green-600 font-semibold "
-                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                        }`
-                  }
-                >
-                  Pages <ChevronDown size={16} />
-                </NavLink>
-
                 {/* Blog */}
                 <NavLink
                   to="/blog"
@@ -221,99 +235,32 @@ export default function Navbar() {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="md:hidden py-4 flex flex-col gap-2">
-              <button className="bg-green-600 text-white px-4 py-2 flex items-center gap-2 hover:bg-green-700 rounded w-full">
-                <span>☰</span>
-                All Categories
+              <button className="bg-green-600 text-white px-4 py-2 rounded">
+                ☰ All Categories
               </button>
-              <NavLink
-                to="/"
-                end
-                className={({ isActive }) =>
-                  `px-4 py-3 transition
-                          ${
-                            isActive
-                              ? "bg-green-50 text-green-600 font-semibold "
-                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                          }`
-                }
-              >
-                Home
-              </NavLink>
 
-              {/* Shop */}
-              <NavLink
-                to="/shop"
-                className={({ isActive }) =>
-                  `px-4 py-3 flex items-center gap-1 transition
-                        ${
-                          isActive
-                            ? "bg-green-50 text-green-600 font-semibold "
-                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                        }`
-                }
-              >
-                Shop <ChevronDown size={16} />
-              </NavLink>
-
-              {/* Pages */}
-              <NavLink
-                to="/pages"
-                className={({ isActive }) =>
-                  `px-4 py-3 flex items-center gap-1 transition
-                        ${
-                          isActive
-                            ? "bg-green-50 text-green-600 font-semibold "
-                            : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                        }`
-                }
-              >
-                Pages <ChevronDown size={16} />
-              </NavLink>
-
-              {/* Blog */}
-              <NavLink
-                to="/blog"
-                className={({ isActive }) =>
-                  `px-4 py-3 flex items-center gap-1 transition
-                    ${
+              {[
+                { to: "/", label: "Home" },
+                { to: "/shop", label: "Shop" },
+                { to: "/blog", label: "Blog" },
+                { to: "/about", label: "About Us" },
+                { to: "/contact", label: "Contact Us" },
+              ].map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === "/"}
+                  className={({ isActive }) =>
+                    `px-4 py-3 ${
                       isActive
-                        ? "bg-green-50 text-green-600 font-semibold "
+                        ? "bg-green-50 text-green-600 font-semibold"
                         : "text-gray-700 hover:bg-green-50 hover:text-green-600"
                     }`
-                }
-              >
-                Blog <ChevronDown size={16} />
-              </NavLink>
-
-              {/* About */}
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  `px-4 py-3 transition
-                      ${
-                        isActive
-                          ? "bg-green-50 text-green-600 font-semibold "
-                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                      }`
-                }
-              >
-                About Us
-              </NavLink>
-
-              {/* Contact */}
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  `px-4 py-3 transition
-                      ${
-                        isActive
-                          ? "bg-green-50 text-green-600 font-semibold "
-                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
-                      }`
-                }
-              >
-                Contact Us
-              </NavLink>
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
             </div>
           )}
         </div>
