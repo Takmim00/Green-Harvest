@@ -65,7 +65,7 @@ export default function SignIn() {
         {/* Register */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Don’t have account?
-          <Link to="/register" className="text-green-600 font-semibold ml-1">
+          <Link to="/register" className="text-green-600 font-semibold ml-1 over:underline">
             Register
           </Link>
         </p>

@@ -9,6 +9,7 @@ import Wishlist from "../pages/WishListSctions/Wishlist";
 import Checkout from "../pages/Checkout/Checkout";
 import Single_Blog from "../pages/Blog/Single_Blog";
 import SignIn from "../pages/Authentication/SignIn";
+import Register from "../pages/Authentication/Register";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,15 @@ export const router = createBrowserRouter([
       {
         path:'/signIn',
         element:<SignIn/>
-      }
+      },
+      {
+        path:'/signIn',
+        element:<SignIn/>
+      },
+      {
+        path:'/register',
+        element:<Register/>
+      },
     ],
   },
 ]);
