@@ -1,5 +1,8 @@
+'use client';
+
 import React from "react";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+import { X } from "lucide-react";
 
 const CATEGORIES = [
   { id: "1", name: "Fresh Fruit", count: 111 },
@@ -57,122 +60,165 @@ const RECENT_POSTS = [
   },
 ];
 
-const Siderbar = ({onSearch,onCategorySelect}) => {
-  return (
-    <aside className="w-full md:w-[320px] space-y-10">
-      {/* Filter Action (Matches Screenshot Filter Button) */}
-      <div className="md:hidden">
-        <button className="w-full bg-green-600 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2 font-medium hover:bg-green-700 transition-colors shadow-lg shadow-green-200">
-          <i className="fa-solid fa-sliders"></i>
-          Filter
-        </button>
-      </div>
+// Sidebar content component for reuse in desktop and mobile
+const SidebarContent = ({ onSearch, onCategorySelect, onClose }) => (
+  <div className="space-y-10">
+    {/* Search Input */}
+    <div className="relative">
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={(e) => onSearch?.(e.target.value)}
+        className="w-full pl-10 pr-4 py-3.5 bg-white border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm text-sm"
+      />
+      <HiMiniMagnifyingGlass size={24} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"/>
+    </div>
 
-      {/* Search Input */}
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search..."
-          onChange={(e) => onSearch?.(e.target.value)}
-          className="w-full pl-10 pr-4 py-3.5 bg-white border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm text-sm"
-        />
-        <HiMiniMagnifyingGlass size={24} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"/>
-      </div>
-
-      {/* Top Categories */}
-      <section>
-        <h3 className="text-[18px] font-bold text-gray-900 mb-5">
-          Top Categories
-        </h3>
-        <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
-        <ul className="space-y-4">
-          {CATEGORIES.map((cat) => (
-            <li
-              key={cat.id}
-              onClick={() => onCategorySelect?.(cat.name)}
-              className="flex justify-between items-center text-gray-500 hover:text-green-600 cursor-pointer transition-colors text-sm group"
-            >
-              <span className="group-hover:translate-x-1 transition-transform">
-                {cat.name}
-              </span>
-              <span className="text-gray-300">({cat.count})</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Popular Tags */}
-      <section>
-        <h3 className="text-[18px] font-bold text-gray-900 mb-5">
-          Popular Tag
-        </h3>
-        <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
-        <div className="flex flex-wrap gap-2">
-          {POPULAR_TAGS.map((tag) => (
-            <span
-              key={tag.id}
-              onClick={() => onCategorySelect?.(tag.name)}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium cursor-pointer transition-all ${
-                tag=== "Low Fat"
-                  ? "bg-green-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-green-600 hover:text-white"
-              }`}
-            >
-              {tag.name}
+    {/* Top Categories */}
+    <section>
+      <h3 className="text-[18px] font-bold text-gray-900 mb-5">
+        Top Categories
+      </h3>
+      <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
+      <ul className="space-y-4">
+        {CATEGORIES.map((cat) => (
+          <li
+            key={cat.id}
+            onClick={() => {
+              onCategorySelect?.(cat.name);
+              onClose?.();
+            }}
+            className="flex justify-between items-center text-gray-500 hover:text-green-600 cursor-pointer transition-colors text-sm group"
+          >
+            <span className="group-hover:translate-x-1 transition-transform">
+              {cat.name}
             </span>
-          ))}
-        </div>
-      </section>
+            <span className="text-gray-300">({cat.count})</span>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-      {/* Our Gallery */}
-      <section>
-        <h3 className="text-[18px] font-bold text-gray-900 mb-5">
-          Our Gallery
-        </h3>
-        <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
-        <div className="grid grid-cols-4 gap-2">
-          {GALLERY_IMAGES.map((img, idx) => (
+    {/* Popular Tags */}
+    <section>
+      <h3 className="text-[18px] font-bold text-gray-900 mb-5">
+        Popular Tag
+      </h3>
+      <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
+      <div className="flex flex-wrap gap-2">
+        {POPULAR_TAGS.map((tag) => (
+          <span
+            key={tag.id}
+            onClick={() => {
+              onCategorySelect?.(tag.name);
+              onClose?.();
+            }}
+            className={`px-4 py-2 rounded-full text-[13px] font-medium cursor-pointer transition-all ${
+              tag=== "Low Fat"
+                ? "bg-green-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-green-600 hover:text-white"
+            }`}
+          >
+            {tag.name}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    {/* Our Gallery */}
+    <section>
+      <h3 className="text-[18px] font-bold text-gray-900 mb-5">
+        Our Gallery
+      </h3>
+      <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
+      <div className="grid grid-cols-4 gap-2">
+        {GALLERY_IMAGES.map((img, idx) => (
+          <img
+            key={idx}
+            src={img || "/placeholder.svg"}
+            alt="Gallery"
+            className="w-full aspect-square object-cover rounded hover:opacity-80 transition-opacity cursor-pointer shadow-sm"
+          />
+        ))}
+      </div>
+    </section>
+
+    {/* Recently Added */}
+    <section>
+      <h3 className="text-[18px] font-bold text-gray-900 mb-5">
+        Recently Added
+      </h3>
+      <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
+      <div className="space-y-6">
+        {RECENT_POSTS.map((post) => (
+          <div
+            key={post.id}
+            className="flex items-center gap-4 cursor-pointer group"
+          >
             <img
-              key={idx}
-              src={img}
-              alt="Gallery"
-              className="w-full aspect-square object-cover rounded hover:opacity-80 transition-opacity cursor-pointer shadow-sm"
+              src={post.image || "/placeholder.svg"}
+              alt={post.title}
+              className="w-17.5 h-15 object-cover rounded-md shrink-0 shadow-sm"
             />
-          ))}
-        </div>
-      </section>
-
-      {/* Recently Added */}
-      <section>
-        <h3 className="text-[18px] font-bold text-gray-900 mb-5">
-          Recently Added
-        </h3>
-        <div className="h-0.5 w-full bg-gray-100 mb-6 relative"/>
-        <div className="space-y-6">
-          {RECENT_POSTS.map((post) => (
-            <div
-              key={post.id}
-              className="flex items-center gap-4 cursor-pointer group"
-            >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="w-17.5 h-15 object-cover rounded-md shrink-0 shadow-sm"
-              />
-              <div className="flex flex-col gap-1">
-                <h4 className="text-[14px] font-medium text-gray-800 group-hover:text-green-600 transition-colors line-clamp-2 leading-tight">
-                  {post.title}
-                </h4>
-                <div className="flex items-center gap-2 text-[12px] text-gray-400">
-                  <i className="fa-regular fa-calendar text-green-600"></i>
-                  <span>{post.date}</span>
-                </div>
+            <div className="flex flex-col gap-1">
+              <h4 className="text-[14px] font-medium text-gray-800 group-hover:text-green-600 transition-colors line-clamp-2 leading-tight">
+                {post.title}
+              </h4>
+              <div className="flex items-center gap-2 text-[12px] text-gray-400">
+                <i className="fa-regular fa-calendar text-green-600"></i>
+                <span>{post.date}</span>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+);
+
+const Siderbar = ({ onSearch, onCategorySelect, isFilterOpen, setIsFilterOpen }) => {
+  return (
+    <>
+      {/* Mobile Filter Drawer Overlay */}
+      {isFilterOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsFilterOpen(false)}
+        />
+      )}
+
+      {/* Mobile Filter Drawer */}
+      <div
+        className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+          isFilterOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between p-4 border-b">
+          <h2 className="font-semibold text-lg text-gray-900">Filters</h2>
+          <button
+            onClick={() => setIsFilterOpen(false)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X size={20} className="text-gray-600" />
+          </button>
         </div>
-      </section>
-    </aside>
+        <div className="overflow-y-auto h-[calc(100%-60px)] p-4">
+          <SidebarContent 
+            onSearch={onSearch} 
+            onCategorySelect={onCategorySelect}
+            onClose={() => setIsFilterOpen(false)}
+          />
+        </div>
+      </div>
+
+      {/* Desktop Sidebar - Hidden on mobile */}
+      <aside className="hidden md:block w-[320px] shrink-0">
+        <SidebarContent 
+          onSearch={onSearch} 
+          onCategorySelect={onCategorySelect}
+        />
+      </aside>
+    </>
   );
 };
 
