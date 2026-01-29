@@ -19,7 +19,6 @@ export default function Navbar() {
   const { wishlist } = useWishlist();
   const { cart, getCartTotal, getCartCount } = useCart();
 
-  // 🔥 Route change হলে mobile menu auto close
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);

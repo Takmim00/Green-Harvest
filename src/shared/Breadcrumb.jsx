@@ -13,7 +13,7 @@ const routeNames = {
 export default function Breadcrumb() {
   const location = useLocation();
 
-  // 🔴 Home page হলে breadcrumb hide
+
   if (location.pathname === "/") return null;
 
   const pathParts = location.pathname.split("/").filter(Boolean);
@@ -23,7 +23,7 @@ export default function Breadcrumb() {
 
   return (
     <div
-      className="bg-gray-50 py-6"
+      className="bg-gray-50 py-6 bg-cover"
       style={{ backgroundImage: "url(/Breadcrumbs.png)" }}
     >
       <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4">
