@@ -15,7 +15,7 @@ const ProductCard = ({ product, onView }) => {
       )
     : 0;
   return (
-    <div
+<div
       className="
     bg-white 
     rounded-2xl 
@@ -24,14 +24,15 @@ const ProductCard = ({ product, onView }) => {
     transition-all duration-300
     hover:border-[#00B307]
     hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)]
+    hover:-translate-y-2
   "
     >
-      {/* Image Section */}
+{/* Image Section */}
       <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
           src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-full object-cover rounded-t-2xl"
+          className="w-full h-full object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-100 group-hover:rounded-t-2xl"
         />
 
         {/* Sale Badge */}
@@ -101,10 +102,10 @@ const ProductCard = ({ product, onView }) => {
           </div>
         </div>
 
-        <div>
+<div>
           <button
             onClick={() => navigate(`/product/${product.id}`)}
-            className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center "
+            className="w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-12"
           >
             <HiOutlineShoppingBag size={22} />
           </button>

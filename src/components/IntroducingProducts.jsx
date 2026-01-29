@@ -88,20 +88,28 @@ const IntroducingProducts = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
+{/* Products Grid */}
         <div className="">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {filteredProducts.slice(0, 5).map((product) => (
-              <ProductCard
+            {filteredProducts.slice(0, 5).map((product, index) => (
+              <div
                 key={product.id}
-                product={product}
-                isFavorite={favorites.includes(product.id)}
-                onToggleFavorite={() => toggleFavorite(product.id)}
-                onView={(product) => {
-                  setSelectedProduct(product);
-                  setIsModalOpen(true);
+                className="animate-card is-visible"
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  transitionDelay: `${index * 100}ms`
                 }}
-              />
+              >
+                <ProductCard
+                  product={product}
+                  isFavorite={favorites.includes(product.id)}
+                  onToggleFavorite={() => toggleFavorite(product.id)}
+                  onView={(product) => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}
+                />
+              </div>
             ))}
           </div>
           <ProductModal

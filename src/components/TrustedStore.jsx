@@ -1,44 +1,58 @@
 import { Check } from "lucide-react";
 import { Link } from "react-router";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const TrustedStore = () => {
+  const { ref: leftRef, isVisible: leftVisible } = useScrollAnimation();
+  const { ref: rightRef, isVisible: rightVisible } = useScrollAnimation();
+
   return (
     <section
-      className="relative w-full  bg-cover bg-center"
+      className="relative w-full bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: "url(/TrustedBG.png)" }}
     >
       <div className="py-16 px-4 md:px-8 lg:px-16 lg:max-w-7xl max-w-11/12 mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid  lg:grid-cols-2 gap-8 items-center">
           {/* Left Side - Images */}
-          <div className="relative flex items-center">
-            <div className="flex  flex-col md:flex-row gap-6 items-start">
+          <div 
+            ref={leftRef}
+            className={`relative flex items-center transition-all duration-700 ${
+              leftVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+            }`}
+          >
+            <div className="flex flex-col md:flex-row gap-6 items-start">
               {/* Small Image */}
-              <div className="w-full md:w-56 h-64 md:h-72 rounded overflow-hidden shadow-lg">
+              <div className="w-full md:w-56 h-64 md:h-72 rounded overflow-hidden shadow-lg group">
                 <img
                   src="/trusted1.png"
                   alt="Farmer with organic produce"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
 
               {/* Big Image */}
-              <div className="w-full md:w-80 h-80 md:h-96 rounded overflow-hidden shadow-xl ">
+              <div className="w-full md:w-80 h-80 md:h-96 rounded overflow-hidden shadow-xl group">
                 <img
                   src="/trusted2.png"
                   alt="Fresh farm produce"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
             </div>
 
             {/* Decorative leaf */}
-            <div className="absolute bottom-18 -left-8 w-16 h-16 ">
+            <div className="absolute bottom-18 -left-8 w-16 h-16 animate-bounce-slow">
               <img src="/trustedlip.png" alt="" />
             </div>
           </div>
 
           {/* Right Side - Content */}
-          <div className="space-y-6">
+          <div 
+            ref={rightRef}
+            className={`space-y-6 transition-all duration-700 delay-200 ${
+              rightVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+            }`}
+          >
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight">
               100% Trusted
               <br />
@@ -46,8 +60,10 @@ const TrustedStore = () => {
             </h2>
 
             <div className="space-y-4">
-              <div className="flex gap-3">
-                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className={`flex gap-3 transition-all duration-500 delay-300 ${
+                rightVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center transition-transform hover:scale-110">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -62,8 +78,10 @@ const TrustedStore = () => {
                 </div>
               </div>
 
-              <div className="flex gap-3">
-                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className={`flex gap-3 transition-all duration-500 delay-400 ${
+                rightVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center transition-transform hover:scale-110">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -81,11 +99,11 @@ const TrustedStore = () => {
 
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 hover:scale-105 text-white px-6 py-3 rounded-full font-medium transition-all duration-300"
             >
               Shop Now
               <svg
-                className="w-4 h-4"
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

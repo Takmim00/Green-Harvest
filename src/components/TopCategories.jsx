@@ -1,6 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { useStaggeredAnimation } from "../hooks/useScrollAnimation";
+
 
 const categories = [
   {
@@ -151,24 +153,18 @@ const categories = [
 
 const TopCategories = () => {
   const [activeCategory, setActiveCategory] = useState(1);
+  const { containerRef, visibleItems } = useStaggeredAnimation(categories.length, 100);
 
   return (
     <section
-      className="relative w-full  bg-cover bg-center"
+      className="relative w-full bg-cover bg-center"
       style={{ backgroundImage: "url(/TOPBG.png)" }}
     >
-      <div className="relative py-16 px-4  lg:max-w-7xl max-w-11/12 mx-auto">
+      <div className="relative py-16 px-4 lg:max-w-7xl max-w-11/12 mx-auto">
         <img
           src="/Down.png"
           alt="leaf decoration"
-          className="
-    absolute
-    -translate-x-1/2
-   -top-8
-   left-10
-    pointer-events-none
-    select-none
-  "
+          className="absolute -translate-x-1/2 -top-8 left-10 pointer-events-none select-none"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">
@@ -186,18 +182,30 @@ const TopCategories = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {categories.map((category) => (
+        <div 
+          ref={containerRef}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          {categories.map((category, index) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex flex-col items-center p-6 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
-                activeCategory === category.id
+              className={`flex flex-col items-center p-6 rounded-lg border-2 cursor-pointer
+                transition-all duration-500
+                hover:-translate-y-2 hover:shadow-lg
+                ${visibleItems.has(index) 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-8 scale-95'
+                }
+                ${activeCategory === category.id
                   ? "border-green-500 bg-green-50 shadow-md"
-                  : "border-gray-100 bg-white hover:border-green-200 hover:shadow-sm"
-              }`}
+                  : "border-gray-100 bg-white hover:border-green-200"
+                }`}
+              style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className="mb-3">{category.icon}</div>
+              <div className="mb-3 transition-transform duration-300 group-hover:scale-110">
+                {category.icon}
+              </div>
               <h3
                 className={`font-medium text-sm text-center ${
                   activeCategory === category.id

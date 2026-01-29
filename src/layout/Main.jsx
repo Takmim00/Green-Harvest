@@ -6,7 +6,7 @@ import Breadcrumb from '../shared/Breadcrumb';
 
 const Main = () => {
     return (
-        <div>
+        <div className="overflow-x-hidden">
            <Navbar/>
            <Breadcrumb/>
             <Outlet/>

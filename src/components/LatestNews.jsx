@@ -1,6 +1,9 @@
 import { ArrowRight, MessageCircle, User } from "lucide-react";
+import { useStaggeredAnimation } from "../hooks/useScrollAnimation";
 
 const LatestNews = () => {
+  const { containerRef, visibleItems } = useStaggeredAnimation(3, 150);
+  
   const blogs = [
     {
       id: 1,
@@ -54,12 +57,22 @@ const LatestNews = () => {
             </h2>
           </div>
 
-          {/* Blog Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogs.map((blog) => (
+{/* Blog Cards */}
+          <div 
+            ref={containerRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {blogs.map((blog, index) => (
               <div
                 key={blog.id}
-                className="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                className={`bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm 
+                  transition-all duration-500
+                  hover:shadow-lg hover:-translate-y-2
+                  ${visibleItems.has(index) 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                  }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Image Container */}
                 <div className="relative  rounded-t-lg overflow-hidden group">

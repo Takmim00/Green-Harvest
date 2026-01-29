@@ -63,49 +63,65 @@ export default function Banner() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const slide = slides[currentSlide];
+const slide = slides[currentSlide];
 
   return (
     <section
-      className="relative w-full md:h-[80vh] bg-cover bg-[#EDF2EE]
-"
+      className="relative w-full md:h-[80vh] bg-cover bg-[#EDF2EE]"
       style={{ backgroundImage: "url(/BG.png)" }}
     >
       <div className="absolute inset-0 bg-white/40"></div>
 
-      <div className="relative lg:max-w-7xl max-w-11/12 mx-auto px-6 pb-12 md:pb-0 h-full ">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-full  md:gap-20 items-center">
+      <div className="relative lg:max-w-7xl max-w-11/12 mx-auto px-6 pb-12 md:pb-0 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-full md:gap-20 items-center">
           {/* Image */}
           <div className="flex justify-center">
-            <div className="h-65 md:h-105 flex items-center justify-center">
-              <img src={slide.image} className="h-full w-auto object-contain" />
+            <div className="h-65 md:h-105 flex items-center justify-center overflow-hidden">
+              <img 
+                key={slide.id}
+                src={slide.image || "/placeholder.svg"} 
+                className="h-full w-auto object-contain animate-fade-in-scale" 
+                alt={slide.title}
+              />
             </div>
           </div>
 
           {/* Text */}
           <div className="space-y-6 min-h-65">
-            <span className="font-segoe-script text-green-600 font-semibold">
+            <span 
+              key={`welcome-${slide.id}`}
+              className="font-segoe-script text-green-600 font-semibold block animate-slide-in-right"
+            >
               WELCOME TO SHOPERY
             </span>
 
             <div className="space-y-4">
-              <h1 className="text-3xl md:text-6xl  font-semibold text-gray-900">
+              <h1 
+                key={`title-${slide.id}`}
+                className="text-3xl md:text-6xl font-semibold text-gray-900 animate-slide-in-right animation-delay-100"
+              >
                 {slide.title}
               </h1>
-              <h2 className="text-3xl md:text-6xl  font-semibold text-gray-900">
+              <h2 
+                key={`subtitle-${slide.id}`}
+                className="text-3xl md:text-6xl font-semibold text-gray-900 animate-slide-in-right animation-delay-200"
+              >
                 {slide.subtitle}
               </h2>
             </div>
 
-            <p className="text-sm md:text-base text-gray-600 max-w-sm">
+            <p 
+              key={`desc-${slide.id}`}
+              className="text-sm md:text-base text-gray-600 max-w-sm animate-slide-in-right animation-delay-300"
+            >
               {slide.description}
             </p>
 
             <Link
               to="/shop"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full inline-flex  justify-center items-center gap-2"
+              className="bg-green-600 hover:bg-green-700 hover:scale-105 text-white px-8 py-3 rounded-full inline-flex justify-center items-center gap-2 transition-all duration-300 animate-slide-in-right animation-delay-400"
             >
-              Shop now <ArrowRight />
+              Shop now <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>

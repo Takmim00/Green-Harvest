@@ -1,8 +1,12 @@
+'use client';
+
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useState } from "react";
+import { useStaggeredAnimation } from "../hooks/useScrollAnimation";
 
 const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { containerRef, visibleItems } = useStaggeredAnimation(3, 150);
 
   const testimonials = [
     {
@@ -81,12 +85,21 @@ const Testimonials = () => {
             </div>
           </div>
 
-          {/* Testimonial Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
+{/* Testimonial Cards */}
+          <div 
+            ref={containerRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id}
-                className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm"
+                className={`bg-white rounded-lg p-6 border border-gray-100 shadow-sm
+                  transition-all duration-500 hover:shadow-lg hover:-translate-y-2
+                  ${visibleItems.has(index) 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                  }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Quote Icon */}
                 <div className="mb-4">
