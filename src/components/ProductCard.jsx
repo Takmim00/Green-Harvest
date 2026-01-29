@@ -2,7 +2,7 @@ import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useNavigate } from "react-router";
 import { useWishlist } from "../routes/provider/WishlistProvider";
-const ProductCard = ({ product , onView}) => {
+const ProductCard = ({ product, onView }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
 
   const favorite = isInWishlist(product.id);
@@ -42,7 +42,10 @@ const ProductCard = ({ product , onView}) => {
         )}
 
         {/* Action Buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div
+          className="absolute top-3 right-3 flex flex-col gap-2 transition-opacity
+  opacity-100 md:opacity-0 group-hover:opacity-100"
+        >
           <button
             onClick={() => toggleWishlist(product)}
             className="bg-white rounded-full p-2 hover:bg-gray-100"

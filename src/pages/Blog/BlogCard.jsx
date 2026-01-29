@@ -3,6 +3,7 @@ import { CiPlay1, CiUser } from "react-icons/ci";
 import { FaPlay } from "react-icons/fa";
 import { GoArrowRight, GoTag } from "react-icons/go";
 import { LiaCommentAlt } from "react-icons/lia";
+import { Link } from "react-router-dom";
 
 const BlogCard = ({ post, hasVideo }) => {
   return (
@@ -44,11 +45,11 @@ const BlogCard = ({ post, hasVideo }) => {
               </span>
             </div>
             <div className="flex items-center gap-1.5">
-              <CiUser size={16}/>
+              <CiUser size={16} />
               <span>By {post.author}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <LiaCommentAlt size={16}/>
+              <LiaCommentAlt size={16} />
               <span>{post.comments} Comments</span>
             </div>
           </div>
@@ -62,10 +63,12 @@ const BlogCard = ({ post, hasVideo }) => {
           </p>
 
           <div className="mt-auto">
-            <button className="flex items-center gap-2 text-green-600 font-bold text-[13px] uppercase tracking-wider group/btn">
-              Read More
-              <GoArrowRight className="transition-transform group-hover/btn:translate-x-1" />
-            </button>
+            <Link to={`/singleblog/${post.id}`}>
+              <button className="flex items-center gap-2 text-green-600 font-bold text-[13px] uppercase tracking-wider group/btn">
+                Read More
+                <GoArrowRight className="transition-transform group-hover/btn:translate-x-1" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

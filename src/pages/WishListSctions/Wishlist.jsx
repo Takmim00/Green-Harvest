@@ -14,44 +14,37 @@ const Wishlist = () => {
   }, []);
 
   return (
-    <div className="min-h-screen py-8 sm:py-16 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className=" py-8 sm:py-16 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-10">
           My Wishlist
         </h1>
 
         <div className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden">
           {wishlist.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="py-4 pl-4 sm:pl-6 text-xs font-semibold text-gray-400 uppercase">
-                      Product
-                    </th>
-                    <th className="py-4 px-4 text-xs font-semibold text-gray-400 uppercase hidden md:table-cell">
-                      Price
-                    </th>
-                    <th className="py-4 px-4 text-xs font-semibold text-gray-400 uppercase hidden sm:table-cell">
-                      Stock Status
-                    </th>
-                    <th className="py-4 pr-4 sm:pr-6 text-right"></th>
-                  </tr>
-                </thead>
+            <div className="flex flex-col divide-y divide-gray-100">
+              {/* Desktop Header */}
+              <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 border-b border-gray-100 text-xs font-medium text-gray-400 uppercase tracking-wide">
+                <div className="col-span-5">Product</div>
+                <div className="col-span-2">Price</div>
+                <div className="col-span-2">Stock</div>
+                <div className="col-span-3 text-right">Actions</div>
+              </div>
 
-                <tbody>
-                  {wishlist.map((item) => (
-                    <WishlistItem
-                      key={item.id}
-                      product={item}
-                      onRemove={() => toggleWishlist(item)}
-                      onAddToCart={handleAddToCart}
-                    />
-                  ))}
-                </tbody>
-              </table>
+              {/* Wishlist Items */}
+              {wishlist.map((item) => (
+                <WishlistItem
+                  key={item.id}
+                  product={item}
+                  onRemove={() => toggleWishlist(item)}
+                  onAddToCart={handleAddToCart}
+                />
+              ))}
 
-              <ShareBar />
+              {/* Share bar at bottom */}
+              <div className="p-6">
+                <ShareBar />
+              </div>
             </div>
           ) : (
             <div className="py-20 text-center flex flex-col items-center gap-4">
