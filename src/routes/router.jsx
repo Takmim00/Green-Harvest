@@ -8,7 +8,7 @@ import Blog_List from "../pages/Blog/Blog_List";
 import Wishlist from "../pages/WishListSctions/Wishlist";
 import Checkout from "../pages/Checkout/Checkout";
 import Single_Blog from "../pages/Blog/Single_Blog";
-import SignIn from "../pages/Authentication/Register";
+import SignIn from "../pages/Authentication/SignIn";
 
 export const router = createBrowserRouter([
   {
