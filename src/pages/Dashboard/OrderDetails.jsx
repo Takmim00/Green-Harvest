@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { useParams, Link } from 'react-router';
 import { ArrowLeft, CheckCircle, Truck, Package } from 'lucide-react';

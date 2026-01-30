@@ -42,7 +42,7 @@ const Dashboard = () => {
       <div className="bg-white rounded-lg shadow-sm p-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* User Info */}
-          <div className="flex flex-col items-center md:items-start flex-shrink-0">
+          <div className="flex flex-col items-center md:items-start shrink-0">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 shadow-md">
               <img
                 src={user.avatar || "/placeholder.svg"}

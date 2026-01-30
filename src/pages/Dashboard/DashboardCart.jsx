@@ -1,5 +1,3 @@
-"use client";
-
 import { Minus, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../routes/provider/ShoppingProvider";
