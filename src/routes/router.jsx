@@ -8,6 +8,9 @@ import Blog_List from "../pages/Blog/Blog_List";
 import Wishlist from "../pages/WishListSctions/Wishlist";
 import Checkout from "../pages/Checkout/Checkout";
 import Single_Blog from "../pages/Blog/SinglePage/Single_Blog";
+import Single_Blog from "../pages/Blog/Single_Blog";
+import SignIn from "../pages/Authentication/SignIn";
+import Register from "../pages/Authentication/Register";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +21,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      
       {
         path: "/shop",
         element: <Shops />,
@@ -45,6 +49,18 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path:'/signIn',
+        element:<SignIn/>
+      },
+      {
+        path:'/signIn',
+        element:<SignIn/>
+      },
+      {
+        path:'/register',
+        element:<Register/>
       },
     ],
   },

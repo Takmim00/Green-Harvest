@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { useStaggeredAnimation } from "../hooks/useScrollAnimation";
 
 const PromoBanners = () => {
+  const { containerRef, visibleItems } = useStaggeredAnimation(2, 200);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 2,
@@ -45,14 +47,21 @@ const PromoBanners = () => {
       className="relative block w-full mask-[linear-gradient(to_bottom,black_85%,transparent)]  bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url(/PromoBanner.png)" }}
     >
-      <div className="py-16 px-4 md:px-8 lg:px-16 lg:max-w-7xl max-w-11/12 mx-auto">
-        <div className="grid md:grid-cols-2 gap-6">
+<div className="py-16 px-4 md:px-8 lg:px-16 lg:max-w-7xl max-w-11/12 mx-auto">
+        <div 
+          ref={containerRef}
+          className="grid md:grid-cols-2 gap-6"
+        >
           {/* Fruit & Vegetable Banner */}
-          <div className="relative bg-gray-900 rounded-xl overflow-hidden h-64 md:h-72">
+          <div 
+            className={`relative bg-gray-900 rounded-xl overflow-hidden h-64 md:h-72 group
+              transition-all duration-700 hover:shadow-2xl hover:-translate-y-1
+              ${visibleItems.has(0) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}
+          >
             <img
               src="/fresh-vegetables-basket.png"
               alt="Fresh vegetables"
-              className="absolute inset-0 w-full h-full object-cover opacity-60"
+              className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-110"
             />
             <div className="relative z-10 p-8 h-full flex flex-col justify-center">
               <span className="text-white/80 text-xs uppercase tracking-wider mb-2">
@@ -89,12 +98,16 @@ const PromoBanners = () => {
             </div>
           </div>
 
-          {/* Sales of the Year Banner */}
-          <div className="relative bg-gray-900 rounded-xl overflow-hidden h-64 md:h-72">
+{/* Sales of the Year Banner */}
+          <div 
+            className={`relative bg-gray-900 rounded-xl overflow-hidden h-64 md:h-72 group
+              transition-all duration-700 delay-200 hover:shadow-2xl hover:-translate-y-1
+              ${visibleItems.has(1) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}
+          >
             <img
               src="/farm-fresh-produce.png"
               alt="Fresh produce sale"
-              className="absolute inset-0 w-full h-full object-cover opacity-50"
+              className="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-500 group-hover:scale-110"
             />
             <div className="relative z-10 p-8 h-full flex flex-col justify-center">
               <span className="text-orange-400 text-xs uppercase tracking-wider mb-2">

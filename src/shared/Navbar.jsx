@@ -19,7 +19,6 @@ export default function Navbar() {
   const { wishlist } = useWishlist();
   const { cart, getCartTotal, getCartCount } = useCart();
 
-  // 🔥 Route change হলে mobile menu auto close
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -43,7 +42,7 @@ export default function Navbar() {
               <option className="bg-gray-800">USD</option>
               <option className="bg-gray-800">EUR</option>
             </select>
-            <Link href="/signin" className="hover:text-gray-200">
+            <Link to="/signIn" className="hover:text-gray-200">
               Sign in / Sign Up
             </Link>
           </div>

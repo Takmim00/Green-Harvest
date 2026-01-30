@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useMemo, useState } from "react";
 import Siderbar from "./Siderbar";
 import BlogCard from "./BlogCard";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { GoChevronDown } from "react-icons/go";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { SlidersHorizontal } from "lucide-react";
 
 const BLOG_POSTS = [
   {
@@ -124,6 +127,7 @@ const Blog_List = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const filteredPosts = useMemo(() => {
     return BLOG_POSTS.filter((post) => {
       const matchesSearch =
@@ -139,10 +143,25 @@ const Blog_List = () => {
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div className="min-h-screen pb-20 bg-[#f9f9f9]">
-      <div className="max-w-330 mx-auto px-4 md:px-6 pt-12 pb-6">
-        {/* Top Controls Bar */}
+    <div className=" pb-20 bg-[#f9f9f9]">
+      <div className="max-w-330 mx-auto px-4 md:px-6 md:pt-12 pt-4 pb-6">
+{/* Top Controls Bar */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+          {/* Mobile Filter Button */}
+          <button
+            onClick={() => setIsFilterOpen(true)}
+            className="md:hidden flex items-center gap-2 px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <SlidersHorizontal size={18} />
+            <span>Filters</span>
+            {selectedCategory && (
+              <span className="ml-1 px-2 py-0.5 bg-green-600 text-white text-xs rounded-full">
+                1
+              </span>
+            )}
+          </button>
+
+          {/* Desktop Filter Button */}
           <button
             onClick={() => setSelectedCategory(null)}
             className="hidden md:flex bg-[#00b207] text-white px-7 py-3 rounded-full items-center gap-2 font-semibold hover:bg-[#009a06] transition-colors shadow-lg shadow-green-100"
@@ -173,10 +192,12 @@ const Blog_List = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Column: Sidebar */}
+{/* Left Column: Sidebar */}
           <Siderbar
             onSearch={setSearchQuery}
             onCategorySelect={(cat) => setSelectedCategory(cat)}
+            isFilterOpen={isFilterOpen}
+            setIsFilterOpen={setIsFilterOpen}
           />
 
           {/* Right Column: Blog Grid */}
