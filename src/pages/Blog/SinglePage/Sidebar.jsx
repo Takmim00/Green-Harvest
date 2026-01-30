@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import React from "react";
+import { CiCalendar } from "react-icons/ci";
 const CATEGORIES = [
   { id: "1", name: "Fresh Fruit", count: 111 },
   { id: "2", name: "Vegetables", count: 350 },
@@ -24,7 +25,7 @@ const POPULAR_TAGS = [
   { id: "11", name: "Dinner" },
 ];
 
-const Sidebar = ({ onSearch }) => {
+const Sidebar = ({ onSearch, post }) => {
   return (
     <div>
       <aside className="w-full lg:w-80 space-y-8">
@@ -81,6 +82,54 @@ const Sidebar = ({ onSearch }) => {
               >
                 {tag.name}
               </button>
+            ))}
+          </div>
+        </section>
+        {/* Our Gallery */}
+        <section>
+          <h3 className="text-xl font-semibold mb-6 pb-2 border-b border-gray-100">
+            Our Gallery
+          </h3>
+          <div className="grid grid-cols-4 gap-2">
+            {post.map((item) => (
+              <div
+                key={item.id}
+                className="aspect-square overflow-hidden rounded-md cursor-pointer group"
+              >
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+        {/* Recently Added Section */}
+        <section>
+          <h3 className="text-lg font-bold mb-6 border-b border-gray-100 pb-2">
+            Recently Added
+          </h3>
+          <div className="space-y-6">
+            {post.map((posts) => (
+              <div key={posts.id} className="flex gap-4 group cursor-pointer">
+                <div className="shrink-0 w-20 h-16 overflow-hidden rounded-lg">
+                  <img
+                    src={posts.image}
+                    alt={posts.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition"
+                  />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug mb-1 group-hover:text-blue-600 transition">
+                    {posts.title}
+                  </h4>
+                  <div className="flex items-center text-xs text-gray-400">
+                    <CiCalendar className="mr-1" size={16} />
+                    {posts.date}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
