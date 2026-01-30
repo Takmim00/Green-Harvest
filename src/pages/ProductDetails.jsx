@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,9 +7,9 @@ import { BsInstagram, BsTwitterX } from "react-icons/bs";
 import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
+import { useCart } from "../routes/provider/ShoppingProvider";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
-import { useCart } from "../routes/provider/ShoppingProvider";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -37,6 +35,13 @@ const ProductDetails = () => {
         setProduct(foundProduct);
       });
   }, [id]);
+  useEffect(() => {
+    if (product) {
+      setActiveIndex(0);
+      setQuantity(1);
+      setIsFavorite(false);
+    }
+  }, [product]);
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
@@ -61,8 +66,12 @@ const ProductDetails = () => {
   };
 
   const scrollDown = () => {
-    if (activeIndex < product.image.length - 1) setActiveIndex(activeIndex + 1);
+    if (!product?.image) return;
+    if (activeIndex < product.image.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    }
   };
+
   return (
     <div className="w-11/12 md:max-w-7xl mx-auto">
       {/* product info */}
@@ -81,18 +90,15 @@ const ProductDetails = () => {
             <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-hidden">
               {product?.image?.map((img, index) => (
                 <button
-                  key={img}
+                  key={`${product.id}-${index}`}
                   onClick={() => setActiveIndex(index)}
-                  className={`border rounded p-1
-                ${
-                  activeIndex === index ? "border-green-500" : "border-gray-200"
-                }`}
+                  className={`border rounded p-1 ${
+                    activeIndex === index
+                      ? "border-green-500"
+                      : "border-gray-200"
+                  }`}
                 >
-                  <img
-                    src={img || "/placeholder.svg"}
-                    className="w-16 h-16 object-contain"
-                    alt=""
-                  />
+                  <img src={img} className="w-16 h-16 object-contain" alt="" />
                 </button>
               ))}
             </div>
