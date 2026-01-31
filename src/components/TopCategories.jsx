@@ -102,15 +102,10 @@ const TopCategories = () => {
                 />
               </div>
 
-              <h3
-                className={`font-medium text-sm text-center ${
-                  activeCategory === category.id
-                    ? "text-green-700"
-                    : "text-gray-800"
-                }`}
-              >
+              <h3 className="font-medium text-sm text-center text-gray-800 group-hover:text-green-700 transition-colors">
                 {category.name}
               </h3>
+
               <p className="text-xs text-gray-500 mt-1">
                 {category.count} Products
               </p>
