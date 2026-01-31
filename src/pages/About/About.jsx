@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa6";
 import deliverman from "../../assets/Image.png";
 import { BsTwitterX } from "react-icons/bs";
-import Carousel from "./Carousel";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -286,7 +285,7 @@ const About = () => {
               <div className="relative">
                 <div className="overflow-hidden rounded-2xl shadow-sm">
                   <img
-                    src="https://images.unsplash.com/photo-1595981267035-21a4ca293621?auto=format&fit=crop&q=80&w=1000"
+                    src="/FarmerImage.png"
                     alt="Farmer with fresh organic vegetables"
                     className="w-full h-auto object-cover aspect-4/3"
                   />
@@ -377,7 +376,7 @@ const About = () => {
           </div>
         </section>
 
-        <section className="relative min-h-[90vh] flex items-center pt-24 pb-12 overflow-hidden ">
+        <section className="max-w-7xl mx-auto relative min-h-[90vh] flex items-center pt-24 pb-12 overflow-hidden ">
           <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content Side */}
             <div className="flex flex-col space-y-6 md:space-y-8 max-w-xl animate-fade-in-up">
