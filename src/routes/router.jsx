@@ -20,7 +20,7 @@ import DashboardCart from "../pages/Dashboard/DashboardCart";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
-import Contact from "../pages/contact/Contact";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
