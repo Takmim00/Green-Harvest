@@ -18,6 +18,7 @@ import OrderDetails from "../pages/Dashboard/OrderDetails";
 import DashboardWishlist from "../pages/Dashboard/DashboardWishlist";
 import DashboardCart from "../pages/Dashboard/DashboardCart";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings";
+import About from "../pages/About/About";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
 import Contact from "../pages/Contact/Contact";
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      
+
       {
         path: "/shop",
         element: <Shops />,
@@ -54,24 +55,28 @@ export const router = createBrowserRouter([
         element: <Blog_List />,
       },
       {
-        path:"/singleblog/:id",
-        element:<Single_Blog/>
+        path: "/singleblog/:id",
+        element: <Single_Blog />,
       },
       {
         path: "/checkout",
         element: <Checkout />,
       },
       {
-        path:'/signIn',
-        element:<SignIn/>
+        path: "/signIn",
+        element: <SignIn />,
       },
       {
-        path:'/signIn',
-        element:<SignIn/>
+        path: "/signIn",
+        element: <SignIn />,
       },
       {
-        path:'/register',
-        element:<Register/>
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/about",
+        element:<About/>
       },
       {
         path:'/contact',
