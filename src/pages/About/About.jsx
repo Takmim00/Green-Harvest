@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa6";
 import deliverman from "../../assets/Image.png";
 import { BsTwitterX } from "react-icons/bs";
-import Carousel from "./Carousel";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles

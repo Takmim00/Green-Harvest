@@ -1,5 +1,3 @@
-'use client';
-
 import React from "react";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { X } from "lucide-react";
@@ -189,8 +187,8 @@ const Siderbar = ({ onSearch, onCategorySelect, isFilterOpen, setIsFilterOpen })
 
       {/* Mobile Filter Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
-          isFilterOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+          isFilterOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b">

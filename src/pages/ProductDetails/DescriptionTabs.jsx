@@ -1,5 +1,3 @@
-'use client';
-
 import { Check, Star } from "lucide-react";
 import React, { useState } from "react";
 import { GiLindenLeaf } from "react-icons/gi";

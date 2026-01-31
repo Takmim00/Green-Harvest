@@ -18,12 +18,19 @@ import OrderDetails from "../pages/Dashboard/OrderDetails";
 import DashboardWishlist from "../pages/Dashboard/DashboardWishlist";
 import DashboardCart from "../pages/Dashboard/DashboardCart";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings";
+<<<<<<< HEAD
 import About from "../pages/About/About";
+=======
+import NotFound from "../pages/NotFound/NotFound";
+import FAQ from "../pages/faq/FAQ";
+import Contact from "../pages/Contact/Contact";
+>>>>>>> 447c3e9262fd576e4c06ff33fdf4a012aa22b339
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement:<NotFound/>,
     children: [
       {
         path: "/",
@@ -74,11 +81,20 @@ export const router = createBrowserRouter([
         path: "/about",
         element:<About/>
       },
+      {
+        path:'/contact',
+        element:<Contact/>
+      },
+      {
+        path:'/faq',
+        element:<FAQ/>
+      }
     ],
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+    errorElement:<NotFound/>,
     children: [
       {
         path: "/dashboard",

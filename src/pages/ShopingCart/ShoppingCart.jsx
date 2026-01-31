@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router";
 
+import { useCart } from "../../routes/provider/ShoppingProvider";
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
-import { useCart } from "../../routes/provider/ShoppingProvider";
 
 const ShoppingCart = () => {
   const { cart, getCartTotal } = useCart();

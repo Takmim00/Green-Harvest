@@ -1,5 +1,3 @@
-'use client';
-
 import { ChevronDown, Heart, Star, X } from "lucide-react";
 import { useState } from "react";
 import { BsChevronUp, BsTwitterX } from "react-icons/bs";
