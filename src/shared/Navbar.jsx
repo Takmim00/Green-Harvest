@@ -174,7 +174,7 @@ export default function Navbar() {
                         }`
                   }
                 >
-                  Shop <ChevronDown size={16} />
+                  Shop 
                 </NavLink>
 
                 {/* Blog */}
@@ -189,7 +189,7 @@ export default function Navbar() {
                     }`
                   }
                 >
-                  Blog <ChevronDown size={16} />
+                  Blog 
                 </NavLink>
 
                 {/* About */}
@@ -221,6 +221,20 @@ export default function Navbar() {
                 >
                   Contact Us
                 </NavLink>
+                {/* Faq */}
+                <NavLink
+                  to="/faq"
+                  className={({ isActive }) =>
+                    `px-4 py-3 transition
+                      ${
+                        isActive
+                          ? "bg-green-50 text-green-600 font-semibold "
+                          : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      }`
+                  }
+                >
+                  Faqs
+                </NavLink>
               </div>
             </div>
 
@@ -244,6 +258,7 @@ export default function Navbar() {
                 { to: "/blog", label: "Blog" },
                 { to: "/about", label: "About Us" },
                 { to: "/contact", label: "Contact Us" },
+                { to: "/faq", label: "Faqs" },
               ].map((item) => (
                 <NavLink
                   key={item.to}
