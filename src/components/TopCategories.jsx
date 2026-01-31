@@ -56,7 +56,7 @@ const TopCategories = () => {
         <img
           src="/Down.png"
           alt="leaf decoration"
-          className="absolute -translate-x-1/2 -top-8 left-10 pointer-events-none select-none"
+          className="absolute -translate-x-1/2 -top-8 left-10 pointer-events-none select-none animate-bounce-slow"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">

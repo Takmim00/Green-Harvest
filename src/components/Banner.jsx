@@ -172,6 +172,7 @@ const slide = slides[currentSlide];
    right-0
     pointer-events-none
     select-none
+    animate-bounce-slow
   "
       />
     </section>
