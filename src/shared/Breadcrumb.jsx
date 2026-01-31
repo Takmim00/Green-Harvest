@@ -8,6 +8,7 @@ const routeNames = {
   contact: "Contact Us",
   wishlist: "Wishlist",
   shoppingCart: "Cart",
+  faq:"Faq"
 };
 
 export default function Breadcrumb() {
