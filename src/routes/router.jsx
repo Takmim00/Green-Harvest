@@ -19,6 +19,7 @@ import DashboardWishlist from "../pages/Dashboard/DashboardWishlist";
 import DashboardCart from "../pages/Dashboard/DashboardCart";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings";
 import NotFound from "../pages/NotFound/NotFound";
+import Contact from "../pages/contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
         path:'/register',
         element:<Register/>
       },
+      {
+        path:'/contact',
+        element:<Contact/>
+      }
     ],
   },
   {
