@@ -1,12 +1,11 @@
-import React from 'react';
-import { useParams, Link } from 'react-router';
-import { ArrowLeft, CheckCircle, Truck, Package } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Truck } from 'lucide-react';
+import { Link, useParams } from 'react-router';
 
 const OrderDetails = () => {
-  const { orderId } = useParams();
+  const { id } = useParams();
 
   const orderData = {
-    id: orderId || '#738',
+    id: id || '738',
     date: '8 Sep, 2020',
     status: 'On the way',
     billingAddress: {

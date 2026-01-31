@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router';
 import Navbar from '../shared/Navbar';
@@ -54,7 +52,7 @@ const DashboardLayout = () => {
               bg-white 
               rounded-lg 
               h-fit
-              flex-shrink-0
+              shrink-0
               shadow-sm
             `}>
               <div className="p-6 border-b border-gray-200">
