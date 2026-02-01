@@ -265,7 +265,7 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col selection:bg-green-100 selection:text-green-900">
       <div className="grow">
-        <section  ref={sectionRef} className="md:max-w-7xl w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section className="md:max-w-7xl w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
             {/* Left: Text Content */}
             <div className="max-w-xl">
@@ -513,7 +513,7 @@ const About = () => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    <div className="relative overflow-hidden aspect-[4/5]">
+                    <div className="relative overflow-hidden aspect-4/5">
                       <img
                         src={member.image}
                         alt={member.name}
