@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import deliverman from "../../assets/Image.png";
-import person from "../../assets/person1WithBackground.webp";
 
 // Import Swiper styles
 import "swiper/css";
@@ -19,6 +18,8 @@ import "swiper/css/zoom";
 
 // import required modules
 import { Autoplay, Pagination } from "swiper/modules";
+import { useScrollAnimation } from "./../../hooks/useScrollAnimation";
+import Testimonials from "../../components/Testimonials";
 
 const features = [
   {
@@ -259,11 +260,12 @@ const TEAM_MEMBERS = [
 ];
 
 const About = () => {
+  const { ref: sectionRef, isVisible } = useScrollAnimation();
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="min-h-screen flex flex-col selection:bg-green-100 selection:text-green-900">
       <div className="grow">
-        <section className="md:max-w-7xl w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section  ref={sectionRef} className="md:max-w-7xl w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
             {/* Left: Text Content */}
             <div className="max-w-xl">
@@ -292,90 +294,89 @@ const About = () => {
             </div>
           </div>
         </section>
-
         {/* 2nd section */}
-        <section className="relative flex h-162.5 max-[1599px]:h-175 max-[359px]:h-275">
-          {/* Background image */}
-          <div
-            className="
-      w-[55%] h-full bg-cover bg-center
-      max-[1599px]:w-full
-      relative
-    "
-            style={{
-              backgroundImage: `url(${person})`,
-            }}
-          >
-            {/* Overlay for <=1599px */}
-            <div className="hidden max-[1599px]:block absolute inset-0 bg-black/25" />
-          </div>
-
-          {/* Content container */}
-          <div
-            className="
-      absolute inset-0 flex justify-end pt-8
-      max-[1599px]:justify-center
-      max-[1599px]:items-center
-    "
-          >
+        <section
+          ref={sectionRef}
+          className="relative w-full bg-white overflow-hidden"
+        >
+          <div className="flex flex-col lg:flex-row items-stretch">
+            {/* Left Side - Image */}
             <div
-              className="
-        flex flex-col w-[40%] min-w-167.5 mr-[14%]
-        max-[1599px]:w-[80%]
-        max-[1599px]:min-w-0
-        max-[1599px]:mr-0
-        max-[1599px]:text-white
-        max-[991px]:items-center
-      "
+              className={`relative w-full lg:w-1/2 min-h-75 sm:min-h-100 lg:min-h-125 transition-all duration-700 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-12"
+              }`}
             >
-              <span
-                className="
-          text-4xl lg:text-5xl font-semibold text-[(--hard-primary-color)]
-          max-[1599px]:text-center
-          max-[1599px]:text-white
-          max-[767px]:text-[(--heading-05)]
-          max-[575px]:text-[(--body-xxl)]
-        "
-              >
-                100% Trusted Organic Food Store
-              </span>
+              <img
+                src="/farmers.webp"
+                alt="Farmer with fresh organic vegetables"
+                className="absolute inset-0 w-full h-full object-cover object-top lg:object-[left_center]"
+                style={{ objectPosition: "left center" }}
+              />
+              {/* Gradient overlay for mobile to blend into content */}
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-white lg:hidden" />
+            </div>
 
-              <span className="mt-4 text-sm leading-relaxed max-[1599px]:text-center">
+            {/* Right Side - Content */}
+            <div
+              className={`w-full lg:w-1/2 px-6 sm:px-8 lg:px-12 xl:px-16 py-10 sm:py-12 lg:py-16 flex flex-col justify-center transition-all duration-700 delay-200 ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-12"
+              }`}
+            >
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-4">
+                100% Trusted
+                <br />
+                <span className="text-green-600">Organic Food Store</span>
+              </h2>
+
+              {/* Description */}
+              <p className="text-gray-500 text-sm sm:text-base mb-8 max-w-md leading-relaxed">
                 Pellentesque a ante vulputate leo porttitor luctus sed eget
                 eros. Nulla et rhoncus neque. Duis non diam eget est luctus
                 tincidunt a a mi. Nulla eu eros consequat tortor tincidunt
                 feugiat.
-              </span>
+              </p>
 
-              {/* Feature box */}
-              <div className="mt-6 max-[1599px]:mt-4 max-[1599px]:bg-white/60 max-[1599px]:rounded-2xl max-[1599px]:backdrop-blur-md max-[1599px]:text-gray-700 max-[991px]:px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                  {features.map((feature, idx) => (
+              {/* Features Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                {features.map((feature, index) => {
+                  return (
                     <div
-                      key={idx}
-                      className="flex items-start space-x-4 p-4 rounded-xl hover:bg-white hover:shadow-md transition duration-300 cursor-auto"
+                      key={index}
+                      className={`flex items-start gap-3 transition-all duration-500 ${
+                        isVisible
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4"
+                      }`}
+                      style={{ transitionDelay: `${300 + index * 100}ms` }}
                     >
-                      <div className="shrink-0 p-3 bg-green-100 rounded-full">
+                      {/* Icon Circle */}
+                      <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-50 border border-green-100 flex items-center justify-center">
                         {feature.icon}
                       </div>
 
+                      {/* Text */}
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">
+                        <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
                           {feature.title}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
                           {feature.description}
                         </p>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
         {/* 3rd section  */}
-        <section className="max-w-7xl mx-auto relative min-h-[90vh] flex items-center pt-24 pb-12 overflow-hidden ">
+        <section className="w-11/12  md:max-w-7xl mx-auto relative flex items-center pt-24 pb-12 overflow-hidden ">
           <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content Side */}
             <div className="flex flex-col space-y-6 md:space-y-8 max-w-xl animate-fade-in-up">
@@ -407,7 +408,7 @@ const About = () => {
                   </span>
                 </li>
                 <li className="flex items-center space-x-3 text-slate-700 font-medium">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-50 flex items-center justify-center">
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-green-50 flex items-center justify-center">
                     <CheckIcon className="text-green-500 text-sm p-0.5" />
                   </span>
                   <span>Maecenas ut nunc fringilla erat varius.</span>
@@ -431,11 +432,11 @@ const About = () => {
                 <img
                   src={deliverman}
                   alt="Delivery person holding fresh groceries"
-                  className="w-[full] h-120 object-cover rounded-2xl drop-shadow-2xl z-20"
+                  className="w-full h-120 object-cover rounded-2xl drop-shadow-2xl z-20"
                 />
 
                 {/* Floating Element - Fast Delivery Badge */}
-                <div className="absolute -bottom-6 -left-6 md:bottom-12 md:-left-12 bg-white p-4 md:p-6 rounded-2xl shadow-xl z-30 flex items-center space-x-4 animate-bounce-slow">
+                <div className="absolute bottom-0 -left-6  md:-left-12 bg-white p-4 md:p-6 rounded-2xl shadow-xl z-30 flex items-center space-x-4 animate-bounce-slow">
                   <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
                     <FaTruckFast className=" text-orange-500 text-2xl" />
                   </div>
@@ -553,6 +554,8 @@ const About = () => {
           </Swiper>
           <div className="team-pagination flex justify-center mt-8"></div>
         </section>
+        {/* 5th section  */}
+        <Testimonials/>
       </div>
     </div>
   );
