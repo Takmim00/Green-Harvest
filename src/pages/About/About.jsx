@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import person from "../../assets/person1WithBackground.webp";
-import { ArrowRight, Check, CheckIcon } from "lucide-react";
+import { ArrowRight, CheckIcon } from "lucide-react";
+import { useState } from "react";
+import { BsTwitterX } from "react-icons/bs";
 import {
   FaFacebookF,
   FaInstagram,
   FaPinterestP,
   FaTruckFast,
 } from "react-icons/fa6";
-import deliverman from "../../assets/Image.png";
-import { BsTwitterX } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
+import deliverman from "../../assets/Image.png";
+import person from "../../assets/person1WithBackground.webp";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/zoom";
 
 // import required modules
-import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 const features = [
   {
@@ -263,38 +263,37 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col selection:bg-green-100 selection:text-green-900">
       <div className="grow">
-        <section className="bg-white pt-32 pb-16 md:pt-40 md:pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
-              {/* Left: Text Content */}
-              <div className="max-w-xl">
-                <h1 className="text-4xl md:text-5xl lg:text-5xl font-semibold text-gray-900 leading-[1.15] mb-8">
-                  100% Trusted <br />
-                  Organic Food Store
-                </h1>
-                <p className="text-gray-500 text-lg leading-relaxed">
-                  Morbi porttitor ligula in nunc varius sagittis. Proin dui
-                  nisi, laoreet ut tempor ac, cursus vitae eros. Cras quis
-                  ultricies elit. Proin ac lectus arcu. Maecenas aliquet vel
-                  tellus at accumsan. Donec a eros non massa vulputate ornare.
-                  Vivamus ornare commodo ante, at commodo felis congue vitae.
-                </p>
-              </div>
+        <section className="md:max-w-7xl w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
+            {/* Left: Text Content */}
+            <div className="max-w-xl">
+              <h1 className="text-4xl md:text-5xl lg:text-5xl font-semibold text-gray-900 leading-[1.15] mb-8">
+                100% Trusted <br />
+                Organic Food Store
+              </h1>
+              <p className="text-gray-500 text-lg leading-relaxed">
+                Morbi porttitor ligula in nunc varius sagittis. Proin dui nisi,
+                laoreet ut tempor ac, cursus vitae eros. Cras quis ultricies
+                elit. Proin ac lectus arcu. Maecenas aliquet vel tellus at
+                accumsan. Donec a eros non massa vulputate ornare. Vivamus
+                ornare commodo ante, at commodo felis congue vitae.
+              </p>
+            </div>
 
-              {/* Right: Image */}
-              <div className="relative">
-                <div className="overflow-hidden rounded-2xl shadow-sm">
-                  <img
-                    src="/FarmerImage.png"
-                    alt="Farmer with fresh organic vegetables"
-                    className="w-full h-auto object-cover aspect-4/3"
-                  />
-                </div>
+            {/* Right: Image */}
+            <div className="">
+              <div className="overflow-hidden rounded-xl shadow-sm">
+                <img
+                  src="/FarmerImage.png"
+                  alt="Farmer with fresh organic vegetables"
+                  className="w-full h-auto object-cover"
+                />
               </div>
             </div>
           </div>
         </section>
 
+        {/* 2nd section */}
         <section className="relative flex h-162.5 max-[1599px]:h-175 max-[359px]:h-275">
           {/* Background image */}
           <div
@@ -375,7 +374,7 @@ const About = () => {
             </div>
           </div>
         </section>
-
+        {/* 3rd section  */}
         <section className="max-w-7xl mx-auto relative min-h-[90vh] flex items-center pt-24 pb-12 overflow-hidden ">
           <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content Side */}
