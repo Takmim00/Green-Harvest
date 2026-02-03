@@ -5,7 +5,6 @@
     "sku": "251603",
     "current_price": 14.99,
     "original_price": 20.99,
-    "discount_percentage": 28,
     "rating": 4,
     "reviews_count": 30,
     "stock_status": "In Stock",
@@ -18,7 +17,13 @@
       "stock_count": 750,
       "tags": ["Apple", "Green", "Fruit"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Green_Apple_wp4nv7.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png"
+    ]
   },
   {
     "id": 2,
@@ -26,8 +31,8 @@
     "sku": "251603",
     "current_price": 14.99,
     "original_price": 20.99,
-    "discount_percentage": 28,
     "rating": 4,
+    "isSale": 48,
     "reviews_count": 30,
     "stock_status": "In Stock",
     "category": "Fruits",
@@ -39,7 +44,13 @@
       "stock_count": 750,
       "tags": ["Surjapur", "Mango", "Green", "Fruit"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Surjapur_Mango_rdfpod.png"
+    ]
   },
   {
     "id": 3,
@@ -47,7 +58,6 @@
     "sku": "251595",
     "current_price": 9.0,
     "original_price": 12.0,
-    "discount_percentage": 25,
     "rating": 5,
     "reviews_count": 42,
     "stock_status": "In Stock",
@@ -60,7 +70,13 @@
       "stock_count": 1800,
       "tags": ["Tomato", "Red", "Juicy"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Red_Tomatos_e7eiic.png"
+    ]
   },
   {
     "id": 4,
@@ -68,9 +84,9 @@
     "sku": "251589",
     "current_price": 17.0,
     "original_price": 20.0,
-    "discount_percentage": 15,
     "rating": 5,
     "reviews_count": 9,
+    "isSale": 38,
     "stock_status": "In Stock",
     "category": "Vegetables",
     "description": "Farm-fresh white cauliflower heads, rich in fiber and vitamins, perfect for roasting or making low-carb rice.",
@@ -79,9 +95,15 @@
       "color": "White",
       "type": "Organic",
       "stock_count": 600,
-      "tags": ["Cauliflower", "White", "Healthy"]
+      "tags": ["Cauliflower", "White", "Healthy", "Vegetarian"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674453/Fresh_Cauliflower_uwr6so.png"
+    ]
   },
   {
     "id": 5,
@@ -89,7 +111,6 @@
     "sku": "251585",
     "current_price": 14.99,
     "original_price": 14.99,
-    "discount_percentage": 0,
     "rating": 4,
     "reviews_count": 12,
     "stock_status": "In Stock",
@@ -100,9 +121,15 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 1200,
-      "tags": ["Salad", "Fresh", "Lettuce", "Green"]
+      "tags": ["Salad", "Fresh", "Lettuce", "Green", "Vegetarian"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Lettuce_egujdc.png"
+    ]
   },
   {
     "id": 6,
@@ -110,7 +137,6 @@
     "sku": "251586",
     "current_price": 14.99,
     "original_price": 20.99,
-    "discount_percentage": 28,
     "rating": 4,
     "reviews_count": 8,
     "stock_status": "In Stock",
@@ -121,10 +147,16 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 850,
-      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic"]
+      "tags": ["Capsicum", "Bell Pepper", "Green", "Organic", "Vegetarian"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
-    "image_url_2": "https://media.istockphoto.com/id/657619298/photo/raw-green-organic-bell-peppers.jpg?s=612x612&w=0&k=20&c=ApF1UfWthQf6lVVlZd3KDLlkngmz7jXxHIo2a8GejDI="
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Capsicum_uu5bie.png"
+    ],
+    "image_2": "https://media.istockphoto.com/id/657619298/photo/raw-green-organic-bell-peppers.jpg?s=612x612&w=0&k=20&c=ApF1UfWthQf6lVVlZd3KDLlkngmz7jXxHIo2a8GejDI="
   },
   {
     "id": 7,
@@ -132,7 +164,6 @@
     "sku": "251587",
     "current_price": 14.99,
     "original_price": 14.99,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 15,
     "stock_status": "In Stock",
@@ -143,10 +174,16 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 3000,
-      "tags": ["Spicy", "Chilli", "Hot", "Vegetables"]
+      "tags": ["Spicy", "Chilli", "Hot", "Vegetarian"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
-    "image_url_2": "http://googleusercontent.com/image_collection/image_retrieval/8254174019916904202_0"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Green_Chilli_b6zrtx.png"
+    ],
+    "image_2": "http://googleusercontent.com/image_collection/image_retrieval/8254174019916904202_0"
   },
   {
     "id": 8,
@@ -154,7 +191,6 @@
     "sku": "251588",
     "current_price": 14.99,
     "original_price": 14.99,
-    "discount_percentage": 0,
     "rating": 4,
     "reviews_count": 21,
     "stock_status": "In Stock",
@@ -165,10 +201,16 @@
       "color": "Purple",
       "type": "Organic",
       "stock_count": 1100,
-      "tags": ["Eggplant", "Aubergine", "Purple", "Vegetables"]
+      "tags": ["Eggplant", "Aubergine", "Purple","Vegetarian"]
     },
-    "image_url": "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
-    "image_url_2": "https://nzveggieplants.co.nz/cdn/shop/files/Screenshot-20231010_164311_Google_759x700.jpg?v=1756610605"
+    "image": [
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png",
+      "https://res.cloudinary.com/dlhx7zvg3/image/upload/v1768674452/Eggplant_qp6uxe.png"
+    ],
+    "image_2": "https://nzveggieplants.co.nz/cdn/shop/files/Screenshot-20231010_164311_Google_759x700.jpg?v=1756610605"
   },
   {
     "id": 9,
@@ -176,7 +218,6 @@
     "sku": "251591",
     "current_price": 8.99,
     "original_price": 8.99,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 34,
     "stock_status": "In Stock",
@@ -187,9 +228,15 @@
       "color": "Orange",
       "type": "Organic",
       "stock_count": 2200,
-      "tags": ["Carrot", "Orange", "Root Vegetable"]
+      "tags": ["Carrot", "Orange", "Root Vegetable", "Vegetarian"]
     },
-    "image_url": "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg"
+    "image": [
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg",
+      "https://www.shutterstock.com/image-photo/fresh-carrots-sliced-isolated-on-600nw-2535894659.jpg"
+    ]
   },
   {
     "id": 10,
@@ -197,7 +244,6 @@
     "sku": "251593",
     "current_price": 5.5,
     "original_price": 5.5,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 50,
     "stock_status": "In Stock",
@@ -208,9 +254,15 @@
       "color": "Green",
       "type": "Organic",
       "stock_count": 1500,
-      "tags": ["Spinach", "Leafy", "Green"]
+      "tags": ["Spinach", "Leafy", "Green", "Vegetarian"]
     },
-    "image_url": "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555"
+    "image": [
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555",
+      "https://adelaidefresh.com.au/cdn/shop/files/spinach_1024x.webp?v=1713158555"
+    ]
   },
   {
     "id": 11,
@@ -218,7 +270,6 @@
     "sku": "251594",
     "current_price": 4.99,
     "original_price": 4.99,
-    "discount_percentage": 0,
     "rating": 4,
     "reviews_count": 65,
     "stock_status": "In Stock",
@@ -231,7 +282,13 @@
       "stock_count": 4000,
       "tags": ["Onion", "Yellow", "Cooking"]
     },
-    "image_url": "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853"
+    "image": [
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853",
+      "https://growhoss.com/cdn/shop/products/yellow-sweet-spanish-utah-onion_460x@2x.jpg?v=1691784853"
+    ]
   },
   {
     "id": 12,
@@ -239,7 +296,6 @@
     "sku": "251590",
     "current_price": 12.5,
     "original_price": 15.0,
-    "discount_percentage": 16,
     "rating": 4,
     "reviews_count": 18,
     "stock_status": "In Stock",
@@ -250,9 +306,15 @@
       "color": "Red",
       "type": "Organic",
       "stock_count": 940,
-      "tags": ["Pepper", "Red", "Sweet"]
+      "tags": ["Pepper", "Red", "Sweet", "Vegetarian"]
     },
-    "image_url": "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png"
+    "image": [
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png",
+      "https://sc02.alicdn.com/kf/H11b3acff15514be39458c1d186316e5bH.png"
+    ]
   },
   {
     "id": 13,
@@ -260,7 +322,6 @@
     "sku": "251596",
     "current_price": 2.99,
     "original_price": 2.99,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 88,
     "stock_status": "In Stock",
@@ -273,7 +334,13 @@
       "stock_count": 5000,
       "tags": ["Garlic", "Aromatic", "Seasoning"]
     },
-    "image_url": "https://example.com/images/garlic.jpg"
+    "image": [
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg",
+      "https://m.media-amazon.com/images/I/71OuWVJpp5L.jpg"
+    ]
   },
   {
     "id": 14,
@@ -281,9 +348,9 @@
     "sku": "251597",
     "current_price": 6.5,
     "original_price": 7.5,
-    "discount_percentage": 13,
     "rating": 4,
     "reviews_count": 19,
+    "isSale": 58,
     "stock_status": "In Stock",
     "category": "Vegetables",
     "description": "Refreshing and hydrating green cucumbers. Ideal for salads, pickling, or adding to spa-style water.",
@@ -294,7 +361,13 @@
       "stock_count": 1300,
       "tags": ["Cucumber", "Fresh", "Hydrating"]
     },
-    "image_url": "https://www.happyvalleyseeds.com.au/cdn/shop/products/garlic-australian-white-2-bulbs-523703.jpg?v=1710494183"
+    "image": [
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg",
+      "https://i.pinimg.com/736x/78/b2/de/78b2de06151c2e1a4aefae0255a645d8.jpg"
+    ]
   },
   {
     "id": 15,
@@ -302,7 +375,6 @@
     "sku": "251598",
     "current_price": 13.0,
     "original_price": 13.0,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 31,
     "stock_status": "In Stock",
@@ -315,7 +387,13 @@
       "stock_count": 700,
       "tags": ["Ginger", "Spice", "Root"]
     },
-    "image_url": "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg"
+    "image": [
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/006/972/792/small/fresh-ginger-rhizome-with-sliced-and-green-leaves-isolated-on-white-background-with-clipping-path-free-photo.jpg"
+    ]
   },
   {
     "id": 16,
@@ -323,7 +401,6 @@
     "sku": "251599",
     "current_price": 5.0,
     "original_price": 5.0,
-    "discount_percentage": 0,
     "rating": 5,
     "reviews_count": 55,
     "stock_status": "In Stock",
@@ -336,7 +413,13 @@
       "stock_count": 1600,
       "tags": ["Corn", "Sweet", "Cob"]
     },
-    "image_url": "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg"
+    "image": [
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg",
+      "https://www.veggycation.com.au/siteassets/veggycationvegetable/sweet-corn.jpg"
+    ]
   },
   {
     "id": 17,
@@ -344,7 +427,6 @@
     "sku": "251600",
     "current_price": 10.99,
     "original_price": 10.99,
-    "discount_percentage": 0,
     "rating": 4,
     "reviews_count": 102,
     "stock_status": "In Stock",
@@ -357,7 +439,13 @@
       "stock_count": 3500,
       "tags": ["Potato", "Starchy", "Baking"]
     },
-    "image_url": "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg"
+    "image": [
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg",
+      "https://www.simplyrecipes.com/thmb/KN0_1D5tEosls-G9C-OmJ02DdEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Yukin-Vs-Gold-LEAD-01-d250aa91a1b540058f305f70d9b6d585.jpg"
+    ]
   },
   {
     "id": 18,
@@ -365,7 +453,6 @@
     "sku": "251601",
     "current_price": 11.5,
     "original_price": 11.5,
-    "discount_percentage": 0,
     "rating": 4,
     "reviews_count": 14,
     "stock_status": "In Stock",
@@ -378,7 +465,13 @@
       "stock_count": 900,
       "tags": ["Zucchini", "Green", "Squash"]
     },
-    "image_url": "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg"
+    "image": [
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/004/289/558/small/zucchini-isolated-on-white-background-photo.jpg"
+    ]
   },
   {
     "id": 19,
@@ -386,7 +479,6 @@
     "sku": "251602",
     "current_price": 5.5,
     "original_price": 6.5,
-    "discount_percentage": 15,
     "rating": 4,
     "reviews_count": 48,
     "stock_status": "In Stock",
@@ -399,7 +491,13 @@
       "stock_count": 2100,
       "tags": ["Onion", "Red", "Salad"]
     },
-    "image_url": "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318"
+    "image": [
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318",
+      "https://www.edenbrothers.com/cdn/shop/files/onion-ruby-red-shk-1_94c13225-d0e6-4f7d-b738-16baceab4aa0.jpg?v=1726674318"
+    ]
   },
   {
     "id": 20,
@@ -407,7 +505,6 @@
     "sku": "251584",
     "current_price": 17.28,
     "original_price": 48.0,
-    "discount_percentage": 64,
     "rating": 4,
     "reviews_count": 4,
     "stock_status": "In Stock",
@@ -420,6 +517,12 @@
       "stock_count": 5413,
       "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"]
     },
-    "image_url": "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg"
+    "image": [
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg",
+      "https://media.riverford.co.uk/images/photo-4480x4480-aecbdd74da1860a1dc74a00589521dd9.jpg"
+    ]
   }
 ]

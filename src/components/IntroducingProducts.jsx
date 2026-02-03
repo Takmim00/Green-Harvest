@@ -1,77 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import ProductCard from "./ProductCard";
-import greenApple from "../assets/Product Image.png";
 import ProductModal from "./ProductModal";
-const PRODUCTS = [
-  {
-    id: 1,
-    name: "Green Apple",
-    category: "fruit",
-    price: 14.99,
-    originalPrice: 20.99,
-    rating: 4.5,
-    image: greenApple,
-    isSale: true,
-  },
-  {
-    id: 2,
-    name: "Sunripe Mango",
-    category: "fruit",
-    price: 14.99,
-    rating: 4.2,
-    image: "/mango-fruit.jpg",
-  },
-  {
-    id: 3,
-    name: "Red Tomatos",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.3,
-    image: "/red-tomatoes.jpg",
-  },
-  {
-    id: 4,
-    name: "Fresh Cauliflower",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.4,
-    image: "/cauliflower-vegetables.jpg",
-  },
-  {
-    id: 5,
-    name: "Green Lettuce",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.1,
-    image: "/lettuce-vegetables.jpg",
-  },
-  {
-    id: 6,
-    name: "Eggplant",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.2,
-    image: "/eggplant-vegetables.jpg",
-  },
-  {
-    id: 7,
-    name: "Green Chilli",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.0,
-    image: "/green-chilli-pepper.jpg",
-  },
-  {
-    id: 8,
-    name: "Eggplant Purple",
-    category: "vegetable",
-    price: 14.99,
-    rating: 4.3,
-    image: "/purple-eggplant.jpg",
-  },
-];
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -81,15 +12,31 @@ const CATEGORIES = [
   { id: "view-all", label: "View All" },
 ];
 const IntroducingProducts = () => {
+  const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [favorites, setFavorites] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //  Fetch
+  useEffect(() => {
+    fetch("/api/product.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Product fetch error:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProducts =
     selectedCategory === "all" || selectedCategory === "view-all"
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === selectedCategory);
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   const toggleFavorite = (id) => {
     setFavorites((prev) =>
@@ -97,46 +44,82 @@ const IntroducingProducts = () => {
     );
   };
 
-  return (
-    <div className="min-h-scree bg-[#EDF2EE]">
-      {/* Header */}
-      <div className="px-6">
-        <h1 className="text-center text-4xl font-bold text-gray-900 mb-8">
-          Introducing Our Products
-        </h1>
-
-        {/* Category Filter */}
-        <div className="flex justify-center gap-6 flex-wrap">
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`pb-2 font-medium transition-colors ${
-                selectedCategory === category.id
-                  ? "border-b-2 border-green-500 text-green-600"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              {category.label}
-              <span className="text-gray-300"> |</span>
-            </button>
-          ))}
-        </div>
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-xl font-semibold">
+        Loading products...
       </div>
+    );
+  }
 
-      {/* Products Grid */}
-      <div className="max-w-7xl mx-auto py-20 px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isFavorite={favorites.includes(product.id)}
-              onToggleFavorite={() => toggleFavorite(product.id)}
-              onView={(product)=>setSelectedProduct(product)}
-            />
-          ))}
-          <ProductModal product={selectedProduct} onClose={()=>setSelectedProduct(null)}/>
+  return (
+    <div className="relative overflow-hidden">
+      {/* Left Decorative Fruit Image */}
+      <img
+        src="/Group 6.png"
+        alt="Fruit Decoration"
+        className="
+    hidden lg:block
+    absolute
+    -left-20
+    top-1/2
+    -translate-y-1/2 
+    opacity-80
+    pointer-events-none
+  "
+      />
+
+      <div className="lg:max-w-7xl max-w-11/12 mx-auto pb-16 ">
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
+          <div className="flex justify-center md:justify-start">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900">
+              Featured Products
+            </h1>
+          </div>
+
+          <div className="flex justify-center md:justify-end">
+            <Link
+              to="/shop"
+              className="text-green-600 hover:text-green-700 flex items-center gap-2"
+            >
+              View All <ArrowRight />
+            </Link>
+          </div>
+        </div>
+
+{/* Products Grid */}
+        <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {filteredProducts.slice(0, 5).map((product, index) => (
+              <div
+                key={product.id}
+                className="animate-card is-visible"
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  transitionDelay: `${index * 100}ms`
+                }}
+              >
+                <ProductCard
+                  product={product}
+                  isFavorite={favorites.includes(product.id)}
+                  onToggleFavorite={() => toggleFavorite(product.id)}
+                  onView={(product) => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+          <ProductModal
+            product={selectedProduct}
+            isOpen={isModalOpen}
+            onClose={() => {
+              setSelectedProduct(null);
+              setIsModalOpen(false);
+            }}
+          />
         </div>
       </div>
     </div>

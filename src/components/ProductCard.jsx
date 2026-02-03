@@ -1,20 +1,38 @@
-import React from "react";
-import { Heart, Eye } from "lucide-react";
+import { Eye, Heart } from "lucide-react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
-  const discountPercent = product.originalPrice
+import { useNavigate } from "react-router";
+import { useWishlist } from "../routes/provider/WishlistProvider";
+const ProductCard = ({ product, onView }) => {
+  const { toggleWishlist, isInWishlist } = useWishlist();
+
+  const favorite = isInWishlist(product.id);
+  const navigate = useNavigate();
+  const discountPercent = product.original_price
     ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+        ((product.original_price - product.current_price) /
+          product.original_price) *
+          100,
       )
     : 0;
   return (
-    <div className="bg-white shadow hover:shadow-md transition-shadow border border-gray-200">
-      {/* Image Section */}
-      <div className="relative h-48 rounded-t-lg overflow-hidden group">
+<div
+      className="
+    bg-white 
+    rounded-2xl 
+    border border-gray-200 
+    shadow-sm
+    transition-all duration-300
+    hover:border-[#00B307]
+    hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)]
+    hover:-translate-y-2
+  "
+    >
+{/* Image Section */}
+      <div className="relative aspect-square rounded-t-lg overflow-hidden group">
         <img
-          src={product.image || "/placeholder.svg"}
+          src={product?.image?.[0] || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-100 group-hover:rounded-t-2xl"
         />
 
         {/* Sale Badge */}
@@ -25,17 +43,22 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
         )}
 
         {/* Action Buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div
+          className="absolute top-3 right-3 flex flex-col gap-2 transition-opacity
+  opacity-100 md:opacity-0 group-hover:opacity-100"
+        >
           <button
-            onClick={onToggleFavorite}
+            onClick={() => toggleWishlist(product)}
             className="bg-white rounded-full p-2 hover:bg-gray-100"
-            aria-label="Add to favorites"
           >
             <Heart
               size={18}
-              className={`${isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"}`}
+              className={
+                favorite ? "fill-red-500 text-red-500" : "text-gray-600"
+              }
             />
           </button>
+
           <button
             onClick={() => onView(product)}
             className="bg-white rounded-full p-2 hover:bg-gray-100"
@@ -47,25 +70,23 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
-        <h3 className="font-semibold text-gray-900 mb-2 text-sm">
-          {product.name}
-        </h3>
+      <div className="flex items-center justify-between p-4">
+        <div>
+          <h3 className="font-semibold text-[#4d4d4d] mb-2 text-base ">
+            {product.name}
+          </h3>
 
-        {/* Price Section */}
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-bold text-gray-900">
-            ${product.price.toFixed(2)}
-          </span>
-          {product.originalPrice && (
-            <span className="text-xs text-gray-400 line-through">
-              ${product.originalPrice.toFixed(2)}
+          {/* Price Section */}
+          <div className="flex items-center gap-2 ">
+            <span className="font-bold text-base text-gray-900">
+              ${product?.current_price?.toFixed(2)}
             </span>
-          )}
-        </div>
-
-        {/* Rating */}
-        <div className="flex items-center justify-between mt-2">
+            {product?.original_price && (
+              <span className="text-base text-gray-400 line-through">
+                ${product?.original_price?.toFixed(2)}
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <span
@@ -79,7 +100,13 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite,onView }) => {
               {product.rating.toFixed(1)}
             </span>
           </div>
-          <button className=" w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center ">
+        </div>
+
+<div>
+          <button
+            onClick={() => navigate(`/product/${product.id}`)}
+            className="w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-12"
+          >
             <HiOutlineShoppingBag size={22} />
           </button>
         </div>
