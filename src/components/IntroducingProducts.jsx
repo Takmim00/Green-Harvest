@@ -21,10 +21,11 @@ const IntroducingProducts = () => {
 
   //  Fetch
   useEffect(() => {
-    fetch("/api/product.json")
+    fetch("https://green-harvest-backend-seven.vercel.app/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.results);
+        console.log(data.results);
         setLoading(false);
       })
       .catch((err) => {

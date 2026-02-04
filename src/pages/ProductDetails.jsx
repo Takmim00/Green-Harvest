@@ -12,7 +12,7 @@ import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -26,15 +26,26 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    fetch("/api/product.json")
-      .then((res) => res.json())
+    if (!slug) return; // safety guard
+
+    fetch(
+      `https://green-harvest-backend-seven.vercel.app/api/products/${slug}/`,
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error("Product not found");
+        return res.json();
+      })
       .then((data) => {
-        const foundProduct = data.find(
-          (item) => String(item.id) === String(id),
-        );
-        setProduct(foundProduct);
-      });
-  }, [id]);
+        setProduct({
+          ...data,
+          current_price: Number(data.current_price),
+          original_price: Number(data.original_price),
+          discount_percentage: Number(data.discount_percentage),
+        });
+      })
+      .catch((err) => console.error("Product details error:", err));
+  }, [slug]);
+
   useEffect(() => {
     if (product) {
       setActiveIndex(0);
@@ -53,25 +64,17 @@ const ProductDetails = () => {
       </div>
     );
   }
-  const discountPercent = product.original_price
-    ? Math.round(
-        ((product.original_price - product.current_price) /
-          product.original_price) *
-          100,
-      )
-    : 0;
+  const discountPercent = Math.round(product.discount_percentage || 0);
+  const images = product?.images?.map((img) => img.image) || [];
 
   const scrollUp = () => {
     if (activeIndex > 0) setActiveIndex(activeIndex - 1);
   };
 
   const scrollDown = () => {
-    if (!product?.image) return;
-    if (activeIndex < product.image.length - 1) {
-      setActiveIndex(activeIndex + 1);
-    }
+    if (!images.length) return;
+    if (activeIndex < images.length - 1) setActiveIndex(activeIndex + 1);
   };
-
   return (
     <div className="w-11/12 md:max-w-7xl mx-auto">
       {/* product info */}
@@ -88,7 +91,7 @@ const ProductDetails = () => {
             </button>
             {/* Thumbnails */}
             <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-hidden">
-              {product?.image?.map((img, index) => (
+              {images.map((img, index) => (
                 <button
                   key={`${product.id}-${index}`}
                   onClick={() => setActiveIndex(index)}
@@ -113,7 +116,7 @@ const ProductDetails = () => {
           {/* Main Image */}
           <div className="lg:col-span-4 order-1 lg:order-2 flex items-center justify-center rounded bg-white h-65 sm:h-90 lg:h-125">
             <img
-              src={product?.image?.[activeIndex] || "/placeholder.svg"}
+              src={images[activeIndex] || "/placeholder.svg"}
               className="w-full h-full object-contain"
               alt=""
             />
@@ -131,16 +134,20 @@ const ProductDetails = () => {
           {/* Rating and SKU */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
             <div className="flex gap-0.5">
-              {[...Array(Math.round(product?.rating || 0))].map((_, i) => (
-                <span key={i} className="text-orange-500">
-                  <FaStar className="w-3 h-3 sm:w-4 sm:h-4" />
-                </span>
-              ))}
-              {[...Array(5 - Math.round(product?.rating || 0))].map((_, i) => (
-                <span key={i} className="text-gray-300">
-                  <FaStar className="w-3 h-3 sm:w-4 sm:h-4" />
-                </span>
-              ))}
+              {[...Array(Math.round(product?.average_rating || 0))].map(
+                (_, i) => (
+                  <span key={i} className="text-orange-500">
+                    <FaStar className="w-3 h-3 sm:w-4 sm:h-4" />
+                  </span>
+                ),
+              )}
+              {[...Array(5 - Math.round(product?.average_rating || 0))].map(
+                (_, i) => (
+                  <span key={i} className="text-gray-300">
+                    <FaStar className="w-3 h-3 sm:w-4 sm:h-4" />
+                  </span>
+                ),
+              )}
             </div>
             <span className="text-xs sm:text-sm text-gray-700">
               {product?.reviews_count} Review
@@ -255,7 +262,7 @@ const ProductDetails = () => {
                 href="#"
                 className="text-xs sm:text-sm text-gray-600 hover:underline"
               >
-                Vegetables
+                {product.category}
               </a>
             </div>
 
@@ -265,40 +272,11 @@ const ProductDetails = () => {
                 Tag:
               </span>
               <div className="flex flex-wrap gap-1 items-center">
-                <a
-                  href="#"
-                  className="text-xs sm:text-sm text-gray-600 hover:underline"
-                >
-                  Vegetables
-                </a>
-                <span className="text-xs sm:text-sm text-gray-400">•</span>
-                <a
-                  href="#"
-                  className="text-xs sm:text-sm text-gray-600 hover:underline"
-                >
-                  Healthy
-                </a>
-                <span className="text-xs sm:text-sm text-gray-400">•</span>
-                <a
-                  href="#"
-                  className="text-xs sm:text-sm text-gray-600 hover:underline"
-                >
-                  Chinese
-                </a>
-                <span className="text-xs sm:text-sm text-gray-400">•</span>
-                <a
-                  href="#"
-                  className="text-xs sm:text-sm text-gray-600 hover:underline"
-                >
-                  Cabbage
-                </a>
-                <span className="text-xs sm:text-sm text-gray-400">•</span>
-                <a
-                  href="#"
-                  className="text-xs sm:text-sm text-gray-600 hover:underline"
-                >
-                  Green Cabbage
-                </a>
+                {product.additional_info?.tags?.map((tag, i) => (
+                  <span key={i} className="text-xs sm:text-sm text-gray-600">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>

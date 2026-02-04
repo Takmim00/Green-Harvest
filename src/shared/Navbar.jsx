@@ -498,7 +498,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu */}
-          
+
           {isMenuOpen && (
             <div className="md:hidden fixed inset-0 top-35 bg-white z-40 overflow-y-auto">
               <div className="p-4">
