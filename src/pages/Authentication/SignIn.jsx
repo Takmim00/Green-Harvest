@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../routes/provider/AuthProvider";
 
 export default function SignIn() {
+  const { loginUser, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const success = await loginUser(email, password);
+    if (success) {
+      navigate("/shop"); // or "/"
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -14,11 +29,14 @@ export default function SignIn() {
         </h2>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Email */}
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
             className="w-full px-4 py-3 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
           />
 
@@ -27,6 +45,9 @@ export default function SignIn() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
               className="w-full px-4 py-3 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <button
@@ -49,23 +70,27 @@ export default function SignIn() {
               to="/forgot-password"
               className="text-gray-500 hover:text-green-600"
             >
-              Forget Password
+              Forgot Password
             </Link>
           </div>
 
           {/* Button */}
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-semibold transition"
+            disabled={loading}
+            className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white py-3 rounded-full font-semibold transition"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
         {/* Register */}
         <p className="text-center text-sm text-gray-600 mt-6">
-          Don’t have account?
-          <Link to="/register" className="text-green-600 font-semibold ml-1 over:underline">
+          Don’t have an account?
+          <Link
+            to="/register"
+            className="text-green-600 font-semibold ml-1 hover:underline"
+          >
             Register
           </Link>
         </p>
