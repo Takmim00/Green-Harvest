@@ -42,6 +42,7 @@ export default function Shops() {
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedTags, setSelectedTags] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [ordering, setOrdering] = useState("");
 
   const [totalPages, setTotalPages] = useState(1);
 
@@ -49,8 +50,16 @@ export default function Shops() {
   useEffect(() => {
     setLoading(true);
 
+    const queryParams = new URLSearchParams({
+      page: currentPage,
+    });
+
+    if (ordering) {
+      queryParams.append("ordering", ordering);
+    }
+
     fetch(
-      `https://green-harvest-backend-seven.vercel.app/api/products/?page=${currentPage}`,
+      `https://green-harvest-backend-seven.vercel.app/api/products/?${queryParams.toString()}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -63,7 +72,7 @@ export default function Shops() {
         console.error(err);
         setLoading(false);
       });
-  }, [currentPage]);
+  }, [ordering, currentPage]);
 
   /* ================= FILTER ================= */
   useEffect(() => {
@@ -99,13 +108,7 @@ export default function Shops() {
 
     setFilteredProducts(result);
   }, [products, selectedCategory, priceRange, selectedRating, selectedTags]);
-  if (loading) {
-    return (
-      <div className="text-center py-20 text-xl font-semibold">
-        <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin mx-auto"></div>
-      </div>
-    );
-  }
+
   /* ================= HANDLERS ================= */
   const handleViewProduct = (product) => {
     setSelectedProduct(product);
@@ -395,11 +398,21 @@ export default function Shops() {
 
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600">Sort by:</span>
-                <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
-                  <option>Latest</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Rating</option>
+                <select
+                  value={ordering}
+                  onChange={(e) => {
+                    setOrdering(e.target.value);
+                    setCurrentPage(1); // reset page
+                  }}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option value="">Default</option>
+                  <option value="-created_at">Latest</option>
+                  <option value="current_price">Price: Low to High</option>
+                  <option value="-current_price">Price: High to Low</option>
+                  <option value="-average_rating">Rating</option>
+                  <option value="name">Name: A-Z</option>
+                  <option value="-name">Name: Z-A</option>
                 </select>
               </div>
               <div className="text-sm text-gray-500">
@@ -475,66 +488,69 @@ export default function Shops() {
             )}
 
             {/* Product Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onView={handleViewProduct}
-                />
-              ))}
-            </div>
-
-            {/* Empty State */}
-            {filteredProducts.length === 0 && (
-              <div className="text-center py-16">
-                <p className="text-gray-500 text-lg">No products found</p>
-                <p className="text-gray-400 text-sm mt-2">
-                  Try adjusting your filters
-                </p>
+            {loading ? (
+              <div className="col-span-full flex justify-center py-20">
+                <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
               </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {filteredProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onView={handleViewProduct}
+                    />
+                  ))}
+                </div>
+
+                {filteredProducts.length === 0 && (
+                  <div className="text-center py-16">
+                    <p className="text-gray-500 text-lg">No products found</p>
+                    <p className="text-gray-400 text-sm mt-2">
+                      Try adjusting your filters
+                    </p>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Pagination */}
             {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-10">
-            <button
-              onClick={() =>
-                setCurrentPage((p) => Math.max(1, p - 1))
-              }
-              disabled={currentPage === 1}
-              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ChevronLeft size={18} />
-            </button>
+              <div className="flex items-center justify-center gap-2 mt-10">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronLeft size={18} />
+                </button>
 
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`w-10 h-10 rounded-full text-sm font-medium transition-colors ${
+                {[...Array(totalPages)].map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`w-10 h-10 rounded-full text-sm font-medium transition-colors ${
                       currentPage === i + 1
                         ? "bg-green-600 text-white"
                         : "border border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
-              >
-                {i + 1}
-              </button>
-            ))}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
 
-            <button
-              onClick={() =>
-                setCurrentPage((p) =>
-                  Math.min(totalPages, p + 1)
-                )
-              }
-              disabled={currentPage === totalPages}
-              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        )}
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>
