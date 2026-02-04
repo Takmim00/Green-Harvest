@@ -32,6 +32,22 @@ const SmallProductCard = ({
       </div>
     );
   };
+  const getProductImage = (images) => {
+  if (Array.isArray(images)) {
+    return (
+      images.find(img => img.is_primary)?.image ||
+      images[0]?.image
+    );
+  }
+
+  if (images && typeof images === "object") {
+    return images.image;
+  }
+
+  return "/placeholder.svg";
+};
+
+ const primaryImage = getProductImage(product.images);
 
   return (
     <div
@@ -45,7 +61,7 @@ const SmallProductCard = ({
       {/* Product Image */}
       <div className="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center shrink-0">
         <img
-          src={product.image?.[0] || "/placeholder.svg"}
+          src={primaryImage}
           alt={product.name}
           className="max-w-full max-h-full object-contain p-1"
         />
@@ -56,15 +72,17 @@ const SmallProductCard = ({
         <h4 className="text-sm text-gray-700 font-medium truncate">
           {product.name}
         </h4>
-        <div className="mt-0.5">{renderStars(product.rating)}</div>
+        <div className="mt-0.5">{renderStars(product.average_rating)}</div>
         {showDiscount && product.original_price ? (
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-sm font-semibold text-green-600">
-              ${product.current_price?.toFixed(2)}
+             <span className="font-bold text-base text-gray-900">
+              ${Number(product.current_price).toFixed(2)}
             </span>
-            <span className="text-xs text-gray-400 line-through">
-              ${product.original_price?.toFixed(2)}
-            </span>
+            {product.original_price && (
+              <span className="text-base text-gray-400 line-through">
+                ${Number(product.original_price).toFixed(2)}
+              </span>
+            )}
           </div>
         ) : null}
       </div>

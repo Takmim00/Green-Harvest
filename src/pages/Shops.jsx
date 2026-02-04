@@ -27,6 +27,7 @@ const popularTags = [
   "Breakfast",
   "Fruit",
 ];
+const PRODUCTS_PER_PAGE = 12;
 
 export default function Shops() {
   const [products, setProducts] = useState([]);
@@ -40,40 +41,52 @@ export default function Shops() {
   const [priceRange, setPriceRange] = useState([0, 50]);
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedTags, setSelectedTags] = useState([]);
-  const productsPerPage = 12;
+  const [loading, setLoading] = useState(true);
 
+  const [totalPages, setTotalPages] = useState(1);
+
+  /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
-    fetch("/api/product.json")
+    setLoading(true);
+
+    fetch(
+      `https://green-harvest-backend-seven.vercel.app/api/products/?page=${currentPage}`,
+    )
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
-        setFilteredProducts(data);
+        setProducts(data.results || []);
+        setFilteredProducts(data.results || []);
+        setTotalPages(Math.ceil(data.count / PRODUCTS_PER_PAGE));
+        setLoading(false);
       })
-      .catch((err) => console.error("Error loading products:", err));
-  }, []);
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [currentPage]);
 
+  /* ================= FILTER ================= */
   useEffect(() => {
     let result = [...products];
 
-    // Filter by category
     if (selectedCategory !== "All") {
       result = result.filter(
-        (p) => p.category.toLowerCase() === selectedCategory.toLowerCase(),
+        (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase(),
       );
     }
 
-    // Filter by price range
     result = result.filter(
       (p) =>
-        p.current_price >= priceRange[0] && p.current_price <= priceRange[1],
+        Number(p.current_price) >= priceRange[0] &&
+        Number(p.current_price) <= priceRange[1],
     );
 
-    // Filter by rating
     if (selectedRating > 0) {
-      result = result.filter((p) => p.rating >= selectedRating);
+      result = result.filter(
+        (p) => Number(p.average_rating || 0) >= selectedRating,
+      );
     }
 
-    // Filter by tags
     if (selectedTags.length > 0) {
       result = result.filter((p) =>
         selectedTags.some((tag) =>
@@ -85,24 +98,15 @@ export default function Shops() {
     }
 
     setFilteredProducts(result);
-    setCurrentPage(1);
-  }, [selectedCategory, priceRange, selectedRating, selectedTags, products]);
-
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + productsPerPage,
-  );
-
-  const toggleFavorite = (productId) => {
-    setFavorites((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId],
+  }, [products, selectedCategory, priceRange, selectedRating, selectedTags]);
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-xl font-semibold">
+        <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin mx-auto"></div>
+      </div>
     );
-  };
-
+  }
+  /* ================= HANDLERS ================= */
   const handleViewProduct = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -364,8 +368,6 @@ export default function Shops() {
         </div>
       </div>
 
-   
-
       <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop Sidebar - Hidden on mobile */}
@@ -474,19 +476,17 @@ export default function Shops() {
 
             {/* Product Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {currentProducts.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
-                  isFavorite={favorites.includes(product.id)}
-                  onToggleFavorite={() => toggleFavorite(product.id)}
                   onView={handleViewProduct}
                 />
               ))}
             </div>
 
             {/* Empty State */}
-            {currentProducts.length === 0 && (
+            {filteredProducts.length === 0 && (
               <div className="text-center py-16">
                 <p className="text-gray-500 text-lg">No products found</p>
                 <p className="text-gray-400 text-sm mt-2">
@@ -497,38 +497,44 @@ export default function Shops() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-10">
-                <button
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                {[...Array(totalPages)].map((_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`w-10 h-10 rounded-full text-sm font-medium transition-colors ${
+          <div className="flex items-center justify-center gap-2 mt-10">
+            <button
+              onClick={() =>
+                setCurrentPage((p) => Math.max(1, p - 1))
+              }
+              disabled={currentPage === 1}
+              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-10 h-10 rounded-full text-sm font-medium transition-colors ${
                       currentPage === i + 1
                         ? "bg-green-600 text-white"
                         : "border border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={() =>
-                    setCurrentPage((p) => Math.min(totalPages, p + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-            )}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() =>
+                setCurrentPage((p) =>
+                  Math.min(totalPages, p + 1)
+                )
+              }
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        )}
           </main>
         </div>
       </div>

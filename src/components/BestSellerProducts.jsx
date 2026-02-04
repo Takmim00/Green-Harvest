@@ -6,6 +6,45 @@ import ProductModal from "./ProductModal";
 import SmallProductCard from "./SmallProductCard";
 
 const BestSellerProducts = () => {
+  // const [favorites, setFavorites] = useState({});
+
+  // const [products, setProducts] = useState([]);
+  // const [activeListItemId, setActiveListItemId] = useState(null);
+
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // useEffect(() => {
+  //   fetch("https://green-harvest-backend-seven.vercel.app/api/products")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setProducts(data.results || []);
+  //     })
+  //     .catch((err) => console.error("Product fetch error:", err));
+  // }, []);
+
+  // const getProductById = (id) =>
+  //   products.find((p) => Number(p.id) === Number(id));
+
+  // const topRowProductIds = [1, 5, 6, 7, 16];
+
+  // const hotDealsProducts = [
+  //   { id: 1, showDiscount: false },
+  //   { id: 2, showDiscount: true },
+  //   { id: 5, showDiscount: false },
+  // ];
+
+  // const bestSellerListProducts = [
+  //   { id: 8, showDiscount: false },
+  //   { id: 12, showDiscount: true },
+  //   { id: 3, showDiscount: false },
+  // ];
+
+  // const topRatedProducts = [
+  //   { id: 17, showDiscount: false },
+  //   { id: 16, showDiscount: true },
+  //   { id: 4, showDiscount: false },
+  // ];
   const [products, setProducts] = useState([]);
   const [activeListItemId, setActiveListItemId] = useState(2);
   const [favorites, setFavorites] = useState({});
@@ -14,10 +53,12 @@ const BestSellerProducts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("/api/product.json")
+    fetch("https://green-harvest-backend-seven.vercel.app/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Error fetching products:", err));
+      .then((data) => {
+        setProducts(data.results || []);
+      })
+      .catch((err) => console.error("Product fetch error:", err));
   }, []);
 
   const getProductById = (id) => products.find((p) => p.id === id);
@@ -30,25 +71,26 @@ const BestSellerProducts = () => {
   };
 
   // Product IDs for top row - Best Seller Cards
-  const topRowProductIds = [1, 5, 6, 7, 16];
+  const topRowProductIds = [16, 21, 25, 14, 17];
+  // console.log(topRowProductIds);
 
   // Product lists for bottom section
   const hotDealsProducts = [
-    { id: 1, showDiscount: false },
-    { id: 2, showDiscount: true },
-    { id: 5, showDiscount: false },
+    { id: 13, showDiscount: false },
+    { id: 22, showDiscount: true },
+    { id: 18, showDiscount: false },
   ];
 
   const bestSellerListProducts = [
-    { id: 8, showDiscount: false },
+    { id: 11, showDiscount: false },
     { id: 12, showDiscount: true },
-    { id: 3, showDiscount: false },
+    { id: 14, showDiscount: false },
   ];
 
   const topRatedProducts = [
     { id: 17, showDiscount: false },
     { id: 16, showDiscount: true },
-    { id: 4, showDiscount: false },
+    { id: 30, showDiscount: false },
   ];
 
   // Product List Section Component

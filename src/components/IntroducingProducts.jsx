@@ -48,7 +48,7 @@ const IntroducingProducts = () => {
   if (loading) {
     return (
       <div className="text-center py-20 text-xl font-semibold">
-        Loading products...
+        <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin mx-auto"></div>
       </div>
     );
   }
