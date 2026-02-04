@@ -54,9 +54,14 @@ export default function Shops() {
       page: currentPage,
     });
 
-    if (ordering) {
-      queryParams.append("ordering", ordering);
-    }
+    if (ordering) queryParams.append("ordering", ordering);
+    if (selectedCategory !== "All")
+      queryParams.append("category", selectedCategory);
+    if (priceRange[0] > 0) queryParams.append("min_price", priceRange[0]);
+    if (priceRange[1] < 50) queryParams.append("max_price", priceRange[1]);
+    if (selectedRating > 0) queryParams.append("min_rating", selectedRating);
+    if (selectedTags.length > 0)
+      queryParams.append("tags", selectedTags.join(","));
 
     fetch(
       `https://green-harvest-backend-seven.vercel.app/api/products/?${queryParams.toString()}`,
@@ -64,7 +69,7 @@ export default function Shops() {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.results || []);
-        setFilteredProducts(data.results || []);
+        setFilteredProducts(data.results || []); // optional, can remove if you always rely on API
         setTotalPages(Math.ceil(data.count / PRODUCTS_PER_PAGE));
         setLoading(false);
       })
@@ -72,42 +77,16 @@ export default function Shops() {
         console.error(err);
         setLoading(false);
       });
-  }, [ordering, currentPage]);
+  }, [
+    ordering,
+    currentPage,
+    selectedCategory,
+    priceRange,
+    selectedRating,
+    selectedTags,
+  ]);
 
-  /* ================= FILTER ================= */
-  useEffect(() => {
-    let result = [...products];
-
-    if (selectedCategory !== "All") {
-      result = result.filter(
-        (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase(),
-      );
-    }
-
-    result = result.filter(
-      (p) =>
-        Number(p.current_price) >= priceRange[0] &&
-        Number(p.current_price) <= priceRange[1],
-    );
-
-    if (selectedRating > 0) {
-      result = result.filter(
-        (p) => Number(p.average_rating || 0) >= selectedRating,
-      );
-    }
-
-    if (selectedTags.length > 0) {
-      result = result.filter((p) =>
-        selectedTags.some((tag) =>
-          p.additional_info?.tags?.some((t) =>
-            t.toLowerCase().includes(tag.toLowerCase()),
-          ),
-        ),
-      );
-    }
-
-    setFilteredProducts(result);
-  }, [products, selectedCategory, priceRange, selectedRating, selectedTags]);
+  
 
   /* ================= HANDLERS ================= */
   const handleViewProduct = (product) => {
@@ -144,7 +123,10 @@ export default function Shops() {
               type="radio"
               name={isMobile ? "category-mobile" : "category"}
               checked={selectedCategory === "All"}
-              onChange={() => setSelectedCategory("All")}
+              onChange={() => {
+                setSelectedCategory("All");
+                setCurrentPage(1); // reset page
+              }}
               className="w-4 h-4 accent-green-600"
             />
             <span className="text-sm text-gray-700">All</span>
@@ -159,7 +141,10 @@ export default function Shops() {
                   type="radio"
                   name={isMobile ? "category-mobile" : "category"}
                   checked={selectedCategory === cat.name}
-                  onChange={() => setSelectedCategory(cat.name)}
+                  onChange={() => {
+                    setSelectedCategory(cat.name);
+                    setCurrentPage(1); // reset page
+                  }}
                   className="w-4 h-4 accent-green-600"
                 />
                 <span className="text-sm text-gray-700">{cat.name}</span>
