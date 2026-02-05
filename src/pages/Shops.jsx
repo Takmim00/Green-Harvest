@@ -356,7 +356,7 @@ export default function Shops() {
         </div>
       </div>
 
-      <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 py-8">
+      <div className="md:max-w-7xl w-11/12 mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop Sidebar - Hidden on mobile */}
           <aside className="hidden lg:block w-72 shrink-0">
@@ -474,7 +474,7 @@ export default function Shops() {
 
             {/* Product Grid */}
             {loading ? (
-              <div className="col-span-full flex justify-center py-20">
+              <div className="min-h-screen col-span-full flex justify-center py-20">
                 <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
               </div>
             ) : (

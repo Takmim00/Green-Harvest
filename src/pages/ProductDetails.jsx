@@ -26,7 +26,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    if (!slug) return; // safety guard
+    if (!slug) return; 
 
     fetch(
       `https://green-harvest-backend-seven.vercel.app/api/products/${slug}/`,
