@@ -25,11 +25,23 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo */}
             <div className="flex items-center gap-2 shrink-0">
-              <Link href="/" className="shrink-0">
+              {/* <Link href="/" className="shrink-0">
                 <div className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
                   <span className="text-green-500">🍃</span> Ecobazar
                 </div>
-              </Link>
+              </Link> */}
+              <Link to="/" className="shrink-0 flex items-center gap-2">
+              <div className="w-10 h-10  rounded-full flex items-center justify-center">
+                {/* <Leaf size={22} className="text-white" /> */}
+                <img src="/GreenHarvest.png" alt="" />
+              </div>
+              <div>
+                <div className="text-xl font-bold text-gray-900">GreenHarvest</div>
+                <div className="text-[10px] text-green-600 font-medium -mt-1">
+                  ORGANIC GROCERY
+                </div>
+              </div>
+            </Link>
             </div>
 
             {/* Text */}
