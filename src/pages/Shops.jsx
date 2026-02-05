@@ -3,16 +3,6 @@ import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import ProductModal from "../components/ProductModal";
 
-const categories = [
-  { name: "Fresh Fruit", count: 134 },
-  { name: "Vegetables", count: 150 },
-  { name: "Cooking", count: 54 },
-  { name: "Snacks", count: 47 },
-  { name: "Beverages", count: 43 },
-  { name: "Beauty & Health", count: 38 },
-  { name: "Bread & Bakery", count: 15 },
-];
-
 const popularTags = [
   "Healthy",
   "Low fat",
@@ -37,7 +27,7 @@ export default function Shops() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [priceRange, setPriceRange] = useState([0, 50]);
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -45,6 +35,7 @@ export default function Shops() {
   const [ordering, setOrdering] = useState("");
 
   const [totalPages, setTotalPages] = useState(1);
+  const [categories, setCategories] = useState([]);
 
   /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
@@ -55,8 +46,9 @@ export default function Shops() {
     });
 
     if (ordering) queryParams.append("ordering", ordering);
-    if (selectedCategory !== "All")
+    if (selectedCategory) {
       queryParams.append("category", selectedCategory);
+    }
     if (priceRange[0] > 0) queryParams.append("min_price", priceRange[0]);
     if (priceRange[1] < 50) queryParams.append("max_price", priceRange[1]);
     if (selectedRating > 0) queryParams.append("min_rating", selectedRating);
@@ -85,8 +77,14 @@ export default function Shops() {
     selectedRating,
     selectedTags,
   ]);
-
-  
+  useEffect(() => {
+    fetch("https://green-harvest-backend-seven.vercel.app/api/categories/")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data.results || []);
+      })
+      .catch((err) => console.error("Category fetch error:", err));
+  }, []);
 
   /* ================= HANDLERS ================= */
   const handleViewProduct = (product) => {
@@ -131,27 +129,31 @@ export default function Shops() {
             />
             <span className="text-sm text-gray-700">All</span>
           </label>
-          {categories.map((cat) => (
-            <label
-              key={cat.name}
-              className="flex items-center justify-between cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name={isMobile ? "category-mobile" : "category"}
-                  checked={selectedCategory === cat.name}
-                  onChange={() => {
-                    setSelectedCategory(cat.name);
-                    setCurrentPage(1); // reset page
-                  }}
-                  className="w-4 h-4 accent-green-600"
-                />
-                <span className="text-sm text-gray-700">{cat.name}</span>
-              </div>
-              <span className="text-sm text-gray-400">({cat.count})</span>
-            </label>
-          ))}
+          {categories
+            .filter((cat) => cat.product_count > 0)
+            .map((cat) => (
+              <label
+                key={cat.id}
+                className="flex items-center justify-between cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name={isMobile ? "category-mobile" : "category"}
+                    checked={selectedCategory === cat.slug}
+                    onChange={() => {
+                      setSelectedCategory(cat.slug);
+                      setCurrentPage(1); // reset page
+                    }}
+                    className="w-4 h-4 accent-green-600"
+                  />
+                  <span className="text-sm text-gray-700">{cat.name}</span>
+                </div>
+                <span className="text-sm text-gray-400">
+                  ({cat.product_count})
+                </span>
+              </label>
+            ))}
         </div>
       </div>
 
