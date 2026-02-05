@@ -154,16 +154,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="shrink-0 flex items-center gap-2">
-              <div className="w-10 h-10  rounded-full flex items-center justify-center">
+              <div className="w-40 h-10  rounded-full flex items-center justify-center">
                 {/* <Leaf size={22} className="text-white" /> */}
-                <img src="/GreenHarvest.png" alt="" />
+                <img src="/green12.png" alt=""  />
               </div>
-              <div>
-                <div className="text-xl font-bold text-gray-900">GreenHarvest</div>
-                <div className="text-[10px] text-green-600 font-medium -mt-1">
+              {/* <div>
+                <div className="text-xl font-bold text-green-700">GreenHarvest</div>
+                <div className="text-[10px] text-gray-950 font-medium -mt-1">
                   ORGANIC GROCERY
                 </div>
-              </div>
+              </div> */}
             </Link>
 
             {/* Search Bar (No Category) */}
