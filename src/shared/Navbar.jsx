@@ -159,8 +159,8 @@ export default function Navbar() {
                 <img src="/GreenHarvest.png" alt="" />
               </div>
               <div>
-                <div className="text-xl font-bold text-green-600">Green<span className="text-yellow-700">Harvest</span></div>
-                <div className="text-[10px] text-gray-900 font-medium -mt-1">
+                <div className="text-xl font-bold text-gray-900">GreenHarvest</div>
+                <div className="text-[10px] text-green-600 font-medium -mt-1">
                   ORGANIC GROCERY
                 </div>
               </div>
