@@ -16,9 +16,7 @@ const Wishlist = () => {
   return (
     <div className=" py-8 sm:py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10">
-          My Wishlist
-        </h1>
+        <h1 className="text-4xl font-bold text-center mb-10">My Wishlist</h1>
 
         <div className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden">
           {wishlist.length > 0 ? (
@@ -34,9 +32,9 @@ const Wishlist = () => {
               {/* Wishlist Items */}
               {wishlist.map((item) => (
                 <WishlistItem
-                  key={item.id}
+                  key={item.wishlistId}
                   product={item}
-                  onRemove={() => toggleWishlist(item)}
+                  onRemove={() => toggleWishlist({ id: item.productId })}
                   onAddToCart={handleAddToCart}
                 />
               ))}
