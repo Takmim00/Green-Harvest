@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import {
   Apple,
@@ -11,7 +11,7 @@ import {
   Cookie,
   Croissant,
   Heart,
-  Leaf,
+  LayoutDashboardIcon,
   Menu,
   Package,
   Phone,
@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../routes/provider/AuthProvider";
 import { useCart } from "../routes/provider/ShoppingProvider";
 import { useWishlist } from "../routes/provider/WishlistProvider";
 
@@ -48,6 +49,7 @@ const categories = [
 ];
 
 export default function Navbar() {
+  const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
@@ -156,7 +158,7 @@ export default function Navbar() {
             <Link to="/" className="shrink-0 flex items-center gap-2">
               <div className="w-40 h-10  rounded-full flex items-center justify-center">
                 {/* <Leaf size={22} className="text-white" /> */}
-                <img src="/green12.png" alt=""  />
+                <img src="/green12.png" alt="" />
               </div>
               {/* <div>
                 <div className="text-xl font-bold text-green-700">GreenHarvest</div>
@@ -209,7 +211,7 @@ export default function Navbar() {
                   </div>
                   <div className="hidden lg:block text-left">
                     <div className="text-[10px] text-gray-500">
-                      Hello, Sign in
+                      Hello, {user ? user.email : "Sign in"}
                     </div>
                     <div className="text-sm font-medium text-gray-900 flex items-center gap-1">
                       Account
@@ -225,35 +227,51 @@ export default function Navbar() {
 
                 {isUserMenuOpen && (
                   <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2">
-                    <Link
-                      to="/signIn"
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
-                    >
-                      <User size={16} />
-                      <span className="text-sm">Sign In</span>
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
-                    >
-                      <ArrowRight size={16} />
-                      <span className="text-sm">Create Account</span>
-                    </Link>
-                    <div className="border-t my-2" />
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
-                    >
-                      <Package size={16} />
-                      <span className="text-sm">My Orders</span>
-                    </Link>
-                    <Link
-                      to="/dashboard/settings"
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
-                    >
-                      <Settings size={16} />
-                      <span className="text-sm">Settings</span>
-                    </Link>
+                    {!user ? (
+                      <>
+                        <Link
+                          to="/signIn"
+                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
+                        >
+                          <User size={16} />
+                          <span className="text-sm">Sign In</span>
+                        </Link>
+
+                        <Link
+                          to="/register"
+                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
+                        >
+                          <ArrowRight size={16} />
+                          <span className="text-sm">Create Account</span>
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
+                        >
+                          <LayoutDashboardIcon size={16} />
+                          <span className="text-sm">Dashboard</span>
+                        </Link>
+
+                        <Link
+                          to="/dashboard/settings"
+                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50"
+                        >
+                          <Settings size={16} />
+                          <span className="text-sm">Settings</span>
+                        </Link>
+
+                        <button
+                          onClick={logout}
+                          className="w-full text-left flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 text-red-500"
+                        >
+                          <X size={16} />
+                          <span className="text-sm">Logout</span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -595,28 +613,45 @@ export default function Navbar() {
                   <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
                     Account
                   </div>
+
                   <div className="space-y-1">
-                    <Link
-                      to="/signIn"
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
-                    >
-                      <User size={18} />
-                      Sign In
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
-                    >
-                      <ArrowRight size={18} />
-                      Create Account
-                    </Link>
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
-                    >
-                      <Package size={18} />
-                      My Orders
-                    </Link>
+                    {!user ? (
+                      <>
+                        <Link
+                          to="/signIn"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
+                        >
+                          <User size={18} />
+                          Sign In
+                        </Link>
+
+                        <Link
+                          to="/register"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
+                        >
+                          <ArrowRight size={18} />
+                          Create Account
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
+                        >
+                          <Package size={18} />
+                          My Orders
+                        </Link>
+
+                        <button
+                          onClick={logout}
+                          className="w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50"
+                        >
+                          <X size={18} />
+                          Logout
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
 

@@ -16,7 +16,7 @@ export default function SignIn() {
 
     const success = await loginUser(email, password);
     if (success) {
-      navigate("/shop"); // or "/"
+      navigate("/"); // or "/"
     }
   };
 

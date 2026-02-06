@@ -46,7 +46,7 @@ export default function Register() {
     console.log(success);
 
     if (success) {
-      navigate("/shop");
+      navigate("/");
     }
   };
 
