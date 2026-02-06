@@ -22,11 +22,14 @@ export const WishlistProvider = ({ children }) => {
         const data = await res.json();
 
         const formatted = (data.items || []).map((item) => ({
-          wishlistId: item.id, // wishlist row id
-          productId: item.id, // if needed, can use row id or add a separate product id if backend has it
+          wishlistId: item.id, // ✅ wishlist row id
+          productId: item.product_id, // if needed, can use row id or add a separate product id if backend has it
           name: item.product_name,
           slug: item.product_slug,
-          image: item.product_image?.image || item.images?.[0]?.image || "/placeholder.svg",
+          image:
+            item.product_image?.image ||
+            item.images?.[0]?.image ||
+            "/placeholder.svg",
           price: Number(item.price),
           status:
             item.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
@@ -42,110 +45,109 @@ export const WishlistProvider = ({ children }) => {
   }, [token]);
 
   // 🔹 Toggle wishlist
-// const toggleWishlist = async (item) => {
-//   if (!token) return;
+  // const toggleWishlist = async (item) => {
+  //   if (!token) return;
 
-//   const productId = item.id; // catalog id for adding
-//   const wishlistId = item.wishlistId; // only exists if already in wishlist
+  //   const productId = item.id; // catalog id for adding
+  //   const wishlistId = item.wishlistId; // only exists if already in wishlist
 
-//   try {
-//     if (wishlistId) {
-//       // Remove from wishlist
-//       await fetch(`${API}/remove/?item_id=${wishlistId}`, {
-//         method: "DELETE",
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
+  //   try {
+  //     if (wishlistId) {
+  //       // Remove from wishlist
+  //       await fetch(`${API}/remove/?item_id=${wishlistId}`, {
+  //         method: "DELETE",
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
 
-//       setWishlist(prev => prev.filter(i => i.wishlistId !== wishlistId));
-//     } else {
-//       // Add new wishlist item
-//       if (!productId) {
-//         console.error("❌ Missing product id, cannot add to wishlist", item);
-//         return;
-//       }
+  //       setWishlist(prev => prev.filter(i => i.wishlistId !== wishlistId));
+  //     } else {
+  //       // Add new wishlist item
+  //       if (!productId) {
+  //         console.error("❌ Missing product id, cannot add to wishlist", item);
+  //         return;
+  //       }
 
-//       const res = await fetch(`${API}/add/`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//         body: JSON.stringify({ product_id: productId }),
-//       });
+  //       const res = await fetch(`${API}/add/`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({ product_id: productId }),
+  //       });
 
-//       if (!res.ok) throw new Error("Add wishlist failed");
+  //       if (!res.ok) throw new Error("Add wishlist failed");
 
-//       const data = await res.json();
+  //       const data = await res.json();
 
-//       // Push newly added item into local state
-//       setWishlist(prev => [
-//         ...prev,
-//         {
-//           wishlistId: data.id, // use the returned wishlist id
-//           productId: data.id,  // same catalog product id
-//           name: data.product_name,
-//           slug: data.product_slug,
-//           image: data.product_image?.image || "/placeholder.svg",
-//           currentPrice: Number(data.price),
-//           status: data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
-//         },
-//       ]);
-//     }
-//   } catch (err) {
-//     console.error("❌ Wishlist toggle error", err);
-//   }
-// };
+  //       // Push newly added item into local state
+  //       setWishlist(prev => [
+  //         ...prev,
+  //         {
+  //           wishlistId: data.id, // use the returned wishlist id
+  //           productId: data.id,  // same catalog product id
+  //           name: data.product_name,
+  //           slug: data.product_slug,
+  //           image: data.product_image?.image || "/placeholder.svg",
+  //           currentPrice: Number(data.price),
+  //           status: data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
+  //         },
+  //       ]);
+  //     }
+  //   } catch (err) {
+  //     console.error("❌ Wishlist toggle error", err);
+  //   }
+  // };
 
+  const toggleWishlist = async (product) => {
+    if (!token) return;
 
-const toggleWishlist = async (product) => {
-  if (!token) return;
+    // Check if product is already in wishlist
+    const existingItem = wishlist.find((i) => i.productId === product.id);
 
-  // Check if product is already in wishlist
-  const existingItem = wishlist.find((i) => i.productId === product.id);
+    try {
+      if (existingItem) {
+        // Remove wishlist
+        await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-  try {
-    if (existingItem) {
-      // Remove wishlist
-      await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+        setWishlist((prev) => prev.filter((i) => i.productId !== product.id));
+      } else {
+        // Add wishlist
+        const res = await fetch(`${API}/add/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ product_id: product.id }),
+        });
 
-      setWishlist(prev => prev.filter(i => i.productId !== product.id));
-    } else {
-      // Add wishlist
-      const res = await fetch(`${API}/add/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ product_id: product.id }),
-      });
+        if (!res.ok) throw new Error("Add wishlist failed");
 
-      if (!res.ok) throw new Error("Add wishlist failed");
+        const data = await res.json();
 
-      const data = await res.json();
-
-      setWishlist(prev => [
-        ...prev,
-        {
-          wishlistId: data.id,         // wishlist row id
-          productId: product.id,       // catalog product id
-          name: data.product_name,
-          slug: data.product_slug,
-          image: data.product_image?.image || product.image || "/placeholder.svg",
-          currentPrice: Number(data.price),
-          status: data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
-        },
-      ]);
+        setWishlist((prev) => [
+          ...prev,
+          {
+            wishlistId: data.id, // wishlist row id
+            productId: product.id, // catalog product id
+            name: data.product_name,
+            slug: data.product_slug,
+            image:
+              data.product_image?.image || product.image || "/placeholder.svg",
+            currentPrice: Number(data.price),
+            status:
+              data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
+          },
+        ]);
+      }
+    } catch (err) {
+      console.error("❌ Wishlist toggle error", err);
     }
-  } catch (err) {
-    console.error("❌ Wishlist toggle error", err);
-  }
-};
-
-
+  };
 
   const isInWishlist = (productId) =>
     wishlist.some((item) => item.productId === productId);

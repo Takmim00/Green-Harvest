@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext();
 
@@ -41,10 +41,10 @@ export const ShoppingProvider = ({ children }) => {
         const items = data?.items || [];
 
         const formatted = items.map((item) => ({
-          id: item.product?.id || item.id,
-          name: item.product?.name || item.name,
-          image: item.product?.image || "",
-          price: Number(item.product?.current_price || item.price || 0),
+          id: item.id,
+          name: item.product_name || "Unnamed Product",
+          image: item.product_image?.image || "/placeholder.svg",
+          price: Number(item.price || 0),
           quantity: item.quantity,
         }));
 
@@ -87,7 +87,7 @@ export const ShoppingProvider = ({ children }) => {
           return prev.map((item) =>
             item.id === product.id
               ? { ...item, quantity: item.quantity + quantity }
-              : item
+              : item,
           );
         }
 
@@ -142,7 +142,7 @@ export const ShoppingProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            product_id: productId,
+            id: productId,
             quantity,
           }),
         });
@@ -152,7 +152,9 @@ export const ShoppingProvider = ({ children }) => {
       }
 
       setCart((prev) =>
-        prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
+        prev.map((item) =>
+          item.id === productId ? { ...item, quantity } : item,
+        ),
       );
     } catch (err) {
       console.error("❌ Update quantity failed:", err);
@@ -183,7 +185,10 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Helpers
   const getCartTotal = () => {
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
     console.log("💰 Cart total:", total);
     return total;
   };

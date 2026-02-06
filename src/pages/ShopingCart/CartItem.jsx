@@ -2,6 +2,7 @@ import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "../../routes/provider/ShoppingProvider";
 
 const CartItem = ({ item }) => {
+  console.log(item);
   const { updateQuantity, removeFromCart } = useCart();
   const subtotal = item.price * item.quantity;
 

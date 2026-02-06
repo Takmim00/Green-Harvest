@@ -81,7 +81,7 @@ export default function Shops() {
     fetch("https://green-harvest-backend-seven.vercel.app/api/categories/")
       .then((res) => res.json())
       .then((data) => {
-        setCategories(data.results || []);
+        setCategories(data || []);
       })
       .catch((err) => console.error("Category fetch error:", err));
   }, []);
