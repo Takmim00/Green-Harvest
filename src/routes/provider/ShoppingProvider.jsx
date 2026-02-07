@@ -21,12 +21,12 @@ export const ShoppingProvider = ({ children }) => {
   useEffect(() => {
     const fetchCart = async () => {
       if (!token) {
-        console.log("🟡 No token found → skipping server cart load");
+        // console.log("🟡 No token found → skipping server cart load");
         return;
       }
 
       try {
-        console.log("🔄 Fetching cart from server...");
+        // console.log("🔄 Fetching cart from server...");
 
         const res = await fetch(`${API}/`, {
           headers: {
@@ -36,7 +36,7 @@ export const ShoppingProvider = ({ children }) => {
         });
 
         const data = await res.json();
-        console.log("📦 Server cart response:", data);
+        // console.log("📦 Server cart response:", data);
 
         const items = data?.items || [];
 
@@ -48,7 +48,7 @@ export const ShoppingProvider = ({ children }) => {
           quantity: item.quantity,
         }));
 
-        console.log("✅ Formatted cart items:", formatted);
+        // console.log("✅ Formatted cart items:", formatted);
         setCart(formatted);
       } catch (err) {
         console.error("❌ Cart load error:", err);
@@ -60,7 +60,7 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Add to cart
   const addToCart = async (product, quantity = 1) => {
-    console.log("🛒 Adding to cart:", { product, quantity });
+    // console.log("🛒 Adding to cart:", { product, quantity });
 
     try {
       if (token) {
@@ -77,7 +77,7 @@ export const ShoppingProvider = ({ children }) => {
         });
 
         const data = await res.json();
-        console.log("✅ Add to cart API response:", data);
+        // console.log("✅ Add to cart API response:", data);
       }
 
       setCart((prev) => {
@@ -91,7 +91,7 @@ export const ShoppingProvider = ({ children }) => {
           );
         }
 
-        console.log("🆕 Adding new item to local cart");
+        // console.log("🆕 Adding new item to local cart");
         return [...prev, mapToCartItem(product, quantity)];
       });
     } catch (err) {
@@ -101,7 +101,7 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Remove single item
   const removeFromCart = async (productId) => {
-    console.log("🗑 Removing item from cart:", productId);
+    // console.log("🗑 Removing item from cart:", productId);
 
     try {
       if (token) {
@@ -115,7 +115,7 @@ export const ShoppingProvider = ({ children }) => {
         });
 
         const data = await res.json();
-        console.log("✅ Remove API response:", data);
+        // console.log("✅ Remove API response:", data);
       }
 
       setCart((prev) => prev.filter((item) => item.id !== productId));
@@ -126,10 +126,10 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Update quantity
   const updateQuantity = async (productId, quantity) => {
-    console.log("✏️ Updating quantity:", { productId, quantity });
+    // console.log("✏️ Updating quantity:", { productId, quantity });
 
     if (quantity < 1) {
-      console.log("⚠️ Quantity < 1 → removing item instead");
+      // console.log("⚠️ Quantity < 1 → removing item instead");
       return removeFromCart(productId);
     }
 
@@ -148,7 +148,7 @@ export const ShoppingProvider = ({ children }) => {
         });
 
         const data = await res.json();
-        console.log("✅ Update quantity API response:", data);
+        // console.log("✅ Update quantity API response:", data);
       }
 
       setCart((prev) =>
@@ -163,7 +163,7 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Clear entire cart
   const clearCart = async () => {
-    console.log("🧹 Clearing entire cart...");
+    // console.log("🧹 Clearing entire cart...");
 
     try {
       if (token) {
@@ -174,7 +174,7 @@ export const ShoppingProvider = ({ children }) => {
           },
         });
 
-        console.log("✅ Clear cart API status:", res.status);
+        // console.log("✅ Clear cart API status:", res.status);
       }
 
       setCart([]);
@@ -189,19 +189,19 @@ export const ShoppingProvider = ({ children }) => {
       (sum, item) => sum + item.price * item.quantity,
       0,
     );
-    console.log("💰 Cart total:", total);
+    // console.log("💰 Cart total:", total);
     return total;
   };
 
   const getCartCount = () => {
     const count = cart.reduce((c, item) => c + item.quantity, 0);
-    console.log("🔢 Cart count:", count);
+    // console.log("🔢 Cart count:", count);
     return count;
   };
 
   const isInCart = (id) => {
     const exists = cart.some((item) => item.id === id);
-    console.log("📌 Is in cart?", { id, exists });
+    // console.log("📌 Is in cart?", { id, exists });
     return exists;
   };
 

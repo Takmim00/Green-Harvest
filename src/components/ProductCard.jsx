@@ -7,7 +7,7 @@ const ProductCard = ({ product, onView }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const navigate = useNavigate();
 
-  const favorite = isInWishlist(product.id);
+  const favorite = isInWishlist(product.slug);
 const getProductImage = (images) => {
   if (Array.isArray(images)) {
     return (

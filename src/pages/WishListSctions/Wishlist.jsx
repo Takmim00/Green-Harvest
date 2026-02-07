@@ -34,7 +34,7 @@ const Wishlist = () => {
                 <WishlistItem
                   key={item.wishlistId}
                   product={item}
-                  onRemove={() => toggleWishlist({ id: item.productId })}
+                  onRemove={() => toggleWishlist({ id: item.wishlistId, slug: item.slug })}
                   onAddToCart={handleAddToCart}
                 />
               ))}
