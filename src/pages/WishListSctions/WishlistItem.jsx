@@ -64,7 +64,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
           <button
             onClick={handleAddToCart}
             disabled={!isInStock}
-            className={`px-4 py-2 rounded-full text-sm font-semibold ${
+            className={`px-4 py-2 rounded-full text-sm font-semibold cursor-pointer ${
               isInStock
                 ? "bg-[#00B207] text-white hover:bg-[#009206]"
                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
@@ -75,7 +75,7 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
 
           <button
             onClick={onRemove}
-            className="w-8 h-8 flex items-center justify-center rounded-full border text-gray-400 hover:text-red-500"
+            className="w-8 h-8 flex items-center justify-center rounded-full border text-gray-400 hover:text-red-500 cursor-pointer"
           >
             <X size={16} />
           </button>

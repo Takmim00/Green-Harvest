@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router/dom";
+import { ToastContainer } from "react-toastify";
 import "./index.css";
 import AuthProvider from "./routes/provider/AuthProvider.jsx";
 import { ShoppingProvider } from "./routes/provider/ShoppingProvider.jsx";
@@ -11,6 +12,15 @@ createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <ShoppingProvider>
         <WishlistProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+          />
           <RouterProvider router={router} />
         </WishlistProvider>
       </ShoppingProvider>
