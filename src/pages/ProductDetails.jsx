@@ -7,9 +7,11 @@ import { BsInstagram, BsTwitterX } from "react-icons/bs";
 import { FaFacebook, FaPinterestP, FaStar } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
+import { toast } from "react-toastify";
 import { useCart } from "../routes/provider/ShoppingProvider";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
+import { useWishlist } from "../routes/provider/WishlistProvider";
 
 const ProductDetails = () => {
   const { slug } = useParams();
@@ -18,7 +20,8 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const [isAnimating, setIsAnimating] = useState(false);
   const handleAddToCart = () => {
     if (product) {
       addToCart(product, quantity);
@@ -26,7 +29,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    if (!slug) return; 
+    if (!slug) return;
 
     fetch(
       `https://green-harvest-backend-seven.vercel.app/api/products/${slug}/`,
@@ -56,6 +59,25 @@ const ProductDetails = () => {
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+  // Determine if product is in wishlist
+  const favorite = product ? isInWishlist(product.slug) : false;
+
+  // Handle wishlist click
+  const handleWishlistClick = () => {
+    if (!product) return;
+
+    toggleWishlist(product);
+
+    // trigger heart animation
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 300); // 300ms animation
+
+    if (isInWishlist(product.slug)) {
+      toast.warn(`${product.name} removed from wishlist!`);
+    } else {
+      toast.success(`${product.name} added to wishlist!`);
+    }
+  };
 
   if (!product) {
     return (
@@ -241,12 +263,14 @@ const ProductDetails = () => {
             </button>
 
             <button
-              onClick={() => setIsFavorite(!isFavorite)}
-              className="p-2.5 sm:p-3 bg-[#bdf5c7] rounded-full transition shrink-0"
+              onClick={handleWishlistClick}
+              className={`p-2.5 sm:p-3 rounded-full transition shrink-0 bg-[#bdf5c7] ${
+                isAnimating ? "scale-125" : ""
+              }`}
             >
               <Heart
                 className={`w-4 h-4 sm:w-5 sm:h-5 ${
-                  isFavorite ? "fill-red-500 text-red-500" : "text-green-600"
+                  favorite ? "fill-red-500 text-red-500" : "text-green-600"
                 }`}
               />
             </button>
