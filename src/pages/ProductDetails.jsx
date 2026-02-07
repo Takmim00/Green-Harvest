@@ -217,7 +217,7 @@ const ProductDetails = () => {
             <div className="flex items-center border border-gray-300 rounded-full overflow-hidden p-0.5 sm:p-1">
               <button
                 onClick={decreaseQty}
-                className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full"
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full  hover:bg-gray-300 active:bg-gray-400 active:scale-95 cursor-pointer"
               >
                 <Minus className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>
@@ -226,7 +226,7 @@ const ProductDetails = () => {
               </span>
               <button
                 onClick={increaseQty}
-                className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full"
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 bg-gray-200 transition text-gray-600 rounded-full  hover:bg-gray-300 active:bg-gray-400 active:scale-95 cursor-pointer"
               >
                 <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>

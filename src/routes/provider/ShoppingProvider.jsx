@@ -16,12 +16,13 @@ const mapToCartItem = (product, quantity = 1) => ({
 export const ShoppingProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const token = localStorage.getItem("access");
-
+const [loading, setLoading] = useState(true); 
   // 🔹 Load cart from server on first render
   useEffect(() => {
     const fetchCart = async () => {
+       setLoading(true); // start loading
       if (!token) {
-        // console.log("🟡 No token found → skipping server cart load");
+        setLoading(false);
         return;
       }
 
@@ -43,7 +44,9 @@ export const ShoppingProvider = ({ children }) => {
         const formatted = items.map((item) => ({
           id: item.id,
           name: item.product_name || "Unnamed Product",
-          image: item.product_image?.image || "/placeholder.svg",
+          // image: item.product_image?.image || "/placeholder.svg",
+          image: item.product_image?.image?.trim() ? item.product_image.image : "/placeholder.svg",
+
           price: Number(item.price || 0),
           quantity: item.quantity,
         }));
@@ -52,6 +55,8 @@ export const ShoppingProvider = ({ children }) => {
         setCart(formatted);
       } catch (err) {
         console.error("❌ Cart load error:", err);
+      }finally {
+        setLoading(false); // stop loading
       }
     };
 
@@ -101,65 +106,54 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Remove single item
   const removeFromCart = async (productId) => {
-    // console.log("🗑 Removing item from cart:", productId);
+  const token = localStorage.getItem("access");
 
-    try {
-      if (token) {
-        const res = await fetch(`${API}/remove/`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ product_id: productId }),
-        });
-
-        const data = await res.json();
-        // console.log("✅ Remove API response:", data);
-      }
-
-      setCart((prev) => prev.filter((item) => item.id !== productId));
-    } catch (err) {
-      console.error("❌ Remove from cart failed:", err);
+  try {
+    if (token) {
+      await fetch(`${API}/remove/?item_id=${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
-  };
+
+    setCart(prev => prev.filter(item => item.id !== productId));
+  } catch (err) {
+    console.error("❌ Remove from cart failed:", err);
+  }
+};
+
 
   // 🔹 Update quantity
-  const updateQuantity = async (productId, quantity) => {
-    // console.log("✏️ Updating quantity:", { productId, quantity });
+ 
+const updateQuantity = async (productId, quantity) => {
+  const token = localStorage.getItem("access");
+  if (quantity < 1) {
+    return removeFromCart(productId);
+  }
 
-    if (quantity < 1) {
-      // console.log("⚠️ Quantity < 1 → removing item instead");
-      return removeFromCart(productId);
+  try {
+    if (token) {
+      await fetch(`${API}/add/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ product_id: productId, quantity }),
+      });
     }
 
-    try {
-      if (token) {
-        const res = await fetch(`${API}/update/`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            id: productId,
-            quantity,
-          }),
-        });
-
-        const data = await res.json();
-        // console.log("✅ Update quantity API response:", data);
-      }
-
-      setCart((prev) =>
-        prev.map((item) =>
-          item.id === productId ? { ...item, quantity } : item,
-        ),
-      );
-    } catch (err) {
-      console.error("❌ Update quantity failed:", err);
-    }
-  };
+    setCart(prev =>
+      prev.map(item =>
+        item.id === productId ? { ...item, quantity } : item
+      )
+    );
+  } catch (err) {
+    console.error("❌ Update quantity failed:", err);
+  }
+};
 
   // 🔹 Clear entire cart
   const clearCart = async () => {
@@ -216,6 +210,7 @@ export const ShoppingProvider = ({ children }) => {
         getCartTotal,
         getCartCount,
         isInCart,
+        loading
       }}
     >
       {children}

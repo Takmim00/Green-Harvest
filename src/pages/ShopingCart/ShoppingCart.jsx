@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 
 const ShoppingCart = () => {
-  const { cart, getCartTotal } = useCart();
+  const { cart, getCartTotal, loading } = useCart();
   const [couponCode, setCouponCode] = useState("");
 
   const subtotal = getCartTotal();
@@ -27,7 +27,11 @@ const ShoppingCart = () => {
           My Shopping Cart
         </h1>
 
-        {cart.length > 0 ? (
+        {loading ? (
+          <div className=" col-span-full flex justify-center py-20">
+            <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
+          </div>
+        ) : cart.length > 0 ? (
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Cart Items Section */}
             <div className="flex-1">
