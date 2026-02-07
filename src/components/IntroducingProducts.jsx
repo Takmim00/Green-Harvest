@@ -2,7 +2,6 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ProductCard from "./ProductCard";
-import ProductModal from "./ProductModal";
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -17,7 +16,6 @@ const IntroducingProducts = () => {
   const [favorites, setFavorites] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //  Fetch
   useEffect(() => {
@@ -89,38 +87,26 @@ const IntroducingProducts = () => {
           </div>
         </div>
 
-{/* Products Grid */}
+        {/* Products Grid */}
         <div className="">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {filteredProducts.slice(0, 5).map((product, index) => (
               <div
                 key={product.id}
                 className="animate-card is-visible"
-                style={{ 
+                style={{
                   animationDelay: `${index * 100}ms`,
-                  transitionDelay: `${index * 100}ms`
+                  transitionDelay: `${index * 100}ms`,
                 }}
               >
                 <ProductCard
                   product={product}
                   isFavorite={favorites.includes(product.id)}
                   onToggleFavorite={() => toggleFavorite(product.id)}
-                  onView={(product) => {
-                    setSelectedProduct(product);
-                    setIsModalOpen(true);
-                  }}
                 />
               </div>
             ))}
           </div>
-          <ProductModal
-            product={selectedProduct}
-            isOpen={isModalOpen}
-            onClose={() => {
-              setSelectedProduct(null);
-              setIsModalOpen(false);
-            }}
-          />
         </div>
       </div>
     </div>

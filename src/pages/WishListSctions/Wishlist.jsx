@@ -1,20 +1,19 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
+import { toast } from "react-toastify";
 import { useWishlist } from "../../routes/provider/WishlistProvider";
 import ShareBar from "./ShareBar";
 import WishlistItem from "./WishlistItem";
 
 const Wishlist = () => {
   const { wishlist, toggleWishlist, loading } = useWishlist();
-  const [toast, setToast] = useState(null);
 
   const handleAddToCart = useCallback((product) => {
-    setToast(`${product.name} added to cart!`);
-    setTimeout(() => setToast(null), 3000);
+    toast.success(`${product.name} added to cart!`);
   }, []);
+
   const handleRemove = useCallback((product) => {
-    setToast(`${product.name} removed from wishlist!`);
-    setTimeout(() => setToast(null), 3000);
+    toast.warn(`${product.name} removed from wishlist!`);
   }, []);
 
   return (
@@ -68,14 +67,7 @@ const Wishlist = () => {
               </p>
             </div>
           )}
-        </div>
-
-        {toast && (
-          <div className="fixed bottom-8 right-8 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3">
-            <FaCircleCheck className="text-green-500 text-lg" />
-            <span>{toast}</span>
-          </div>
-        )}
+        </div>      
       </div>
     </div>
   );

@@ -4,10 +4,12 @@ import { useNavigate } from "react-router";
 import { useWishlist } from "../routes/provider/WishlistProvider";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useProductModal } from "../routes/provider/ProductModalProvider";
 
-const ProductCard = ({ product, onView }) => {
+const ProductCard = ({ product }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const navigate = useNavigate();
+    const { openProductModal } = useProductModal();
 const [isAnimating, setIsAnimating] = useState(false);
   const favorite = isInWishlist(product.slug);
 const getProductImage = (images) => {
@@ -73,7 +75,8 @@ const getProductImage = (images) => {
           </button>
 
           <button
-            onClick={() => onView(product)}
+            // onClick={() => onView(product.slug)}
+            onClick={() => openProductModal(product.slug)}
             className="bg-white rounded-full p-2 cursor-pointer"
           >
             <Eye size={18} className="text-gray-600" />

@@ -22,9 +22,7 @@ const PRODUCTS_PER_PAGE = 12;
 export default function Shops() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -86,11 +84,7 @@ export default function Shops() {
       .catch((err) => console.error("Category fetch error:", err));
   }, []);
 
-  /* ================= HANDLERS ================= */
-  const handleViewProduct = (product) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  };
+
 
   const handleTagClick = (tag) => {
     setSelectedTags((prev) =>
@@ -486,7 +480,7 @@ export default function Shops() {
                     <ProductCard
                       key={product.id}
                       product={product}
-                      onView={handleViewProduct}
+                      
                     />
                   ))}
                 </div>
@@ -542,12 +536,7 @@ export default function Shops() {
         </div>
       </div>
 
-      {/* Product Modal */}
-      <ProductModal
-        product={selectedProduct}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      
     </div>
   );
 }

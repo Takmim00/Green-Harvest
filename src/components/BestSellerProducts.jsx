@@ -49,8 +49,6 @@ const BestSellerProducts = () => {
   const [activeListItemId, setActiveListItemId] = useState(2);
   const [favorites, setFavorites] = useState({});
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://green-harvest-backend-seven.vercel.app/api/products")
@@ -148,10 +146,7 @@ const BestSellerProducts = () => {
               product={product}
               isFavorite={favorites[id]}
               onToggleFavorite={() => toggleFavorite(id)}
-              onView={(product) => {
-                setSelectedProduct(product);
-                setIsModalOpen(true);
-              }}
+              
             />
           );
         })}
@@ -194,14 +189,7 @@ const BestSellerProducts = () => {
           </div>
         </div>
       </div>
-      <ProductModal
-        product={selectedProduct}
-        isOpen={isModalOpen}
-        onClose={() => {
-          setSelectedProduct(null);
-          setIsModalOpen(false);
-        }}
-      />
+     
     </section>
   );
 };
