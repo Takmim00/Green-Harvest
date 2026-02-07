@@ -5,11 +5,15 @@ import ShareBar from "./ShareBar";
 import WishlistItem from "./WishlistItem";
 
 const Wishlist = () => {
-  const { wishlist, toggleWishlist } = useWishlist();
+  const { wishlist, toggleWishlist, loading } = useWishlist();
   const [toast, setToast] = useState(null);
 
   const handleAddToCart = useCallback((product) => {
     setToast(`${product.name} added to cart!`);
+    setTimeout(() => setToast(null), 3000);
+  }, []);
+  const handleRemove = useCallback((product) => {
+    setToast(`${product.name} removed from wishlist!`);
     setTimeout(() => setToast(null), 3000);
   }, []);
 
@@ -19,7 +23,11 @@ const Wishlist = () => {
         <h1 className="text-4xl font-bold text-center mb-10">My Wishlist</h1>
 
         <div className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden">
-          {wishlist.length > 0 ? (
+          {loading ? (
+            <div className=" col-span-full flex justify-center py-20">
+              <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
+            </div>
+          ) : wishlist.length > 0 ? (
             <div className="flex flex-col divide-y divide-gray-100">
               {/* Desktop Header */}
               <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 border-b border-gray-100 text-xs font-medium text-gray-400 uppercase tracking-wide">
@@ -34,7 +42,10 @@ const Wishlist = () => {
                 <WishlistItem
                   key={item.wishlistId}
                   product={item}
-                  onRemove={() => toggleWishlist({ id: item.wishlistId, slug: item.slug })}
+                  onRemove={() => {
+                    toggleWishlist({ id: item.wishlistId, slug: item.slug });
+                    handleRemove(item);
+                  }}
                   onAddToCart={handleAddToCart}
                 />
               ))}
