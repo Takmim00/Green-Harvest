@@ -21,7 +21,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="md:min-h-screen flex items-center justify-center bg-gray-50 px-4 py-4 md:py-0">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
         {/* Title */}
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">

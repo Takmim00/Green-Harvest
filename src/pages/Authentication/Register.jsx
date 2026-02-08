@@ -51,7 +51,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className=" md:min-h-screen flex items-center justify-center bg-gray-50 px-4 py-4 md:py-0">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
