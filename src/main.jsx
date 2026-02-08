@@ -11,24 +11,22 @@ import { router } from "./routes/router.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      
-        <ShoppingProvider>
-          <WishlistProvider>
-            <ToastContainer
-              position="top-right"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              pauseOnHover
-              draggable
-            />
-            <ProductModalProvider>
+      <ShoppingProvider>
+        <WishlistProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+          />
+          <ProductModalProvider>
             <RouterProvider router={router} />
-            </ProductModalProvider>
-          </WishlistProvider>
-        </ShoppingProvider>
-      
+          </ProductModalProvider>
+        </WishlistProvider>
+      </ShoppingProvider>
     </AuthProvider>
   </StrictMode>,
 );

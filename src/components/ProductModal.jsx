@@ -29,33 +29,31 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
-const handleAddToCart = () => {
-  if (!product) return;
+  const handleAddToCart = () => {
+    if (!product) return;
 
-  requireAuth(() => {
-    addToCart({ ...product, image: images[selectedImage] }, quantity);
-    toast.success(`${product.name} added to cart!`);
-  });
-};
+    requireAuth(() => {
+      addToCart({ ...product, image: images[selectedImage] }, quantity);
+      toast.success(`${product.name} added to cart!`);
+    });
+  };
 
+  const handleWishlistClick = () => {
+    if (!product) return;
 
-const handleWishlistClick = () => {
-  if (!product) return;
+    requireAuth(() => {
+      toggleWishlist(product);
 
-  requireAuth(() => {
-    toggleWishlist(product);
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 300);
 
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
-
-    if (isInWishlist(product.slug)) {
-      toast.warn(`${product.name} removed from wishlist!`);
-    } else {
-      toast.success(`${product.name} added to wishlist!`);
-    }
-  });
-};
-
+      if (isInWishlist(product.slug)) {
+        toast.warn(`${product.name} removed from wishlist!`);
+      } else {
+        toast.success(`${product.name} added to wishlist!`);
+      }
+    });
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">

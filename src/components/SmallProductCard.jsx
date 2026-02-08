@@ -1,10 +1,10 @@
 import { Eye, Heart } from "lucide-react";
+import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { useWishlist } from "../routes/provider/WishlistProvider";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useState } from "react";
 import { useProductModal } from "../routes/provider/ProductModalProvider";
+import { useWishlist } from "../routes/provider/WishlistProvider";
 import { requireAuth } from "../utils/requireAuth";
 
 const SmallProductCard = ({
@@ -24,9 +24,7 @@ const SmallProductCard = ({
 
   const getProductImage = (images) => {
     if (Array.isArray(images)) {
-      return (
-        images.find((img) => img.is_primary)?.image || images[0]?.image
-      );
+      return images.find((img) => img.is_primary)?.image || images[0]?.image;
     }
     if (images && typeof images === "object") return images.image;
     return "/placeholder.svg";

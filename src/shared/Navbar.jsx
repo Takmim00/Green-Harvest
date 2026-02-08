@@ -13,7 +13,6 @@ import {
   Heart,
   LayoutDashboardIcon,
   Menu,
-  Package,
   Phone,
   Search,
   Settings,
@@ -136,15 +135,19 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <select className="bg-transparent cursor-pointer hover:text-gray-200">
               <option className="bg-gray-800">Eng</option>
-              <option className="bg-gray-800">Esp</option>
+              <option className="bg-gray-800">Bd</option>
             </select>
             <select className="bg-transparent cursor-pointer hover:text-gray-200">
               <option className="bg-gray-800">USD</option>
-              <option className="bg-gray-800">EUR</option>
+              <option className="bg-gray-800">BDT</option>
             </select>
-            <Link to="/signIn" className="hover:text-gray-200 sm:hidden">
-              Sign in / Sign Up
-            </Link>
+            {user ? (
+              <span className="sm:hidden">Welcome, {user.email}</span>
+            ) : (
+              <Link to="/signIn" className="hover:text-gray-200 sm:hidden">
+                Sign in / Sign Up
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -639,8 +642,8 @@ export default function Navbar() {
                           to="/dashboard"
                           className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50"
                         >
-                          <Package size={18} />
-                          My Orders
+                          <LayoutDashboardIcon size={18} />
+                          Dashboard
                         </Link>
 
                         <button
