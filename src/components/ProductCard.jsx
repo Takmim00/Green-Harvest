@@ -5,6 +5,7 @@ import { useWishlist } from "../routes/provider/WishlistProvider";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useProductModal } from "../routes/provider/ProductModalProvider";
+import { requireAuth } from "../utils/requireAuth";
 
 const ProductCard = ({ product }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -30,18 +31,23 @@ const getProductImage = (images) => {
  const primaryImage = getProductImage(product.images);
 
  const handleWishlistClick = (product) => {
+  if (!product) return;
+
+  requireAuth(() => {
     toggleWishlist(product);
 
-    // ✅ trigger heart animation
     setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300); // animation lasts 300ms
+    setTimeout(() => setIsAnimating(false), 300);
 
     if (isInWishlist(product.slug)) {
       toast.warn(`${product.name} removed from wishlist!`);
     } else {
       toast.success(`${product.name} added to wishlist!`);
     }
-  };
+  });
+};
+
+  
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:border-[#00B307] hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)] hover:-translate-y-2">
       

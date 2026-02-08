@@ -2,61 +2,24 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ProductCard from "./ProductCard";
-import ProductModal from "./ProductModal";
 import SmallProductCard from "./SmallProductCard";
 
 const BestSellerProducts = () => {
-  // const [favorites, setFavorites] = useState({});
-
-  // const [products, setProducts] = useState([]);
-  // const [activeListItemId, setActiveListItemId] = useState(null);
-
-  // const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // useEffect(() => {
-  //   fetch("https://green-harvest-backend-seven.vercel.app/api/products")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProducts(data.results || []);
-  //     })
-  //     .catch((err) => console.error("Product fetch error:", err));
-  // }, []);
-
-  // const getProductById = (id) =>
-  //   products.find((p) => Number(p.id) === Number(id));
-
-  // const topRowProductIds = [1, 5, 6, 7, 16];
-
-  // const hotDealsProducts = [
-  //   { id: 1, showDiscount: false },
-  //   { id: 2, showDiscount: true },
-  //   { id: 5, showDiscount: false },
-  // ];
-
-  // const bestSellerListProducts = [
-  //   { id: 8, showDiscount: false },
-  //   { id: 12, showDiscount: true },
-  //   { id: 3, showDiscount: false },
-  // ];
-
-  // const topRatedProducts = [
-  //   { id: 17, showDiscount: false },
-  //   { id: 16, showDiscount: true },
-  //   { id: 4, showDiscount: false },
-  // ];
   const [products, setProducts] = useState([]);
   const [activeListItemId, setActiveListItemId] = useState(2);
   const [favorites, setFavorites] = useState({});
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     fetch("https://green-harvest-backend-seven.vercel.app/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.results || []);
       })
-      .catch((err) => console.error("Product fetch error:", err));
+      .catch((err) => console.error("Product fetch error:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   const getProductById = (id) => products.find((p) => p.id === id);
@@ -134,62 +97,67 @@ const BestSellerProducts = () => {
           </Link>
         </div>
       </div>
-
-      {/* Top Row - Product Cards using shared ProductCard component */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-        {topRowProductIds.map((id) => {
-          const product = getProductById(id);
-          if (!product) return null;
-          return (
-            <ProductCard
-              key={id}
-              product={product}
-              isFavorite={favorites[id]}
-              onToggleFavorite={() => toggleFavorite(id)}
-              
-            />
-          );
-        })}
-      </div>
-
-      {/* Bottom Section - Lists and Promo */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Hot Deals */}
-        <ProductList title="Hot Deals" items={hotDealsProducts} />
-
-        {/* Best Seller */}
-        <ProductList title="Best Seller" items={bestSellerListProducts} />
-
-        {/* Top Rated */}
-        <ProductList title="Top Rated" items={topRatedProducts} />
-
-        {/* Promotional Banner */}
-        <div className="relative rounded-xl overflow-hidden bg-linear-to-b from-green-800 to-green-900 h-full min-h-70">
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-80"
-            style={{
-              backgroundImage: `url('/fresh-vegetables-basket.png')`,
-            }}
-          />
-
-          {/* Overlay Content */}
-          <div className="relative z-10 p-6 h-full flex flex-col justify-start">
-            <span className="text-orange-400 text-xs font-medium uppercase tracking-wide">
-              Hot Sale
-            </span>
-            <h3 className="text-white text-2xl font-bold mt-2 leading-tight">
-              Save 37% on
-              <br />
-              Every Order
-            </h3>
-            <button className="mt-4 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors w-fit">
-              Shop Now <ArrowRight size={16} />
-            </button>
-          </div>
+      {loading ? (
+        <div className="flex items-center justify-center py-20">
+          <div className="w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
-      </div>
-     
+      ) : (
+        <>
+          {/* Top Row - Product Cards using shared ProductCard component */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+            {topRowProductIds.map((id) => {
+              const product = getProductById(id);
+              if (!product) return null;
+              return (
+                <ProductCard
+                  key={id}
+                  product={product}
+                  isFavorite={favorites[id]}
+                  onToggleFavorite={() => toggleFavorite(id)}
+                />
+              );
+            })}
+          </div>
+
+          {/* Bottom Section - Lists and Promo */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Hot Deals */}
+            <ProductList title="Hot Deals" items={hotDealsProducts} />
+
+            {/* Best Seller */}
+            <ProductList title="Best Seller" items={bestSellerListProducts} />
+
+            {/* Top Rated */}
+            <ProductList title="Top Rated" items={topRatedProducts} />
+
+            {/* Promotional Banner */}
+            <div className="relative rounded-xl overflow-hidden bg-linear-to-b from-green-800 to-green-900 h-full min-h-70">
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-80"
+                style={{
+                  backgroundImage: `url('/fresh-vegetables-basket.png')`,
+                }}
+              />
+
+              {/* Overlay Content */}
+              <div className="relative z-10 p-6 h-full flex flex-col justify-start">
+                <span className="text-orange-400 text-xs font-medium uppercase tracking-wide">
+                  Hot Sale
+                </span>
+                <h3 className="text-white text-2xl font-bold mt-2 leading-tight">
+                  Save 37% on
+                  <br />
+                  Every Order
+                </h3>
+                <button className="mt-4 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors w-fit">
+                  Shop Now <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };

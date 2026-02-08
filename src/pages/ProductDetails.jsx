@@ -12,6 +12,7 @@ import { useCart } from "../routes/provider/ShoppingProvider";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
 import { useWishlist } from "../routes/provider/WishlistProvider";
+import { requireAuth } from "../utils/requireAuth";
 
 const ProductDetails = () => {
   const { slug } = useParams();
@@ -23,10 +24,13 @@ const ProductDetails = () => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [isAnimating, setIsAnimating] = useState(false);
   const handleAddToCart = () => {
-    if (product) {
-      addToCart(product, quantity);
-    }
-  };
+  if (!product) return;
+
+  requireAuth(() => {
+    addToCart(product, quantity);
+  });
+};
+
 
   useEffect(() => {
     if (!slug) return;
@@ -63,21 +67,23 @@ const ProductDetails = () => {
   const favorite = product ? isInWishlist(product.slug) : false;
 
   // Handle wishlist click
-  const handleWishlistClick = () => {
-    if (!product) return;
+const handleWishlistClick = () => {
+  if (!product) return;
 
+  requireAuth(() => {
     toggleWishlist(product);
 
-    // trigger heart animation
     setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300); // 300ms animation
+    setTimeout(() => setIsAnimating(false), 300);
 
     if (isInWishlist(product.slug)) {
       toast.warn(`${product.name} removed from wishlist!`);
     } else {
       toast.success(`${product.name} added to wishlist!`);
     }
-  };
+  });
+};
+
 
   if (!product) {
     return (

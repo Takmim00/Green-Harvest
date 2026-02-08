@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Farmary from "../assets/Group 19.png";
 import { useCart } from "../routes/provider/ShoppingProvider";
 import { useWishlist } from "../routes/provider/WishlistProvider";
+import { requireAuth } from "../utils/requireAuth";
 
 const ProductModal = ({ isOpen, product, loading, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -28,12 +29,20 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
-  const handleAddToCart = () => {
+const handleAddToCart = () => {
+  if (!product) return;
+
+  requireAuth(() => {
     addToCart({ ...product, image: images[selectedImage] }, quantity);
     toast.success(`${product.name} added to cart!`);
-  };
+  });
+};
 
-  const handleWishlistClick = () => {
+
+const handleWishlistClick = () => {
+  if (!product) return;
+
+  requireAuth(() => {
     toggleWishlist(product);
 
     setIsAnimating(true);
@@ -44,7 +53,9 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
     } else {
       toast.success(`${product.name} added to wishlist!`);
     }
-  };
+  });
+};
+
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
