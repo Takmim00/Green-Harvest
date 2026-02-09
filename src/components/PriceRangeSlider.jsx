@@ -90,11 +90,9 @@ export default function PriceRangeSlider({
           value={localMin}
           onChange={handleMinChange}
           onMouseUp={() => {
-            isDragging.current = false;
             onMinChange(localMin);
           }}
           onTouchEnd={() => {
-            isDragging.current = false;
             onMinChange(localMin);
           }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-10"
@@ -108,11 +106,9 @@ export default function PriceRangeSlider({
           value={localMax}
           onChange={handleMaxChange}
           onMouseUp={() => {
-            isDragging.current = false;
             onMaxChange(localMax);
           }}
           onTouchEnd={() => {
-            isDragging.current = false;
             onMaxChange(localMax);
           }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-20"
