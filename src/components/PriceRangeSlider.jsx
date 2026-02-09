@@ -40,13 +40,15 @@ export default function PriceRangeSlider({
   };
 
   const updateRange = () => {
-    if (minInputRef.current && maxInputRef.current && range.current) {
-      const min = Math.max(0, (localMin / maxValue) * 100);
-      const max = Math.min(100, (localMax / maxValue) * 100);
+    requestAnimationFrame(() => {
+      if (range.current) {
+        const min = (localMin / maxValue) * 100;
+        const max = (localMax / maxValue) * 100;
 
-      range.current.style.left = `${min}%`;
-      range.current.style.right = `${100 - max}%`;
-    }
+        range.current.style.left = `${min}%`;
+        range.current.style.right = `${100 - max}%`;
+      }
+    });
   };
 
   useEffect(() => {
@@ -57,12 +59,12 @@ export default function PriceRangeSlider({
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Price Range</h3>
 
-      <div className="relative pt-8 pb-4">
+      <div className="relative pb-4">
         <div className="absolute top-1/2 -translate-y-1/2 w-full h-1.5 bg-gray-200 rounded-full" />
 
         <div
           ref={range}
-          className="absolute top-1/2 -translate-y-1/2 h-1.5 bg-green-600 rounded-full transition-all"
+          className="absolute top-1/2 -translate-y-1/2 h-1.5 bg-green-600 rounded-full transition-[left,right] duration-300 ease-out"
         />
 
         <input
@@ -86,25 +88,42 @@ export default function PriceRangeSlider({
         />
 
         <style>{`
-          input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #16a34a;
-            cursor: pointer;
-            pointer-events: auto;
-          }
-          input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #16a34a;
-            cursor: pointer;
-            pointer-events: auto;
-          }
+            input[type="range"] {
+              transition: all 0.25s ease-out;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+              appearance: none;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background: white;
+              border: 3px solid #16a34a;
+              cursor: pointer;
+              pointer-events: auto;
+              transition: transform 0.15s ease, box-shadow 0.15s ease;
+            }
+
+            input[type="range"]::-webkit-slider-thumb:hover {
+              transform: scale(1.1);
+            }
+
+            input[type="range"]::-webkit-slider-thumb:active {
+              transform: scale(1.15);
+              box-shadow: 0 0 0 8px rgba(22, 163, 74, 0.2);
+            }
+
+            /* Firefox */
+            input[type="range"]::-moz-range-thumb {
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background: white;
+              border: 3px solid #16a34a;
+              cursor: pointer;
+              pointer-events: auto;
+              transition: transform 0.15s ease, box-shadow 0.15s ease;
+            }
         `}</style>
       </div>
       <div className="grid grid-cols-2 gap-4">
@@ -142,8 +161,6 @@ export default function PriceRangeSlider({
           placeholder="Max"
         />
       </div>
-
-      
     </div>
   );
 }

@@ -187,7 +187,7 @@ export default function Shops() {
           <span>$0</span>
           <span>${maxPrice}</span>
         </div>
-      </div> */}
+    </  div> */}
       {/* Price Range */}
       <div className="mb-6 border-t pt-6">
         <PriceRangeSlider
