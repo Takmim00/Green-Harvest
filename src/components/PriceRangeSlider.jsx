@@ -20,14 +20,14 @@ export default function PriceRangeSlider({
     isDragging.current = true;
     const value = Math.min(+e.target.value, localMax);
     setLocalMin(value);
-    onMinChange(value);
+    // onMinChange(value);
   };
 
   const handleMaxChange = (e) => {
     isDragging.current = true;
     const value = Math.max(+e.target.value, localMin);
     setLocalMax(value);
-    onMaxChange(value);
+    // onMaxChange(value);
   };
 
   // const handleMinChange = (e) => {
