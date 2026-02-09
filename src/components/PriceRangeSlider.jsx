@@ -14,18 +14,33 @@ export default function PriceRangeSlider({
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
   const range = useRef(null);
+  const isDragging = useRef(false);
 
   const handleMinChange = (e) => {
-    const value = Math.min(Number(e.target.value), localMax);
+    isDragging.current = true;
+    const value = Math.min(+e.target.value, localMax);
     setLocalMin(value);
     onMinChange(value);
   };
 
   const handleMaxChange = (e) => {
-    const value = Math.max(Number(e.target.value), localMin);
+    isDragging.current = true;
+    const value = Math.max(+e.target.value, localMin);
     setLocalMax(value);
     onMaxChange(value);
   };
+
+  // const handleMinChange = (e) => {
+  //   const value = Math.min(Number(e.target.value), localMax);
+  //   setLocalMin(value);
+  //   onMinChange(value);
+  // };
+
+  // const handleMaxChange = (e) => {
+  //   const value = Math.max(Number(e.target.value), localMin);
+  //   setLocalMax(value);
+  //   onMaxChange(value);
+  // };
 
   const handleMinInput = (e) => {
     const value = Math.min(Number(e.target.value), localMax);
@@ -74,6 +89,14 @@ export default function PriceRangeSlider({
           max={maxValue}
           value={localMin}
           onChange={handleMinChange}
+          onMouseUp={() => {
+            isDragging.current = false;
+            onMinChange(localMin);
+          }}
+          onTouchEnd={() => {
+            isDragging.current = false;
+            onMinChange(localMin);
+          }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-10"
         />
 
@@ -84,6 +107,14 @@ export default function PriceRangeSlider({
           max={maxValue}
           value={localMax}
           onChange={handleMaxChange}
+          onMouseUp={() => {
+            isDragging.current = false;
+            onMaxChange(localMax);
+          }}
+          onTouchEnd={() => {
+            isDragging.current = false;
+            onMaxChange(localMax);
+          }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-20"
         />
 
