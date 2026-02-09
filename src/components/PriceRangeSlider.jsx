@@ -65,6 +65,16 @@ export default function PriceRangeSlider({
       }
     });
   };
+  const debounce = (fn, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fn(...args), delay);
+    };
+  };
+
+  const onMinChangeDebounced = debounce(onMinChange, 200);
+  const onMaxChangeDebounced = debounce(onMaxChange, 200);
 
   useEffect(() => {
     updateRange();
@@ -90,10 +100,10 @@ export default function PriceRangeSlider({
           value={localMin}
           onChange={handleMinChange}
           onMouseUp={() => {
-            onMinChange(localMin);
+            onMinChangeDebounced(localMin);
           }}
           onTouchEnd={() => {
-            onMinChange(localMin);
+            onMinChangeDebounced(localMin);
           }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-10"
         />
@@ -106,10 +116,10 @@ export default function PriceRangeSlider({
           value={localMax}
           onChange={handleMaxChange}
           onMouseUp={() => {
-            onMaxChange(localMax);
+            onMaxChangeDebounced(localMax);
           }}
           onTouchEnd={() => {
-            onMaxChange(localMax);
+            onMaxChangeDebounced(localMax);
           }}
           className="absolute w-full h-1.5 top-1/2 -translate-y-1/2 pointer-events-none appearance-none bg-transparent accent-green-600 z-20"
         />
