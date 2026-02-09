@@ -28,6 +28,7 @@ export default function Shops() {
   const [totalPages, setTotalPages] = useState(1);
   const [categories, setCategories] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  
 
   // URL → State (derived)
   const currentPage = Number(searchParams.get("page") || "1");
@@ -64,12 +65,14 @@ export default function Shops() {
     setLoading(true);
 
     fetch(
-      `https://green-harvest-backend-seven.vercel.app/api/products/?${searchParams.toString()}`
+      `https://green-harvest-backend-seven.vercel.app/api/products/?${searchParams.toString()}`,
     )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.results || []);
-        setTotalPages(Math.max(1, Math.ceil((data.count || 0) / PRODUCTS_PER_PAGE)));
+        setTotalPages(
+          Math.max(1, Math.ceil((data.count || 0) / PRODUCTS_PER_PAGE)),
+        );
         setLoading(false);
       })
       .catch((err) => {
@@ -102,7 +105,7 @@ export default function Shops() {
 
   const saleProducts = useMemo(
     () => products.filter((p) => p.isSale).slice(0, 3),
-    [products]
+    [products],
   );
 
   const handleClearAll = () => {
@@ -116,7 +119,9 @@ export default function Shops() {
     <>
       {/* Categories */}
       <div className="mb-6">
-        <h3 className="font-semibold text-lg text-gray-900 mb-4">All Categories</h3>
+        <h3 className="font-semibold text-lg text-gray-900 mb-4">
+          All Categories
+        </h3>
         <div className="space-y-2">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -146,7 +151,9 @@ export default function Shops() {
                   />
                   <span className="text-sm text-gray-700">{cat.name}</span>
                 </div>
-                <span className="text-sm text-gray-400">({cat.product_count})</span>
+                <span className="text-sm text-gray-400">
+                  ({cat.product_count})
+                </span>
               </label>
             ))}
         </div>
@@ -183,9 +190,26 @@ export default function Shops() {
                 onChange={() => updateParams({ min_rating: r })}
                 className="w-4 h-4 accent-green-600"
               />
+
+              {/* Stars */}
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <span
+                    key={i}
+                    className={`text-sm ${
+                      i < r ? "text-orange-400" : "text-gray-300"
+                    }`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              {/* Rating text */}
               <span className="text-sm text-gray-700">{r}+ Stars</span>
             </label>
           ))}
+
           <button
             onClick={() => updateParams({ min_rating: "" })}
             className="text-sm text-green-600 hover:underline mt-1 block"
@@ -197,7 +221,9 @@ export default function Shops() {
 
       {/* Popular Tags */}
       <div className="mb-6 border-t pt-6">
-        <h3 className="font-semibold text-lg text-gray-900 mb-4">Popular Tags</h3>
+        <h3 className="font-semibold text-lg text-gray-900 mb-4">
+          Popular Tags
+        </h3>
         <div className="flex flex-wrap gap-2">
           {popularTags.map((tag) => (
             <button
@@ -217,7 +243,9 @@ export default function Shops() {
 
       {/* Sale Products (small preview) */}
       <div className="border-t pt-6">
-        <h3 className="font-semibold text-lg text-gray-900 mb-4">Sale Products</h3>
+        <h3 className="font-semibold text-lg text-gray-900 mb-4">
+          Sale Products
+        </h3>
         <div className="space-y-4">
           {saleProducts.map((p) => (
             <div
@@ -336,7 +364,9 @@ export default function Shops() {
               </div>
 
               <div className="text-sm text-gray-600">
-                <span className="font-semibold text-gray-900">{products.length}</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {products.length}
+                </span>{" "}
                 Results
               </div>
             </div>
@@ -416,7 +446,7 @@ export default function Shops() {
                 <button
                   onClick={() => updateParams({ page: currentPage - 1 })}
                   disabled={currentPage === 1}
-                  className="p-2 rounded-full border disabled:opacity-40"
+                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft size={18} />
                 </button>
@@ -430,7 +460,7 @@ export default function Shops() {
                       className={`w-10 h-10 rounded-full text-sm font-medium ${
                         currentPage === page
                           ? "bg-green-600 text-white"
-                          : "border hover:bg-gray-100"
+                          : "border border-gray-300 text-gray-700 hover:bg-gray-100"
                       }`}
                     >
                       {page}
@@ -441,7 +471,7 @@ export default function Shops() {
                 <button
                   onClick={() => updateParams({ page: currentPage + 1 })}
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded-full border disabled:opacity-40"
+                  className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronRight size={18} />
                 </button>
