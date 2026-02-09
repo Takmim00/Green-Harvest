@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function PriceRangeSlider({
   minValue,
@@ -109,29 +107,43 @@ export default function PriceRangeSlider({
           }
         `}</style>
       </div>
-
       <div className="grid grid-cols-2 gap-4">
         <input
           type="number"
           value={localMin}
-          onChange={handleMinInput}
           min={minValue}
           max={localMax}
-          className="border rounded-lg py-2 text-center"
+          onChange={handleMinInput}
+          onKeyDown={(e) => {
+            if (["e", "E", "+", "-", "."].includes(e.key)) {
+              e.preventDefault();
+            }
+          }}
+          className="border rounded-lg py-2 text-center border-gray-300
+               focus:border-green-600 focus:ring-2 focus:ring-green-500
+               focus:outline-none "
+          placeholder="Min"
         />
+
         <input
           type="number"
           value={localMax}
-          onChange={handleMaxInput}
           min={localMin}
           max={maxValue}
-          className="border rounded-lg py-2 text-center"
+          onChange={handleMaxInput}
+          onKeyDown={(e) => {
+            if (["e", "E", "+", "-", "."].includes(e.key)) {
+              e.preventDefault();
+            }
+          }}
+          className="border rounded-lg py-2 text-center border-gray-300
+               focus:border-green-600 focus:ring-2 focus:ring-green-500
+               focus:outline-none"
+          placeholder="Max"
         />
       </div>
 
-      <div className="text-center text-sm text-gray-600">
-        ${localMin} - ${localMax}
-      </div>
+      
     </div>
   );
 }

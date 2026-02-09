@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import PriceRangeSlider from "../components/PriceRangeSlider";
 import ProductCard from "../components/ProductCard";
 
 const popularTags = [
@@ -28,14 +29,15 @@ export default function Shops() {
   const [totalPages, setTotalPages] = useState(1);
   const [categories, setCategories] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  
 
   // URL → State (derived)
   const currentPage = Number(searchParams.get("page") || "1");
   const selectedCategory = searchParams.get("category") || ""; // "" = All
   const ordering = searchParams.get("ordering") || "";
   const minRating = Number(searchParams.get("min_rating") || "0");
+  const minPrice = Number(searchParams.get("min_price") || "0");
   const maxPrice = Number(searchParams.get("max_price") || "50");
+
   const selectedTags = (searchParams.get("tags") || "")
     .split(",")
     .filter(Boolean);
@@ -52,7 +54,6 @@ export default function Shops() {
       }
     });
 
-    // Most filter changes → reset to page 1 (unless page is explicitly set)
     if (!("page" in updates)) {
       next.set("page", "1");
     }
@@ -100,7 +101,7 @@ export default function Shops() {
   const activeFilterCount =
     (selectedCategory ? 1 : 0) +
     (minRating > 0 ? 1 : 0) +
-    (maxPrice < 50 ? 1 : 0) +
+    (minPrice > 0 || maxPrice < 50 ? 1 : 0) +
     selectedTags.length;
 
   const saleProducts = useMemo(
@@ -109,7 +110,9 @@ export default function Shops() {
   );
 
   const handleClearAll = () => {
-    setSearchParams(new URLSearchParams({ page: "1" }));
+    const params = new URLSearchParams();
+    params.set("page", "1");
+    setSearchParams(params, { replace: true });
   };
 
   // ────────────────────────────────────────────────
@@ -117,6 +120,15 @@ export default function Shops() {
   // ────────────────────────────────────────────────
   const FilterContent = ({ isMobile = false }) => (
     <>
+      <button
+        onClick={handleClearAll}
+        className="w-full mb-4 py-2.5 border border-gray-300 rounded-lg
+             text-sm font-medium text-gray-700
+             hover:bg-gray-100 transition"
+      >
+        Clear Filters
+      </button>
+
       {/* Categories */}
       <div className="mb-6">
         <h3 className="font-semibold text-lg text-gray-900 mb-4">
@@ -160,7 +172,7 @@ export default function Shops() {
       </div>
 
       {/* Price Range (max only) */}
-      <div className="mb-6 border-t pt-6">
+      {/* <div className="mb-6 border-t pt-6">
         <h3 className="font-semibold text-lg text-gray-900 mb-4">Price</h3>
         <input
           type="range"
@@ -175,6 +187,17 @@ export default function Shops() {
           <span>$0</span>
           <span>${maxPrice}</span>
         </div>
+      </div> */}
+      {/* Price Range */}
+      <div className="mb-6 border-t pt-6">
+        <PriceRangeSlider
+          minValue={0}
+          maxValue={50}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onMinChange={(value) => updateParams({ min_price: value })}
+          onMaxChange={(value) => updateParams({ max_price: value })}
+        />
       </div>
 
       {/* Rating */}
@@ -391,11 +414,14 @@ export default function Shops() {
                     </button>
                   </span>
                 )}
-
-                {maxPrice < 50 && (
+                {(minPrice > 0 || maxPrice < 50) && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm">
-                    ≤ ${maxPrice}
-                    <button onClick={() => updateParams({ max_price: "" })}>
+                    ${minPrice} – ${maxPrice}
+                    <button
+                      onClick={() =>
+                        updateParams({ min_price: "", max_price: "" })
+                      }
+                    >
                       <X size={14} />
                     </button>
                   </span>
