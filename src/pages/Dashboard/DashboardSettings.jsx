@@ -5,6 +5,7 @@ const API = "https://green-harvest-backend-seven.vercel.app/api/auth/users/me/";
 export default function AccountSettings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [savingBilling, setSavingBilling] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -102,7 +103,7 @@ export default function AccountSettings() {
   // 🔹 Billing save
   const handleBillingChange = async (e) => {
     e.preventDefault();
-    setSaving(true);
+    setSavingBilling(true);
     try {
       const token = localStorage.getItem("access");
 
@@ -126,7 +127,7 @@ export default function AccountSettings() {
     } catch {
       toast.error("Billing update failed ❌");
     } finally {
-      setSaving(false);
+      setSavingBilling(false);
     }
   };
 
@@ -381,10 +382,10 @@ export default function AccountSettings() {
           </div>
 
           <button
-            disabled={saving}
+            disabled={savingBilling}
             className="px-6 py-3 bg-[#00B250] text-white font-semibold rounded-full hover:bg-[#009a42] transition-colors cursor-pointer"
           >
-            {saving ? "Saving..." : "Save Address"}
+            {savingBilling ? "Saving..." : "Save Address"}
           </button>
         </form>
       </div>
