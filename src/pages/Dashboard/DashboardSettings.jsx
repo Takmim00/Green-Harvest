@@ -212,289 +212,280 @@ export default function AccountSettings() {
   }
   return (
     <div className=" bg-gray-50 ">
-      <div className="">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          {/* Header */}
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Account Settings
-          </h1>
+      <div className="bg-white rounded-lg shadow-sm p-8">
+        {/* Header */}
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Account Settings
+        </h1>
 
-          {/* 2-Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Left Column - Form Fields */}
-            <div className="order-2 lg:order-1">
-              <form onSubmit={handleSaveChanges} className="space-y-6">
-                {/* First Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    First name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                    placeholder="Enter your first name"
-                  />
-                </div>
-
-                {/* Last Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                    placeholder="Enter your last name"
-                  />
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    readOnly
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all cursor-not-allowed"
-                    placeholder="Enter your email"
-                  />
-                </div>
-
-                {/* Phone Number */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                {/* Save Changes Button */}
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors cursor-pointer"
-                >
-                  {saving ? "Saving..." : "Save Changes"}
-                </button>
-              </form>
-            </div>
-
-            {/* Right Column - Profile Image */}
-            <div className="flex flex-col items-center justify-start lg:justify-center order-1 lg:order-2">
-              <div className="relative">
-                {/* Profile Image */}
-                <img
-                  src={profileImage || "/placeholder.svg"}
-                  alt="Profile"
-                  className="w-60 h-60 rounded-full object-cover border-4 border-gray-200"
-                />
-              </div>
-
-              {/* Choose Image Button */}
-              <label className="mt-6 px-6 py-3 border-2 border-green-600 text-green-600 font-semibold rounded-full hover:bg-green-50 transition-colors cursor-pointer flex items-center gap-2">
-                <Upload size={20} />
-                Choose Image
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                />
-              </label>
-            </div>
-          </div>
-
-          {/* Billing Address Section */}
-          <div className="mt-16 pt-12 border-t border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">
-              Billing Address
-            </h2>
-
-            <form onSubmit={handleBillingChange} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Street Address
-                  </label>
-                  <input
-                    type="text"
-                    name="street"
-                    value={formData.street}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
-                    placeholder="4140 Parker Rd."
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    City / Town
-                  </label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Zip Code
-                  </label>
-                  <input
-                    type="text"
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-              </div>
-
-              <button
-                disabled={saving}
-                className="px-6 py-3 bg-[#00B250] text-white font-semibold rounded-full hover:bg-[#009a42] transition-colors cursor-pointer"
-              >
-                {saving ? "Saving..." : "Save Address"}
-              </button>
-            </form>
-          </div>
-
-          {/* Change Password Section */}
-          <div className="mt-16 pt-12 border-t border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">
-              Change Password
-            </h2>
-
-            <form
-              onSubmit={handleChangePassword}
-              className="space-y-6 max-w-2xl"
-            >
-              {/* Current Password */}
+        {/* 2-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Form Fields */}
+          <div className="order-2 lg:order-1">
+            <form onSubmit={handleSaveChanges} className="space-y-4">
+              {/* First Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Current Password
+                  First name
                 </label>
-                <div className="relative">
-                  <input
-                    type={showPasswords.current ? "text" : "password"}
-                    name="currentPassword"
-                    value={passwordData.currentPassword}
-                    onChange={handlePasswordChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                    placeholder="Enter current password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => togglePasswordVisibility("current")}
-                    className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-                  >
-                    {showPasswords.current ? (
-                      <EyeOff size={20} />
-                    ) : (
-                      <Eye size={20} />
-                    )}
-                  </button>
-                </div>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Enter your first name"
+                />
               </div>
 
-              {/* New Password & Confirm Password */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    New Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      type={showPasswords.new ? "text" : "password"}
-                      name="newPassword"
-                      value={passwordData.newPassword}
-                      onChange={handlePasswordChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                      placeholder="Enter new password"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => togglePasswordVisibility("new")}
-                      className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-                    >
-                      {showPasswords.new ? (
-                        <EyeOff size={20} />
-                      ) : (
-                        <Eye size={20} />
-                      )}
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Confirm Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      type={showPasswords.confirm ? "text" : "password"}
-                      name="confirmPassword"
-                      value={passwordData.confirmPassword}
-                      onChange={handlePasswordChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
-                      placeholder="Confirm new password"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => togglePasswordVisibility("confirm")}
-                      className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-                    >
-                      {showPasswords.confirm ? (
-                        <EyeOff size={20} />
-                      ) : (
-                        <Eye size={20} />
-                      )}
-                    </button>
-                  </div>
-                </div>
+              {/* Last Name */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Enter your last name"
+                />
               </div>
 
-              {/* Change Password Button */}
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  readOnly
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all cursor-not-allowed"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              {/* Phone Number */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Save Changes Button */}
               <button
                 type="submit"
-                disabled={changingPassword}
+                disabled={saving}
                 className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors cursor-pointer"
               >
-                {changingPassword ? "Changing..." : "Change Password"}
+                {saving ? "Saving..." : "Save Changes"}
               </button>
             </form>
           </div>
+
+          {/* Right Column - Profile Image */}
+          <div className="flex flex-col items-center justify-start lg:justify-center order-1 lg:order-2">
+            <div className="relative">
+              {/* Profile Image */}
+              <img
+                src={profileImage || "/placeholder.svg"}
+                alt="Profile"
+                className="w-60 h-60 rounded-full object-cover border-4 border-gray-200"
+              />
+            </div>
+
+            {/* Choose Image Button */}
+            <label className="mt-6 px-6 py-3 border-2 border-green-600 text-green-600 font-semibold rounded-full hover:bg-green-50 transition-colors cursor-pointer flex items-center gap-2">
+              <Upload size={20} />
+              Choose Image
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </label>
+          </div>
         </div>
+      </div>
+
+      {/* Billing Address Section */}
+      <div className="mt-8 pt-12 bg-white rounded-lg shadow-sm p-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Billing Address
+        </h2>
+
+        <form onSubmit={handleBillingChange} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Street Address
+              </label>
+              <input
+                type="text"
+                name="street"
+                value={formData.street}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
+                placeholder="4140 Parker Rd."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                City / Town
+              </label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Country
+              </label>
+              <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Zip Code
+              </label>
+              <input
+                type="text"
+                name="zipCode"
+                value={formData.zipCode}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B250] focus:border-transparent outline-none transition-all"
+              />
+            </div>
+          </div>
+
+          <button
+            disabled={saving}
+            className="px-6 py-3 bg-[#00B250] text-white font-semibold rounded-full hover:bg-[#009a42] transition-colors cursor-pointer"
+          >
+            {saving ? "Saving..." : "Save Address"}
+          </button>
+        </form>
+      </div>
+
+      {/* Change Password Section */}
+      <div className="mt-8 pt-12 bg-white rounded-lg shadow-sm p-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Change Password
+        </h2>
+
+        <form onSubmit={handleChangePassword} className="space-y-4 ">
+          {/* Current Password */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Current Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPasswords.current ? "text" : "password"}
+                name="currentPassword"
+                value={passwordData.currentPassword}
+                onChange={handlePasswordChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                placeholder="Enter current password"
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("current")}
+                className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+              >
+                {showPasswords.current ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* New Password & Confirm Password */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                New Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPasswords.new ? "text" : "password"}
+                  name="newPassword"
+                  value={passwordData.newPassword}
+                  onChange={handlePasswordChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Enter new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => togglePasswordVisibility("new")}
+                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+                >
+                  {showPasswords.new ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPasswords.confirm ? "text" : "password"}
+                  name="confirmPassword"
+                  value={passwordData.confirmPassword}
+                  onChange={handlePasswordChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                  placeholder="Confirm new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => togglePasswordVisibility("confirm")}
+                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+                >
+                  {showPasswords.confirm ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Change Password Button */}
+          <button
+            type="submit"
+            disabled={changingPassword}
+            className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors cursor-pointer"
+          >
+            {changingPassword ? "Changing..." : "Change Password"}
+          </button>
+        </form>
       </div>
     </div>
   );
