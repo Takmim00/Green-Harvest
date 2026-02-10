@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 const API = "https://green-harvest-backend-seven.vercel.app/api/auth/users/me/";
 export default function AccountSettings() {
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -71,7 +73,7 @@ export default function AccountSettings() {
   // 🔹 Account info save
   const handleSaveChanges = async (e) => {
     e.preventDefault();
-
+    setSaving(true);
     try {
       const token = localStorage.getItem("access");
 
@@ -92,13 +94,15 @@ export default function AccountSettings() {
       toast.success("Account information updated ");
     } catch {
       toast.error("Account information Update failed ");
+    } finally {
+      setSaving(false);
     }
   };
 
   // 🔹 Billing save
   const handleBillingChange = async (e) => {
     e.preventDefault();
-
+    setSaving(true);
     try {
       const token = localStorage.getItem("access");
 
@@ -121,6 +125,8 @@ export default function AccountSettings() {
       toast.success("Billing information updated");
     } catch {
       toast.error("Billing update failed ❌");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -151,19 +157,52 @@ export default function AccountSettings() {
     });
   };
 
-  const handleChangePassword = (e) => {
+  const handleChangePassword = async (e) => {
     e.preventDefault();
+
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      alert("New password and confirm password do not match!");
+      toast.error("New password and confirm password do not match!");
       return;
     }
-    alert("Password changed successfully!");
-    setPasswordData({
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
+    setChangingPassword(true);
+
+    try {
+      const token = localStorage.getItem("access");
+
+      const res = await fetch(
+        "https://green-harvest-backend-seven.vercel.app/api/auth/users/set_password/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            current_password: passwordData.currentPassword,
+            new_password: passwordData.newPassword,
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data?.detail || "Password change failed");
+      }
+
+      toast.success("Password changed successfully!");
+
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+    } catch (err) {
+      toast.error(err.message || "Password change failed!");
+    } finally {
+      setChangingPassword(false);
+    }
   };
+
   if (loading) {
     return (
       <div className="flex justify-center py-20 min-h-screen">
@@ -249,9 +288,10 @@ export default function AccountSettings() {
                 {/* Save Changes Button */}
                 <button
                   type="submit"
+                  disabled={saving}
                   className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors cursor-pointer"
                 >
-                  Save Changes
+                  {saving ? "Saving..." : "Save Changes"}
                 </button>
               </form>
             </div>
@@ -340,8 +380,11 @@ export default function AccountSettings() {
                 </div>
               </div>
 
-              <button className="px-6 py-3 bg-[#00B250] text-white font-semibold rounded-full hover:bg-[#009a42] transition-colors cursor-pointer">
-                Save Address
+              <button
+                disabled={saving}
+                className="px-6 py-3 bg-[#00B250] text-white font-semibold rounded-full hover:bg-[#009a42] transition-colors cursor-pointer"
+              >
+                {saving ? "Saving..." : "Save Address"}
               </button>
             </form>
           </div>
@@ -444,9 +487,10 @@ export default function AccountSettings() {
               {/* Change Password Button */}
               <button
                 type="submit"
+                disabled={changingPassword}
                 className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors cursor-pointer"
               >
-                Change Password
+                {changingPassword ? "Changing..." : "Change Password"}
               </button>
             </form>
           </div>
