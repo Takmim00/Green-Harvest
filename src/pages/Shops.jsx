@@ -26,7 +26,7 @@ export default function Shops() {
   const [totalPages, setTotalPages] = useState(1);
   const [categories, setCategories] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
+const [count, setCount] = useState(0);
   // URL → State (derived)
   const currentPage = Number(searchParams.get("page") || "1");
   const selectedCategory = searchParams.get("category") || ""; 
@@ -67,10 +67,12 @@ export default function Shops() {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setProducts(data.results || []);
         setTotalPages(
           Math.ceil((data.count || 0) / (data.results?.length || 1)),
         );
+         setCount(data.count);
         setLoading(false);
       })
       .catch((err) => {
@@ -368,7 +370,7 @@ export default function Shops() {
 
               <div className="text-sm text-gray-600">
                 <span className="font-semibold text-gray-900">
-                  {products.length}
+                  {count}
                 </span>{" "}
                 Results
               </div>
