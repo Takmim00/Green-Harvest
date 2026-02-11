@@ -1,14 +1,18 @@
 import { useCart } from "../../routes/provider/ShoppingProvider";
 import { X } from "lucide-react";
+import { requireAuth } from "../../utils/requireAuth";
+import { toast } from "react-toastify";
 
-const WishlistItem = ({ product, onRemove, onAddToCart }) => {
+const WishlistItem = ({ product, onRemove }) => {
   const { addToCart } = useCart();
-  console.log(product);
 
   // ✅ Normalize fields
   const name = product.name || product.product_name || "Unnamed Product";
-  const image =
-    product.image || product.product_image || "/placeholder.svg";
+    const image =
+  product.image ||
+  product.product_image?.image ||
+  "/placeholder.svg";
+
   const price = Number(
     product.currentPrice ?? product.price ?? 0
   );
@@ -18,15 +22,29 @@ const WishlistItem = ({ product, onRemove, onAddToCart }) => {
 
   const isInStock = status === "In Stock";
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name,
-      image,
-      current_price: price,
-    });
-    onAddToCart({ name });
-  };
+
+const handleAddToCart = async () => {
+  requireAuth(async () => {
+    try {
+      const res = await fetch(
+        `https://green-harvest-backend-seven.vercel.app/api/products/${product.slug}/`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch product");
+
+      const data = await res.json();
+
+      addToCart(data);
+
+      toast.success(`${data.name || data.product_name} added to cart! 🛒`);
+    } catch (err) {
+      console.error("❌ Add to cart error:", err);
+      toast.error("Failed to add product to cart");
+    }
+  });
+};
+
+
 
   return (
     <div className="px-4 sm:px-6 py-5 border-b border-gray-100 hover:bg-gray-50 transition-colors">

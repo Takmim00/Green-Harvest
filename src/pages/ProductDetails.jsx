@@ -262,7 +262,7 @@ const ProductDetails = () => {
 
             <button
               onClick={handleAddToCart}
-              className="flex-1 min-w-35 sm:min-w-45 flex items-center justify-center gap-1 sm:gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 rounded-full transition group text-sm sm:text-base"
+              className="flex-1 min-w-35 sm:min-w-45 flex items-center justify-center gap-1 sm:gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 rounded-full transition group text-sm sm:text-base cursor-pointer"
             >
               <span>Add to Cart</span>
               <HiOutlineShoppingBag className="w-5 h-5 sm:w-5.5 sm:h-5.5 group-hover:translate-x-1 transition" />
@@ -270,7 +270,7 @@ const ProductDetails = () => {
 
             <button
               onClick={handleWishlistClick}
-              className={`p-2.5 sm:p-3 rounded-full transition shrink-0 bg-[#bdf5c7] ${
+              className={`p-2.5 sm:p-3 rounded-full transition shrink-0 bg-[#bdf5c7] cursor-pointer ${
                 isAnimating ? "scale-125" : ""
               }`}
             >

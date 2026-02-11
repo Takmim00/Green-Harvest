@@ -13,6 +13,8 @@ const ProductCard = ({ product }) => {
   const { openProductModal } = useProductModal();
   const [isAnimating, setIsAnimating] = useState(false);
   const favorite = isInWishlist(product.slug);
+  const [loading, setLoading] = useState(false);
+
   const getProductImage = (images) => {
     if (Array.isArray(images)) {
       return images.find((img) => img.is_primary)?.image || images[0]?.image;
@@ -28,21 +30,27 @@ const ProductCard = ({ product }) => {
   const primaryImage = getProductImage(product.images);
 
   const handleWishlistClick = (product) => {
-    if (!product) return;
+  if (!product) return;
 
-    requireAuth(() => {
-      toggleWishlist(product);
+  requireAuth(async () => {
+    if (loading) return;
+  setLoading(true);
+    const already = isInWishlist(product.slug); // আগে ধরো
 
-      setIsAnimating(true);
-      setTimeout(() => setIsAnimating(false), 300);
+    await toggleWishlist(product); // wait করো
 
-      if (isInWishlist(product.slug)) {
-        toast.warn(`${product.name} removed from wishlist!`);
-      } else {
-        toast.success(`${product.name} added to wishlist!`);
-      }
-    });
-  };
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 300);
+
+    if (already) {
+      toast.warn(`${product.name} removed from wishlist!`);
+    } else {
+      toast.success(`${product.name} added to wishlist!`);
+    }
+    setLoading(false);
+  });
+};
+
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:border-[#00B307] hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)] hover:-translate-y-2">
