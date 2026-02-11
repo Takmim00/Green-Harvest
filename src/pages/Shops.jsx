@@ -81,7 +81,7 @@ export default function Shops() {
 
   // Fetch categories (once)
   useEffect(() => {
-    fetch("https://green-harvest-backend-seven.vercel.app/api/categories/")
+    fetch("https://green-harvest-backend-seven.vercel.app/api/categories/leaf/")
       .then((res) => res.json())
       .then((data) => setCategories(data || []))
       .catch((err) => console.error("Categories fetch failed", err));

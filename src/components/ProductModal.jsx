@@ -194,7 +194,7 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
               </div>
 
               {/* Description */}
-              <p className="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3 md:line-clamp-none">
+              <p className="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">
                 {product.description}
               </p>
 
@@ -223,7 +223,7 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
                   {/* Add to Cart */}
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 md:py-3 px-4 rounded-full transition group text-sm md:text-base"
+                    className="flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-900 text-white font-semibold py-2.5 md:py-3 px-4 rounded-full transition group text-sm md:text-base cursor-pointer"
                   >
                     <span>Add to Cart</span>
                     <HiOutlineShoppingBag
@@ -235,7 +235,7 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
                   {/* Wishlist */}
                   <button
                     onClick={handleWishlistClick}
-                    className={`p-2.5 md:p-3 bg-[#bdf5c7] rounded-full transition ${
+                    className={`p-2.5 md:p-3 bg-[#bdf5c7] rounded-full transition cursor-pointer ${
                       isAnimating ? "scale-125" : ""
                     }`}
                   >

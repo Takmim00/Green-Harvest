@@ -92,7 +92,7 @@ export const WishlistProvider = ({ children }) => {
             slug: data.product_slug,
             name: data.product_name,
             image: data.product_image?.image || "/placeholder.svg",
-            currentPrice: Number(data.price),
+             price: Number(data.price),
             status:
               data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
           },
