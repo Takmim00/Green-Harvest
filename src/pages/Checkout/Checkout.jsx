@@ -4,9 +4,8 @@ import { useCart } from "../../routes/provider/ShoppingProvider";
 
 const Checkout = () => {
   const { cart, getCartTotal, clearCart } = useCart();
-  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [paymentMethod, setPaymentMethod] = useState("stripe");
   const [shipToDifferent, setShipToDifferent] = useState(false);
-console.log(cart);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,11 +31,53 @@ console.log(cart);
     }));
   };
 
-  const handlePlaceOrder = () => {
-    // Order placement logic
-    console.log("Order placed:", { formData, paymentMethod, cart });
-    alert("Order placed successfully!");
-    clearCart();
+  const handlePlaceOrder = async () => {
+    try {
+      const token = localStorage.getItem("access");
+
+      const payload = {
+        payment_method: paymentMethod,
+        shipping_address: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          street_address: formData.streetAddress,
+          city: formData.state,
+          country: formData.country,
+          postcode: formData.zipCode,
+          email: formData.email,
+          phone_number: formData.phone,
+          order_notes: formData.orderNotes,
+        },
+      };
+
+      const res = await fetch(
+        "https://green-harvest-backend-seven.vercel.app/api/orders/checkout/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // ✅ important
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to place order");
+      }
+
+      const data = await res.json();
+      console.log("Backend error:", data);
+
+      if (data.payment_url) {
+        window.location.href = data.payment_url; // Stripe redirect
+      } else {
+        alert("Order placed successfully!");
+        clearCart();
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
   };
 
   return (
@@ -52,7 +93,6 @@ console.log(cart);
               <h2 className="text-xl font-semibold text-[#1A1A1A] mb-6">
                 Billing Information
               </h2>
-
               <div className="space-y-4">
                 {/* Row 1: First name, Last name, Company name */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -345,7 +385,7 @@ console.log(cart);
                   Payment Method
                 </h4>
                 <div className="space-y-3">
-                  <label className="flex items-center gap-3 cursor-pointer">
+                  {/* <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
                       name="payment"
@@ -379,6 +419,17 @@ console.log(cart);
                       className="w-4 h-4 accent-[#00B207]"
                     />
                     <span className="text-sm text-[#1A1A1A]">Amazon Pay</span>
+                  </label> */}
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="stripe"
+                      checked={paymentMethod === "stripe"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="w-4 h-4 accent-[#00B207]"
+                    />
+                    <span className="text-sm text-[#1A1A1A]">Stripe</span>
                   </label>
                 </div>
               </div>

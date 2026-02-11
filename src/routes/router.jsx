@@ -22,6 +22,7 @@ import OrderDetails from "../pages/Dashboard/OrderDetails";
 import OrderHistory from "../pages/Dashboard/OrderHistoy";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
+import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -33,15 +34,6 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-
-      // {
-      //   path: "/shop",
-      //   element: <Shops />,
-      // },
-      // {
-      //   path: "/product/:slug",
-      //   element: <ProductDetails />,
-      // },
       {
         path: "shop",
         children: [
@@ -89,6 +81,10 @@ export const router = createBrowserRouter([
         path: "/faq",
         element: <FAQ />,
       },
+      {
+        path:"/checkout/success",
+        element:<CheckoutSuccess/>
+      }
     ],
   },
   {
