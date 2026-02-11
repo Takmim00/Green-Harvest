@@ -23,6 +23,7 @@ import OrderHistory from "../pages/Dashboard/OrderHistoy";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
 import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess";
+import CheckoutCancel from "../pages/Checkout/CheckoutCancel";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
       {
         path:"/checkout/success",
         element:<CheckoutSuccess/>
+      },
+      {
+        path:"/checkout/cancel",
+        element:<CheckoutCancel/>
       }
     ],
   },

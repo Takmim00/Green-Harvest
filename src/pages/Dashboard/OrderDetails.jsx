@@ -65,7 +65,11 @@ export default function OrderDetailsPage() {
     : { name: "", address: "", email: "", phone: "" };
 
   if (loading)
-    return <p className="text-center py-8">Loading order details...</p>;
+    return (
+      <div className="text-center py-8">
+        <div className="w-8 h-8 border-4 border-t-green-600 border-gray-200 rounded-full animate-spin mx-auto" />
+      </div>
+    );
   if (error) return <p className="text-center py-8 text-red-500">{error}</p>;
   if (!orderData) return <p className="text-center py-8">No order found.</p>;
 
