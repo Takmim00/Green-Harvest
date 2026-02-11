@@ -111,7 +111,7 @@ export default function OrderDetailsPage() {
               {orderData.items?.length === 1 ? "item" : "items"}
             </p>
           </div>
-          <Link href="/">
+          <Link to="/dashboard/order-history">
             <span className="text-green-600 font-semibold hover:text-green-700 cursor-pointer transition-colors">
               Back to List
             </span>
