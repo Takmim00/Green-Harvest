@@ -10,7 +10,7 @@ const CheckoutCancel = () => {
 
         <p className="text-gray-600 mb-6">
           Your payment was not completed. Don't worry — your cart items are
-          still محفوظ.
+          still there.
         </p>
 
         <Link
