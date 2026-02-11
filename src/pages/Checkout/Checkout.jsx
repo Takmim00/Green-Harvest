@@ -5,6 +5,8 @@ import { useCart } from "../../routes/provider/ShoppingProvider";
 const Checkout = () => {
   const { cart, getCartTotal, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("stripe");
+  const [loading, setLoading] = useState(false);
+
   const [shipToDifferent, setShipToDifferent] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -20,7 +22,7 @@ const Checkout = () => {
   });
 
   const subtotal = getCartTotal();
-  const shipping = 0; // Free shipping
+  const shipping = 0;
   const total = subtotal + shipping;
 
   const handleInputChange = (e) => {
@@ -33,6 +35,7 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     try {
+      setLoading(true); // start loading
       const token = localStorage.getItem("access");
 
       const payload = {
@@ -56,7 +59,7 @@ const Checkout = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // ✅ important
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
         },
@@ -70,13 +73,15 @@ const Checkout = () => {
       console.log("Backend error:", data);
 
       if (data.payment_url) {
-        window.location.href = data.payment_url; // Stripe redirect
+        window.location.href = data.payment_url;
       } else {
         alert("Order placed successfully!");
         clearCart();
       }
     } catch (error) {
       console.error("Error placing order:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,7 +96,7 @@ const Checkout = () => {
             {/* Billing Information */}
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-[#1A1A1A] mb-6">
-                Billing Information
+                Shipping Information
               </h2>
               <div className="space-y-4">
                 {/* Row 1: First name, Last name, Company name */}
@@ -322,37 +327,9 @@ const Checkout = () => {
                     </div>
                   ))
                 ) : (
-                  <>
-                    {/* Default items when cart is empty - matching the design */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
-                          <span className="text-2xl">🫑</span>
-                        </div>
-                        <p className="text-sm text-[#1A1A1A]">
-                          Green Capsicum{" "}
-                          <span className="text-[#808080]">x5</span>
-                        </p>
-                      </div>
-                      <span className="text-sm font-medium text-[#1A1A1A]">
-                        $70.00
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
-                          <span className="text-2xl">🍅</span>
-                        </div>
-                        <p className="text-sm text-[#1A1A1A]">
-                          Red Capsicum{" "}
-                          <span className="text-[#808080]">x1</span>
-                        </p>
-                      </div>
-                      <span className="text-sm font-medium text-[#1A1A1A]">
-                        $14.00
-                      </span>
-                    </div>
-                  </>
+                  <p className="text-center text-sm text-gray-500 py-6">
+                    Your cart is empty.
+                  </p>
                 )}
               </div>
 
@@ -437,9 +414,13 @@ const Checkout = () => {
               {/* Place Order Button */}
               <button
                 onClick={handlePlaceOrder}
-                className="w-full mt-6 py-4 bg-[#00B207] text-white rounded-full text-base font-semibold hover:bg-[#009206] transition-colors"
+                disabled={loading}
+                className="w-full mt-6 py-4 bg-[#00B207] text-white rounded-full text-base font-semibold hover:bg-[#009206] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
               >
-                Place Order
+                {loading && (
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
+                {loading ? "Processing..." : "Place Order"}
               </button>
             </div>
           </div>

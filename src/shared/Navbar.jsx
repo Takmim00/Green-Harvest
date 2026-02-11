@@ -121,7 +121,10 @@ export default function Navbar() {
 
     navigate(`/shop?search=${encodeURIComponent(searchQuery)}`);
   };
-
+const handleLogout = () => {
+  logout(); 
+  navigate("/"); 
+};
   return (
     <nav className="w-full">
       {/* Top Bar */}
@@ -265,7 +268,7 @@ export default function Navbar() {
                         </Link>
 
                         <button
-                          onClick={logout}
+                         onClick={handleLogout}
                           className="w-full text-left flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 text-red-500"
                         >
                           <X size={16} />
@@ -645,7 +648,7 @@ export default function Navbar() {
                         </Link>
 
                         <button
-                          onClick={logout}
+                          onClick={handleLogout}
                           className="w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50"
                         >
                           <X size={18} />

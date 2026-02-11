@@ -101,7 +101,7 @@ export const router = createBrowserRouter([
         element: <OrderHistory />,
       },
       {
-        path: "/dashboard/order/:id",
+        path: "/dashboard/order/:order_id",
         element: <OrderDetails />,
       },
       {

@@ -1,187 +1,334 @@
-import { ArrowLeft, CheckCircle, Truck } from 'lucide-react';
-import { Link, useParams } from 'react-router';
+import { CheckCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
 
-const OrderDetails = () => {
-  const { id } = useParams();
+export const metadata = {
+  title: "Order Details",
+  description: "View your order details and tracking information",
+};
 
-  const orderData = {
-    id: id || '738',
-    date: '8 Sep, 2020',
-    status: 'On the way',
-    billingAddress: {
-      name: 'Dianne Russell',
-      address: '4140 Parker Rd. Allentown, New Mexico 31134',
-      email: 'dianne.russell@gmail.com',
-      phone: '(671) 555-0110'
+export default function OrderDetailsPage() {
+  const { order_id } = useParams(); // get order_id from route param
+  const [orderData, setOrderData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchOrder() {
+      try {
+        const token = localStorage.getItem("access");
+
+        const res = await fetch(
+          `https://green-harvest-backend-seven.vercel.app/api/orders/${order_id}/`,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch order data");
+        }
+
+        const data = await res.json();
+        console.log(data);
+        setOrderData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchOrder();
+  }, [order_id]);
+
+  // Billing & Shipping address mapping
+  const billingAddress = orderData
+    ? {
+        name: `${orderData.first_name} ${orderData.last_name}`,
+        address: `${orderData.street_address}, ${orderData.city}, ${orderData.country}, ${orderData.postcode}`,
+        email: orderData.email,
+        phone: orderData.phone_number,
+      }
+    : { name: "", address: "", email: "", phone: "" };
+
+  const shippingAddress = orderData
+    ? {
+        name: `${orderData.first_name} ${orderData.last_name}`,
+        address: `${orderData.street_address}, ${orderData.city}, ${orderData.country}, ${orderData.postcode}`,
+        email: orderData.email,
+        phone: orderData.phone_number,
+      }
+    : { name: "", address: "", email: "", phone: "" };
+
+  if (loading)
+    return <p className="text-center py-8">Loading order details...</p>;
+  if (error) return <p className="text-center py-8 text-red-500">{error}</p>;
+  if (!orderData) return <p className="text-center py-8">No order found.</p>;
+
+  // map API status to readable timeline
+  const timelineSteps = [
+    {
+      step: "Order received",
+      completed:
+        orderData.status === "order_received" || orderData.status !== "pending",
     },
-    shippingAddress: {
-      name: 'Dianne Russell',
-      address: '4140 Parker Rd. Allentown, New Mexico 31134',
-      email: 'dianne.russell@gmail.com',
-      phone: '(671) 555-0110'
+    {
+      step: "Processing",
+      completed: ["processing", "on_the_way", "delivered"].includes(
+        orderData.status,
+      ),
     },
-    items: [
-      { id: 1, name: 'Red Capsicum', price: '$14.00', quantity: 45, total: '$75.00', image: '/farm-fresh-produce.png' },
-      { id: 2, name: 'Green Capsicum', price: '$14.00', quantity: 42, total: '$28.00', image: '/organic-products.png' },
-      { id: 3, name: 'Green Chili', price: '$29.70', quantity: 90, total: '$287.00', image: '/fresh-vegetables-basket.png' },
-    ],
-    subtotal: '$390.00',
-    discount: '30%',
-    shipping: 'Free',
-    total: '$234.00',
-    timeline: [
-      { step: 'Order received', completed: true },
-      { step: 'Processing', completed: true },
-      { step: 'On the way', completed: true },
-      { step: 'Delivered', completed: false }
-    ]
-  };
+    {
+      step: "On the way",
+      completed: ["on_the_way", "delivered"].includes(orderData.status),
+    },
+    { step: "Delivered", completed: orderData.status === "delivered" },
+  ];
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <Link
-          to="/dashboard/order-history"
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <ArrowLeft size={24} className="text-gray-600" />
-        </Link>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Order Details</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            Order {orderData.id} • {orderData.date}
-          </p>
+    <div className="min-h-screen bg-white py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Order Details</h1>
+            <p className="text-sm text-gray-600 mt-1">
+              {new Date(orderData.created_at).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}{" "}
+              •{" "}
+              {orderData.items?.reduce(
+                (total, item) => total + item.quantity,
+                0,
+              )}{" "}
+              {orderData.items?.length === 1 ? "item" : "items"}
+            </p>
+          </div>
+          <Link href="/">
+            <span className="text-green-600 font-semibold hover:text-green-700 cursor-pointer transition-colors">
+              Back to List
+            </span>
+          </Link>
         </div>
-      </div>
 
-      {/* Timeline */}
-      <div className="bg-white rounded-lg shadow-sm p-8">
-        <h2 className="text-lg font-bold text-gray-900 mb-6">Order Status</h2>
-        <div className="flex items-center justify-between">
-          {orderData.timeline.map((item, idx) => (
-            <div key={idx} className="flex flex-col items-center flex-1">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                item.completed ? 'bg-[#00B250]' : 'bg-gray-200'
-              }`}>
-                {item.completed ? (
-                  <CheckCircle size={24} className="text-white" />
-                ) : (
-                  <div className="w-4 h-4 rounded-full bg-gray-400" />
-                )}
-              </div>
-              <p className="text-xs text-gray-600 text-center font-medium">{item.step}</p>
-              {idx < orderData.timeline.length - 1 && (
-                <div className={`absolute w-24 h-1 mt-4 ${
-                  item.completed ? 'bg-[#00B250]' : 'bg-gray-300'
-                }`} style={{ marginLeft: '60px' }} />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Addresses */}
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Billing Address */}
+        {/* Top Section - Addresses and Summary */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 pb-8">
+          {/* Billing Address */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">
+              Billing Address
+            </p>
+            <div className="space-y-4">
+              <p className="font-semibold text-gray-900 text-base">
+                {billingAddress.name}
+              </p>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {billingAddress.address}
+              </p>
               <div>
-                <p className="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-3">BILLING ADDRESS</p>
-                <h3 className="text-lg font-bold text-gray-900 mb-1">{orderData.billingAddress.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{orderData.billingAddress.address}</p>
-                <div className="space-y-1">
-                  <p className="text-sm text-gray-900">{orderData.billingAddress.email}</p>
-                  <p className="text-sm text-gray-900">{orderData.billingAddress.phone}</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
+                  Email
+                </p>
+                <p className="text-sm text-gray-900">{billingAddress.email}</p>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
+                  Phone
+                </p>
+                <p className="text-sm text-gray-900">{billingAddress.phone}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Shipping Address */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">
+              Shipping Address
+            </p>
+            <div className="space-y-4">
+              <p className="font-semibold text-gray-900 text-base">
+                {shippingAddress.name}
+              </p>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {shippingAddress.address}
+              </p>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
+                  Email
+                </p>
+                <p className="text-sm text-gray-900">{shippingAddress.email}</p>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
+                  Phone
+                </p>
+                <p className="text-sm text-gray-900">{shippingAddress.phone}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Order Summary */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <div className="space-y-5">
+              <div className="flex justify-between items-start">
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                  Order ID:
+                </p>
+                <p className="text-base font-bold text-gray-900">
+                  {orderData.id}
+                </p>
+              </div>
+              <div className="flex justify-between items-start">
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                  Payment Method:
+                </p>
+                <p className="text-base font-bold text-gray-900">
+                  {orderData.paymentMethod}
+                </p>
+              </div>
+              <div className="border-t border-gray-200 pt-5">
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-sm text-gray-600">Subtotal:</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {orderData.subtotal}
+                  </p>
+                </div>
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-sm text-gray-600">Discount</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {orderData.discount}
+                  </p>
+                </div>
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-sm text-gray-600">Shipping</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {orderData.shipping}
+                  </p>
+                </div>
+                <div className="border-t border-gray-200 pt-4 flex justify-between items-start">
+                  <p className="text-base font-semibold text-gray-900">Total</p>
+                  <p className="text-lg font-bold text-green-600">
+                    {orderData.total}
+                  </p>
                 </div>
               </div>
-
-              {/* Shipping Address */}
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-3">SHIPPING ADDRESS</p>
-                <h3 className="text-lg font-bold text-gray-900 mb-1">{orderData.shippingAddress.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{orderData.shippingAddress.address}</p>
-                <div className="space-y-1">
-                  <p className="text-sm text-gray-900">{orderData.shippingAddress.email}</p>
-                  <p className="text-sm text-gray-900">{orderData.shippingAddress.phone}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Order Items */}
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-6">Order Items</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-4 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">PRODUCT</th>
-                    <th className="text-left py-4 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">PRICE</th>
-                    <th className="text-left py-4 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">QUANTITY</th>
-                    <th className="text-left py-4 px-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">SUBTOTAL</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orderData.items.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-100">
-                      <td className="py-4 px-3">
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={item.image || '/placeholder.svg'}
-                            alt={item.name}
-                            className="w-12 h-12 rounded-lg object-cover bg-gray-100"
-                          />
-                          <span className="text-sm font-medium text-gray-900">{item.name}</span>
-                        </div>
-                      </td>
-                      <td className="py-4 px-3 text-sm font-medium text-gray-900">{item.price}</td>
-                      <td className="py-4 px-3 text-sm text-gray-600">{item.quantity}</td>
-                      <td className="py-4 px-3 text-sm font-medium text-gray-900">{item.total}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
 
-        {/* Right Column - Order Summary */}
-        <div className="bg-white rounded-lg shadow-sm p-8 h-fit">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Order Summary</h3>
-          <div className="space-y-4">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-900 font-medium">{orderData.subtotal}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Discount</span>
-              <span className="text-gray-900 font-medium">{orderData.discount}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Shipping</span>
-              <span className="text-gray-900 font-medium">{orderData.shipping}</span>
-            </div>
-            <div className="border-t border-gray-200 pt-4 flex justify-between">
-              <span className="text-lg font-bold text-gray-900">Total</span>
-              <span className="text-lg font-bold text-gray-900">{orderData.total}</span>
-            </div>
-          </div>
+        {/* Timeline */}
+        <div className="mb-8 pb-8">
+          <div className="flex items-start justify-between relative">
+            {/* Timeline line container */}
+            <svg
+              className="absolute top-5 left-0 w-full h-1 pointer-events-none"
+              style={{ height: "4px" }}
+            >
+              <line
+                x1="0"
+                y1="0"
+                x2="100%"
+                y2="0"
+                stroke="#16a34a"
+                strokeWidth="4"
+              />
+              <line
+                x1="50%"
+                y1="0"
+                x2="100%"
+                y2="0"
+                stroke="#d1d5db"
+                strokeWidth="4"
+              />
+            </svg>
 
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-3">ORDER STATUS</p>
-            <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full">
-              <Truck size={16} className="text-blue-600 mr-2" />
-              <span className="text-sm font-semibold text-blue-600">{orderData.status}</span>
-            </div>
+            {timelineSteps.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center flex-1 relative z-10"
+              >
+                {/* Circle */}
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white relative mb-4 ${
+                    item.completed
+                      ? "bg-green-600"
+                      : "border-2 border-green-500 bg-white text-green-600"
+                  }`}
+                >
+                  {item.completed ? (
+                    <CheckCircle size={24} />
+                  ) : (
+                    <span className="text-sm font-bold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  )}
+                </div>
+                {/* Step label */}
+                <p
+                  className={`text-sm font-semibold text-center ${
+                    item.completed ? "text-green-600" : "text-gray-500"
+                  }`}
+                >
+                  {item.step}
+                </p>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* Products Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-gray-100 border-b border-gray-300">
+                <th className="text-left py-4 px-6 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Product
+                </th>
+                <th className="text-left py-4 px-6 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Price
+                </th>
+                <th className="text-left py-4 px-6 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Quantity
+                </th>
+                <th className="text-left py-4 px-6 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  Subtotal
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderData.items.map((item) => (
+                <tr key={item.id} className="border-b border-gray-200">
+                  <td className="py-5 px-6">
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={item.product_image || "/placeholder.svg"}
+                        alt={item.product_name}
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                      <p className="font-medium text-gray-900">
+                        {item.product_name}
+                      </p>
+                    </div>
+                  </td>
+                  <td className="py-5 px-6 text-gray-900 font-medium">
+                    {item.price}
+                  </td>
+                  <td className="py-5 px-6 text-gray-700">{item.quantity}</td>
+                  <td className="py-5 px-6 text-gray-900 font-medium">
+                    {item.subtotal}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   );
-};
-
-export default OrderDetails;
+}

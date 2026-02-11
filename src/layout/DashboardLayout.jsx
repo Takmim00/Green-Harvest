@@ -1,39 +1,50 @@
-import React, { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router';
-import Navbar from '../shared/Navbar';
-import Footer from '../shared/Footer';
-import { 
-  LayoutDashboard, 
-  ClipboardList, 
-  Heart, 
-  ShoppingCart, 
-  Settings, 
+import {
+  ClipboardList,
+  Heart,
+  LayoutDashboard,
   LogOut,
   Menu,
-  X
-} from 'lucide-react';
-import Breadcrumb from '../shared/Breadcrumb';
+  Settings,
+  ShoppingCart,
+  X,
+} from "lucide-react";
+import { useContext, useState } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router";
+import { AuthContext } from "../routes/provider/AuthProvider";
+import Breadcrumb from "../shared/Breadcrumb";
+import Footer from "../shared/Footer";
+import Navbar from "../shared/Navbar";
 
 const DashboardLayout = () => {
+  const { logout } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   const menuItems = [
-    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/dashboard/order-history', label: 'Order History', icon: ClipboardList },
-    { path: '/dashboard/wishlist', label: 'Wishlist', icon: Heart },
-    { path: '/dashboard/shopping-cart', label: 'Shopping Cart', icon: ShoppingCart },
-    { path: '/dashboard/settings', label: 'Settings', icon: Settings },
+    { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    {
+      path: "/dashboard/order-history",
+      label: "Order History",
+      icon: ClipboardList,
+    },
+    { path: "/dashboard/wishlist", label: "Wishlist", icon: Heart },
+    {
+      path: "/dashboard/shopping-cart",
+      label: "Shopping Cart",
+      icon: ShoppingCart,
+    },
+    { path: "/dashboard/settings", label: "Settings", icon: Settings },
   ];
 
   const handleLogout = () => {
-    navigate('/');
+    logout();
+    navigate("/");
   };
 
   return (
     <div className="overflow-x-hidden">
       <Navbar />
-      <Breadcrumb/>
+      <Breadcrumb />
       <div className="bg-gray-50">
         <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -47,8 +58,9 @@ const DashboardLayout = () => {
             </button>
 
             {/* Sidebar */}
-            <aside className={`
-              ${sidebarOpen ? 'block' : 'hidden'} 
+            <aside
+              className={`
+              ${sidebarOpen ? "block" : "hidden"} 
               lg:block 
               w-full lg:w-56 
               bg-white 
@@ -56,22 +68,25 @@ const DashboardLayout = () => {
               h-fit
               shrink-0
               shadow-sm
-            `}>
+            `}
+            >
               <div className="p-6 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-900">Navigation</h2>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Navigation
+                </h2>
               </div>
               <nav className="p-4 space-y-1">
                 {menuItems.map((item) => (
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    end={item.path === '/dashboard'}
+                    end={item.path === "/dashboard"}
                     onClick={() => setSidebarOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'bg-[#00B250] text-white shadow-sm'
-                          : 'text-gray-600 hover:bg-gray-50'
+                          ? "bg-[#00B250] text-white shadow-sm"
+                          : "text-gray-600 hover:bg-gray-50"
                       }`
                     }
                   >

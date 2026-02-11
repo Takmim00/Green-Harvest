@@ -16,6 +16,8 @@ const Dashboard = () => {
   // };
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [recentOrders, setRecentOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(true);
 
   // 🔹 Fetch logged-in user
   useEffect(() => {
@@ -42,43 +44,84 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
-  const recentOrders = [
-    {
-      id: "738",
-      date: "8 Sep, 2020",
-      total: "$135.00",
-      products: 5,
-      status: "Processing",
-    },
-    {
-      id: "703",
-      date: "24 May, 2020",
-      total: "$25.00",
-      products: 1,
-      status: "on the way",
-    },
-    {
-      id: "130",
-      date: "22 Oct, 2020",
-      total: "$250.00",
-      products: 4,
-      status: "Completed",
-    },
-    {
-      id: "561",
-      date: "1 Feb, 2020",
-      total: "$35.00",
-      products: 1,
-      status: "Completed",
-    },
-    {
-      id: "536",
-      date: "21 Sep, 2020",
-      total: "$578.00",
-      products: 13,
-      status: "Completed",
-    },
-  ];
+  // const recentOrders = [
+  //   {
+  //     id: "738",
+  //     date: "8 Sep, 2020",
+  //     total: "$135.00",
+  //     products: 5,
+  //     status: "Processing",
+  //   },
+  //   {
+  //     id: "703",
+  //     date: "24 May, 2020",
+  //     total: "$25.00",
+  //     products: 1,
+  //     status: "on the way",
+  //   },
+  //   {
+  //     id: "130",
+  //     date: "22 Oct, 2020",
+  //     total: "$250.00",
+  //     products: 4,
+  //     status: "Completed",
+  //   },
+  //   {
+  //     id: "561",
+  //     date: "1 Feb, 2020",
+  //     total: "$35.00",
+  //     products: 1,
+  //     status: "Completed",
+  //   },
+  //   {
+  //     id: "536",
+  //     date: "21 Sep, 2020",
+  //     total: "$578.00",
+  //     products: 13,
+  //     status: "Completed",
+  //   },
+  // ];
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("access");
+        const res = await fetch(
+          "https://green-harvest-backend-seven.vercel.app/api/orders/",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        if (!res.ok) throw new Error("Failed to fetch orders");
+        const data = await res.json();
+        console.log(data);
+
+        // map backend data to your frontend structure
+        const mappedOrders = data.results.map((order) => ({
+          id: order.order_id || order.id,
+          date: new Date(order.created_at).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }),
+          total: order.total,
+          products:
+            order.items?.reduce((sum, item) => sum + item.quantity, 0) || 0,
+          status: order.status,
+        }));
+
+        setRecentOrders(mappedOrders);
+      } catch (err) {
+        console.error("Orders fetch error:", err);
+      } finally {
+        setOrdersLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
@@ -193,38 +236,57 @@ const Dashboard = () => {
                 </th>
               </tr>
             </thead>
+
             <tbody>
-              {recentOrders.map((order, index) => (
-                <tr
-                  key={index}
-                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td className="py-4 px-3 text-sm font-semibold text-gray-900">
-                    {order.id}
-                  </td>
-                  <td className="py-4 px-3 text-sm text-gray-600">
-                    {order.date}
-                  </td>
-                  <td className="py-4 px-3 text-sm text-gray-900 font-medium">
-                    {order.total}
-                  </td>
-                  <td className="py-4 px-3">
-                    <span
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}
-                    >
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-3 text-right">
-                    <Link
-                      to={`/dashboard/order/${order.id}`}
-                      className="text-sm text-[#00B250] font-semibold hover:underline"
-                    >
-                      View Details
-                    </Link>
+              {ordersLoading && (
+                <tr>
+                  <td colSpan={5} className="py-6 text-center">
+                    <div className="w-8 h-8 border-4 border-t-green-600 border-gray-200 rounded-full animate-spin mx-auto" />
                   </td>
                 </tr>
-              ))}
+              )}
+
+              {!ordersLoading && recentOrders.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="py-6 text-center text-gray-500">
+                    No orders found
+                  </td>
+                </tr>
+              )}
+
+              {!ordersLoading &&
+                recentOrders.length > 0 &&
+                recentOrders.map((order, index) => (
+                  <tr
+                    key={index}
+                    className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="py-4 px-3 text-sm font-semibold text-gray-900">
+                      {order.id}
+                    </td>
+                    <td className="py-4 px-3 text-sm text-gray-600">
+                      {order.date}
+                    </td>
+                    <td className="py-4 px-3 text-sm text-gray-900 font-medium">
+                      {order.total}
+                    </td>
+                    <td className="py-4 px-3">
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="py-4 px-3 text-right">
+                      <Link
+                        to={`/dashboard/order/${order.id}`}
+                        className="text-sm text-[#00B250] font-semibold hover:underline"
+                      >
+                        View Details
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
