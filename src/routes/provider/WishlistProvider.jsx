@@ -33,8 +33,8 @@ export const WishlistProvider = ({ children }) => {
         const data = await res.json();
 
         const formatted = (data.items || []).map((item) => ({
-          wishlistId: item.id, // ✅ wishlist row 
-           productId: item.product_id,  
+          wishlistId: item.id, // ✅ wishlist row
+          productId: item.product_id,
           slug: item.product_slug,
           name: item.product_name,
           image:
@@ -57,119 +57,66 @@ export const WishlistProvider = ({ children }) => {
 
     fetchWishlist();
   }, [token]);
-  // const toggleWishlist = async (product) => {
-  //   if (!token) return;
-    
-  // const productId = product.id || product.productId; // ⭐ FIX
 
-  // if (!productId) {
-  //   console.error("❌ Product ID missing:", product);
-  //   return;
-  // }
+  const toggleWishlist = async (product) => {
+    if (!token) return;
 
-  //   const existingItem = wishlist.find((i) => i.slug === product.slug);
+    // ⭐ main fix
+    const productId = product.id ?? product.productId;
 
-  //   try {
-  //     if (existingItem) {
-  //       // 🔴 REMOVE
-  //       await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
-  //         method: "DELETE",
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-
-  //       setWishlist((prev) => prev.filter((i) => i.slug !== product.slug));
-  //     } else {
-  //       // 🟢 ADD
-  //       const res = await fetch(`${API}/add/`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({ product_id: productId }),
-  //       });
-
-  //       if (!res.ok) throw new Error("Add wishlist failed");
-
-  //       const data = await res.json();
-
-  //       setWishlist((prev) => [
-  //         ...prev,
-  //         {
-  //           wishlistId: data.id,
-  //           productId: data.product_id,
-  //           slug: data.product_slug,
-  //           name: data.product_name,
-  //           image: data.product_image?.image || "/placeholder.svg",
-  //            price: Number(data.price),
-  //           status:
-  //             data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
-  //         },
-  //       ]);
-  //     }
-  //   } catch (err) {
-  //     console.error("❌ Wishlist toggle error", err);
-  //   }
-  // };
-const toggleWishlist = async (product) => {
-  if (!token) return;
-
-  // ⭐ main fix
-  const productId = product.id ?? product.productId;
-
-  if (!productId) {
-    console.error("❌ Missing productId:", product);
-    return;
-  }
-
-  const existingItem = wishlist.find((i) => i.slug === product.slug);
-
-  try {
-    if (existingItem) {
-      await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setWishlist((prev) => prev.filter((i) => i.slug !== product.slug));
-    } else {
-      const res = await fetch(`${API}/add/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ product_id: productId }), // ⭐ fixed
-      });
-
-      if (!res.ok) throw new Error("Add wishlist failed");
-
-      const data = await res.json();
-
-      setWishlist((prev) => [
-        ...prev,
-        {
-          wishlistId: data.id,
-          productId: productId, // ⭐ keep for future toggle
-          slug: data.product_slug,
-          name: data.product_name,
-          image: data.product_image?.image || "/placeholder.svg",
-          price: Number(data.price),
-          status:
-            data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
-        },
-      ]);
+    if (!productId) {
+      console.error("❌ Missing productId:", product);
+      return;
     }
-  } catch (err) {
-    console.error("❌ Wishlist toggle error", err);
-  }
-};
+
+    const existingItem = wishlist.find((i) => i.slug === product.slug);
+
+    try {
+      if (existingItem) {
+        await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setWishlist((prev) => prev.filter((i) => i.slug !== product.slug));
+      } else {
+        const res = await fetch(`${API}/add/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ product_id: productId }), // ⭐ fixed
+        });
+
+        if (!res.ok) throw new Error("Add wishlist failed");
+
+        const data = await res.json();
+
+        setWishlist((prev) => [
+          {
+            wishlistId: data.id,
+            productId: productId, // ⭐ keep for future toggle
+            slug: data.product_slug,
+            name: data.product_name,
+            image: data.product_image?.image || "/placeholder.svg",
+            price: Number(data.price),
+            status:
+              data.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
+          },
+          ...prev,
+        ]);
+      }
+    } catch (err) {
+      console.error("❌ Wishlist toggle error", err);
+    }
+  };
 
   const isInWishlist = (slug) => wishlist.some((item) => item.slug === slug);
 
   return (
     <WishlistContext.Provider
-      value={{ wishlist, toggleWishlist, isInWishlist , loading }}
+      value={{ wishlist, toggleWishlist, isInWishlist, loading }}
     >
       {children}
     </WishlistContext.Provider>

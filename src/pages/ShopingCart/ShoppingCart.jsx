@@ -4,9 +4,10 @@ import { Link } from "react-router";
 import { useCart } from "../../routes/provider/ShoppingProvider";
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
+import { toast } from "react-toastify";
 
 const ShoppingCart = () => {
-  const { cart, getCartTotal, loading } = useCart();
+  const { cart, getCartTotal, loading ,clearCart} = useCart();
   const [couponCode, setCouponCode] = useState("");
 console.log(cart);
   const subtotal = getCartTotal();
@@ -17,6 +18,14 @@ console.log(cart);
     if (couponCode.trim()) {
       // Coupon logic can be implemented here
       console.log("Applying coupon:", couponCode);
+    }
+  };
+const handleClearCart = async () => {
+    try {
+      await clearCart();
+      toast.success("Cart cleared successfully 🧹");
+    } catch (err) {
+      toast.error("Failed to clear cart ❌");
     }
   };
 
@@ -61,8 +70,8 @@ console.log(cart);
                 >
                   Return to shop
                 </Link>
-                <button className="px-6 py-3 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                  Update Cart
+                <button onClick={handleClearCart} className="px-6 py-3 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                  Clear Cart
                 </button>
               </div>
 

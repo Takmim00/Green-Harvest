@@ -107,7 +107,7 @@ export const ShoppingProvider = ({ children }) => {
           );
         }
         // console.log("🆕 Adding new item to local cart");
-        return [...prev, mapToCartItem(product, quantity)];
+        return [mapToCartItem(product, quantity),...prev ];
       });
     } catch (err) {
       console.error("❌ Add to cart failed:", err);
@@ -166,7 +166,7 @@ export const ShoppingProvider = ({ children }) => {
 
   // 🔹 Clear entire cart
   const clearCart = async () => {
-    // console.log("🧹 Clearing entire cart...");
+    console.log("🧹 Clearing entire cart...");
 
     try {
       if (token) {
