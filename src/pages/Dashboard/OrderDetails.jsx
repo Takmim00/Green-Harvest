@@ -2,10 +2,7 @@ import { CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 
-export const metadata = {
-  title: "Order Details",
-  description: "View your order details and tracking information",
-};
+
 
 export default function OrderDetailsPage() {
   const { order_id } = useParams(); // get order_id from route param
