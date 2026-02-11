@@ -6,7 +6,7 @@ const Checkout = () => {
   const { cart, getCartTotal, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [shipToDifferent, setShipToDifferent] = useState(false);
-
+console.log(cart);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

@@ -110,7 +110,7 @@ const SmallProductCard = ({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/product/${product.slug}`);
+              navigate(`/shop/${product.slug}`);
             }}
             className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 cursor-pointer"
           >

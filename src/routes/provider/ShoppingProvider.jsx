@@ -4,23 +4,30 @@ const CartContext = createContext();
 
 const API = "https://green-harvest-backend-seven.vercel.app/api/cart";
 
-// Mapper function
-const mapToCartItem = (product, quantity = 1) => ({
-  id: product.id,
-  name: product.name,
-  image: Array.isArray(product.image) ? product.image[0] : product.image || "",
-  price: Number(product.current_price ?? product.currentPrice ?? 0),
-  quantity: quantity,
-});
+
+const mapToCartItem = (product, quantity = 1) => {
+  const primaryImage = Array.isArray(product.images)
+    ? product.images.find(img => img.is_primary)?.image || product.images[0]?.image
+    : null;
+
+  return {
+    id: product.id,
+    slug: product.slug,
+    name: product.name,
+    image: primaryImage || "/placeholder.svg",
+    price: Number(product.current_price ?? product.currentPrice ?? product.price ?? 0),
+    quantity,
+  };
+};
 
 export const ShoppingProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const token = localStorage.getItem("access");
-const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   // 🔹 Load cart from server on first render
   useEffect(() => {
     const fetchCart = async () => {
-       setLoading(true); // start loading
+      setLoading(true); // start loading
       if (!token) {
         setLoading(false);
         return;
@@ -43,9 +50,11 @@ const [loading, setLoading] = useState(true);
 
         const formatted = items.map((item) => ({
           id: item.id,
+          slug: item.product_slug,
           name: item.product_name || "Unnamed Product",
-          // image: item.product_image?.image || "/placeholder.svg",
-          image: item.product_image?.image?.trim() ? item.product_image.image : "/placeholder.svg",
+          image: item.product_image?.image?.trim()
+            ? item.product_image.image
+            : "/placeholder.svg",
 
           price: Number(item.price || 0),
           quantity: item.quantity,
@@ -55,7 +64,7 @@ const [loading, setLoading] = useState(true);
         setCart(formatted);
       } catch (err) {
         console.error("❌ Cart load error:", err);
-      }finally {
+      } finally {
         setLoading(false); // stop loading
       }
     };
@@ -84,18 +93,19 @@ const [loading, setLoading] = useState(true);
         const data = await res.json();
         // console.log("✅ Add to cart API response:", data);
       }
+      console.log("🛒 Adding to cart:", product);
+      console.log("Image field:", product.image, product.product_image?.image);
 
       setCart((prev) => {
-        const existingItem = prev.find((item) => item.id === product.id);
+        const existingItem = prev.find((item) => item.slug === product.slug);
         if (existingItem) {
           console.log("🔁 Increasing quantity for existing item");
           return prev.map((item) =>
-            item.id === product.id
+            item.slug === product.slug
               ? { ...item, quantity: item.quantity + quantity }
               : item,
           );
         }
-
         // console.log("🆕 Adding new item to local cart");
         return [...prev, mapToCartItem(product, quantity)];
       });
@@ -106,54 +116,53 @@ const [loading, setLoading] = useState(true);
 
   // 🔹 Remove single item
   const removeFromCart = async (productId) => {
-  const token = localStorage.getItem("access");
+    const token = localStorage.getItem("access");
 
-  try {
-    if (token) {
-      await fetch(`${API}/remove/?item_id=${productId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    try {
+      if (token) {
+        await fetch(`${API}/remove/?item_id=${productId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+
+      setCart((prev) => prev.filter((item) => item.id !== productId));
+    } catch (err) {
+      console.error("❌ Remove from cart failed:", err);
     }
-
-    setCart(prev => prev.filter(item => item.id !== productId));
-  } catch (err) {
-    console.error("❌ Remove from cart failed:", err);
-  }
-};
-
+  };
 
   // 🔹 Update quantity
- 
-const updateQuantity = async (productId, quantity) => {
-  const token = localStorage.getItem("access");
-  if (quantity < 1) {
-    return removeFromCart(productId);
-  }
 
-  try {
-    if (token) {
-      await fetch(`${API}/add/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ product_id: productId, quantity }),
-      });
+  const updateQuantity = async (productId, quantity) => {
+    const token = localStorage.getItem("access");
+    if (quantity < 1) {
+      return removeFromCart(productId);
     }
 
-    setCart(prev =>
-      prev.map(item =>
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
-  } catch (err) {
-    console.error("❌ Update quantity failed:", err);
-  }
-};
+    try {
+      if (token) {
+        await fetch(`${API}/add/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ product_id: productId, quantity }),
+        });
+      }
+
+      setCart((prev) =>
+        prev.map((item) =>
+          item.id === productId ? { ...item, quantity } : item,
+        ),
+      );
+    } catch (err) {
+      console.error("❌ Update quantity failed:", err);
+    }
+  };
 
   // 🔹 Clear entire cart
   const clearCart = async () => {
@@ -210,7 +219,7 @@ const updateQuantity = async (productId, quantity) => {
         getCartTotal,
         getCartCount,
         isInCart,
-        loading
+        loading,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ import CartTotal from "./CartTotal";
 const ShoppingCart = () => {
   const { cart, getCartTotal, loading } = useCart();
   const [couponCode, setCouponCode] = useState("");
-
+console.log(cart);
   const subtotal = getCartTotal();
   const shipping = 0; // Free shipping
   const total = subtotal + shipping;

@@ -1,47 +1,53 @@
 import { createBrowserRouter } from "react-router";
 import Main from "../layout/Main";
+import Blog_List from "../pages/Blog/Blog_List";
+import Single_Blog from "../pages/Blog/SinglePage/Single_Blog";
+import Checkout from "../pages/Checkout/Checkout";
 import Home from "../pages/Home";
 import ProductDetails from "../pages/ProductDetails";
 import ShoppingCart from "../pages/ShopingCart/ShoppingCart";
 import Shops from "../pages/Shops";
-import Blog_List from "../pages/Blog/Blog_List";
 import Wishlist from "../pages/WishListSctions/Wishlist";
-import Checkout from "../pages/Checkout/Checkout";
-import Single_Blog from "../pages/Blog/SinglePage/Single_Blog";
 
-import SignIn from "../pages/Authentication/SignIn";
-import Register from "../pages/Authentication/Register";
 import DashboardLayout from "../layout/DashboardLayout";
+import About from "../pages/About/About";
+import Register from "../pages/Authentication/Register";
+import SignIn from "../pages/Authentication/SignIn";
+import Contact from "../pages/Contact/Contact";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import OrderHistory from "../pages/Dashboard/OrderHistoy";
-import OrderDetails from "../pages/Dashboard/OrderDetails";
-import DashboardWishlist from "../pages/Dashboard/DashboardWishlist";
 import DashboardCart from "../pages/Dashboard/DashboardCart";
 import DashboardSettings from "../pages/Dashboard/DashboardSettings";
-import About from "../pages/About/About";
+import DashboardWishlist from "../pages/Dashboard/DashboardWishlist";
+import OrderDetails from "../pages/Dashboard/OrderDetails";
+import OrderHistory from "../pages/Dashboard/OrderHistoy";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
-import Contact from "../pages/Contact/Contact";
-
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement:<NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
         element: <Home />,
       },
 
+      // {
+      //   path: "/shop",
+      //   element: <Shops />,
+      // },
+      // {
+      //   path: "/product/:slug",
+      //   element: <ProductDetails />,
+      // },
       {
-        path: "/shop",
-        element: <Shops />,
-      },
-      {
-        path: "/product/:slug",
-        element: <ProductDetails />,
+        path: "shop",
+        children: [
+          { index: true, element: <Shops /> },
+          { path: ":slug", element: <ProductDetails /> },
+        ],
       },
       {
         path: "/wishlist",
@@ -68,31 +74,27 @@ export const router = createBrowserRouter([
         element: <SignIn />,
       },
       {
-        path: "/signIn",
-        element: <SignIn />,
-      },
-      {
         path: "/register",
         element: <Register />,
       },
       {
         path: "/about",
-        element:<About/>
+        element: <About />,
       },
       {
-        path:'/contact',
-        element:<Contact/>
+        path: "/contact",
+        element: <Contact />,
       },
       {
-        path:'/faq',
-        element:<FAQ/>
-      }
+        path: "/faq",
+        element: <FAQ />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
-    errorElement:<NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/dashboard",

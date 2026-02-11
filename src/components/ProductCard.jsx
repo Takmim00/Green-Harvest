@@ -123,7 +123,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <button
-          onClick={() => navigate(`/product/${product.slug}`)}
+          onClick={() => navigate(`/shop/${product.slug}`)}
           className="w-12 h-12 bg-green-50 hover:bg-green-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-12 cursor-pointer"
         >
           <HiOutlineShoppingBag size={22} />

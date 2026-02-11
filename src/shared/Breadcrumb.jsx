@@ -25,9 +25,8 @@ export default function Breadcrumb() {
       className="bg-gray-50 py-6 bg-cover"
       style={{ backgroundImage: "url(/Breadcrumbs.png)" }}
     >
-      <div className="md:max-w-7xl w-11/12 mx-auto px-4">
+      <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4">
         <div className="flex items-center gap-2 text-base text-gray-500">
-          
           {/* Home */}
           <Link to="/" className="hover:text-green-600">
             <House />
@@ -36,8 +35,7 @@ export default function Breadcrumb() {
           {pathParts.map((part, index) => {
             const path = "/" + pathParts.slice(0, index + 1).join("/");
             const name =
-              routeNames[part] ||
-              part.charAt(0).toUpperCase() + part.slice(1);
+              routeNames[part] || part.charAt(0).toUpperCase() + part.slice(1);
 
             return (
               <div key={path} className="flex items-center gap-2">

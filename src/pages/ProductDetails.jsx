@@ -234,7 +234,7 @@ const ProductDetails = () => {
           </div>
 
           {/* Description */}
-          <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
+          <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed line-clamp-3">
             {product.description}
           </p>
           <div className="border-t border-gray-200" />
