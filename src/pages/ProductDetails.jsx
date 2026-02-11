@@ -10,9 +10,9 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { useCart } from "../routes/provider/ShoppingProvider";
 import { useWishlist } from "../routes/provider/WishlistProvider";
+import { requireAuth } from "../utils/requireAuth";
 import DescriptionTabs from "./ProductDetails/DescriptionTabs";
 import RelatedCard from "./ProductDetails/RelatedCard";
-import { requireAuth } from "../utils/requireAuth";
 
 const ProductDetails = () => {
   const { slug } = useParams();
@@ -28,6 +28,8 @@ const ProductDetails = () => {
 
     requireAuth(() => {
       addToCart(product, quantity);
+
+      toast.success(`${product.name} added to cart 🛒`);
     });
   };
 

@@ -19,11 +19,8 @@ const popularTags = [
   "Fruit",
 ];
 
-const PRODUCTS_PER_PAGE = 12;
-
 export default function Shops() {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
@@ -32,7 +29,7 @@ export default function Shops() {
 
   // URL → State (derived)
   const currentPage = Number(searchParams.get("page") || "1");
-  const selectedCategory = searchParams.get("category") || ""; // "" = All
+  const selectedCategory = searchParams.get("category") || ""; 
   const ordering = searchParams.get("ordering") || "";
   const minRating = Number(searchParams.get("min_rating") || "0");
   const minPrice = Number(searchParams.get("min_price") || "0");
@@ -72,7 +69,7 @@ export default function Shops() {
       .then((data) => {
         setProducts(data.results || []);
         setTotalPages(
-          Math.max(1, Math.ceil((data.count || 0) / PRODUCTS_PER_PAGE)),
+          Math.ceil((data.count || 0) / (data.results?.length || 1)),
         );
         setLoading(false);
       })
@@ -171,7 +168,6 @@ export default function Shops() {
         </div>
       </div>
 
-  
       {/* Price Range */}
       <div className="mb-6 border-t pt-6">
         <PriceRangeSlider
