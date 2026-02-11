@@ -22,7 +22,7 @@ const ShoppingCart = () => {
 
   return (
     <div className=" py-8 sm:py-12 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className=" lg:max-w-7xl max-w-11/12 mx-auto">
         <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-8">
           My Shopping Cart
         </h1>

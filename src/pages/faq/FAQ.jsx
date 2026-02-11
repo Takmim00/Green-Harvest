@@ -43,7 +43,7 @@ const FAQ = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 pt-16">
+      <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 pt-16">
         <div className="flex flex-col lg:flex-row items-start gap-8">
           {/* Left Side - FAQ Content */}
           <div className="w-full lg:w-[55%]">

@@ -12,6 +12,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import Breadcrumb from '../shared/Breadcrumb';
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -32,8 +33,9 @@ const DashboardLayout = () => {
   return (
     <div className="overflow-x-hidden">
       <Navbar />
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 py-8">
+      <Breadcrumb/>
+      <div className="bg-gray-50">
+        <div className="lg:max-w-7xl max-w-11/12 mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Mobile Menu Button */}
             <button

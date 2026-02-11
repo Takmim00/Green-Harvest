@@ -10,18 +10,44 @@ const BestSellerProducts = () => {
   const [favorites, setFavorites] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   setLoading(true);
+
+  //   fetch("https://green-harvest-backend-seven.vercel.app/api/products")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setProducts(data.results || []);
+  //     })
+  //     .catch((err) => console.error("Product fetch error:", err))
+  //     .finally(() => setLoading(false));
+  // }, []);
+
   useEffect(() => {
-    setLoading(true);
+    const fetchAllProducts = async () => {
+      try {
+        setLoading(true);
 
-    fetch("https://green-harvest-backend-seven.vercel.app/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.results || []);
-      })
-      .catch((err) => console.error("Product fetch error:", err))
-      .finally(() => setLoading(false));
+        let url = "https://green-harvest-backend-seven.vercel.app/api/products";
+        let allProducts = [];
+
+        while (url) {
+          const res = await fetch(url);
+          const data = await res.json();
+
+          allProducts = [...allProducts, ...(data.results || [])];
+          url = data.next; // next page URL, null hole loop stop
+        }
+
+        setProducts(allProducts);
+      } catch (err) {
+        console.error("Product fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllProducts();
   }, []);
-
   const getProductById = (id) => products.find((p) => p.id === id);
 
   const toggleFavorite = (productId) => {
@@ -32,7 +58,7 @@ const BestSellerProducts = () => {
   };
 
   // Product IDs for top row - Best Seller Cards
-  const topRowProductIds = [16, 21, 25, 14, 17];
+  const topRowProductIds = [16, 23, 25, 14, 27];
   // console.log(topRowProductIds);
 
   // Product lists for bottom section

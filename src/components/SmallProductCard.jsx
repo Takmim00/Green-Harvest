@@ -112,7 +112,7 @@ const SmallProductCard = ({
               e.stopPropagation();
               navigate(`/product/${product.slug}`);
             }}
-            className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600"
+            className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 cursor-pointer"
           >
             <HiOutlineShoppingBag size={14} />
           </button>
@@ -123,7 +123,7 @@ const SmallProductCard = ({
               e.stopPropagation();
               openProductModal(product.slug);
             }}
-            className="w-8 h-8 rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 flex items-center justify-center"
+            className="w-8 h-8 rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-pointer"
           >
             <Eye size={14} />
           </button>
@@ -131,7 +131,7 @@ const SmallProductCard = ({
           {/* Wishlist */}
           <button
             onClick={handleWishlistClick}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition cursor-pointer ${
               isAnimating ? "scale-125" : ""
             } ${
               favorite

@@ -68,7 +68,7 @@ const IntroducingProducts = () => {
   "
       />
 
-      <div className="lg:max-w-7xl max-w-11/12 mx-auto pb-16 ">
+      <div className="px-4 lg:max-w-7xl max-w-11/12 mx-auto pb-16 ">
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 mb-12">
           <div className="flex justify-center md:justify-start">

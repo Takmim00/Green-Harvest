@@ -345,7 +345,7 @@ export default function Shops() {
         </div>
       </div>
 
-      <div className="md:max-w-7xl mx-auto w-11/12 px-4 py-8">
+      <div className="px-4 lg:max-w-7xl max-w-11/12 mx-auto  py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop sidebar */}
           <aside className="hidden lg:block w-72 shrink-0">

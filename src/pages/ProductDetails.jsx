@@ -102,7 +102,7 @@ const ProductDetails = () => {
     if (activeIndex < images.length - 1) setActiveIndex(activeIndex + 1);
   };
   return (
-    <div className="w-11/12 md:max-w-7xl mx-auto">
+    <div className="px-4 lg:max-w-7xl max-w-11/12 mx-auto">
       {/* product info */}
       <div className="grid   md:grid-cols-2 gap-6 mt-6">
         <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4">

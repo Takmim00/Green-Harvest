@@ -29,7 +29,7 @@ const FeatureSection = () => {
 
   return (
     <section className="py-16">
-      <div className="lg:max-w-7xl max-w-11/12 mx-auto">
+      <div className="px-4 lg:max-w-7xl max-w-11/12 mx-auto">
         <div 
           ref={containerRef}
           className="grid grid-cols-1 md:grid-cols-4 rounded-lg overflow-hidden shadow-sm bg-white"
