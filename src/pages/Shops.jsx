@@ -171,23 +171,7 @@ export default function Shops() {
         </div>
       </div>
 
-      {/* Price Range (max only) */}
-      {/* <div className="mb-6 border-t pt-6">
-        <h3 className="font-semibold text-lg text-gray-900 mb-4">Price</h3>
-        <input
-          type="range"
-          min="0"
-          max="50"
-          step="1"
-          value={maxPrice}
-          onChange={(e) => updateParams({ max_price: e.target.value })}
-          className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-green-600"
-        />
-        <div className="flex justify-between text-sm text-gray-600 mt-3">
-          <span>$0</span>
-          <span>${maxPrice}</span>
-        </div>
-    </  div> */}
+  
       {/* Price Range */}
       <div className="mb-6 border-t pt-6">
         <PriceRangeSlider
