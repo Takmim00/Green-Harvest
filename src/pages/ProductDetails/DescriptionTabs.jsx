@@ -1,5 +1,5 @@
-import { Check, Star } from "lucide-react";
-import React, { useState } from "react";
+import { Check } from "lucide-react";
+import { useState } from "react";
 import { GiLindenLeaf } from "react-icons/gi";
 import { SlTag } from "react-icons/sl";
 
@@ -54,7 +54,7 @@ const DescriptionTabs = ({ product }) => {
 
     // simulate API call with timeout
     setTimeout(() => {
-      setVisibleReviews((prev) => prev + 2); // পরবর্তী 2টা review দেখাবে
+      setVisibleReviews((prev) => prev + 2);
       setLoading(false);
     }, 1000); // 1 second loading simulation
   };
@@ -86,48 +86,46 @@ const DescriptionTabs = ({ product }) => {
             {/* Left Column - Description */}
             <div className="col-span-1 lg:col-span-7">
               <div className="space-y-3 sm:space-y-4">
-                <p className="text-gray-600 text-[11px] sm:text-xs md:text-sm lg:text-base leading-relaxed">
-                  Sed commodo odium sit et porta tursi purus lorem tristis. Dui
-                  curabitur semper justo eros vel odio vivamusse pellentesque
-                  semper ornare fringilla. Nulla nisl volutpat vel faucibus id.
-                  Sed vitae lacus nam lorem leo risus eget a eleifend. Fusce nec
-                  ornare nisi feugiat nec in condimentum nisl cras pellentesque
-                  tristique. Integer a lectus finibus mauris diam semper
-                  scelerique sit dignissim.
-                </p>
-                <p className="text-gray-600 text-[11px] sm:text-xs md:text-sm lg:text-base leading-relaxed">
-                  Pellentesque felis eros ac leo euisque consequat id felis
-                  mollis. Sed id fringilla nibh. Suspisse fringilla mi et velit
-                  fringilla pellentesque diam euisque nulla eros. Fusce eleifend
-                  congue semper semper dumpere felis pellentesque in molestie
-                  vel in nibh augue semper venenatis urna turpis ridiculus
-                  imperdiet nec tincidunt vel.
-                </p>
+                {(() => {
+                  const description = product?.description || "";
 
-                {/* Checkmark List */}
-                <ul className="space-y-1.5 sm:space-y-2 pt-1 sm:pt-2">
-                  {[
-                    "100 g of fresh leaves provides",
-                    "Adequate source of antioxidants aleriatim",
-                    "Unique low-calorie weight loss features",
-                    "Fresh complete color and bright potassium",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start sm:items-center gap-1.5 sm:gap-2 text-gray-700 text-[11px] sm:text-xs md:text-sm p-0.5 sm:p-1"
-                    >
-                      <Check
-                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white bg-green-600 rounded-full shrink-0 p-0.5 mt-0.5 sm:mt-0"
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-[11px] sm:text-xs md:text-sm text-gray-700">
-                  Cras et diam maximus, accumsan sapien et, sollicitudin velit.
-                  Nulla blandit eros non turpis lobortis iaculis at ut
-                  massa.{" "}
-                </p>
+                  // split by * and trim
+                  const parts = description
+                    .split("*")
+                    .map((p) => p.trim())
+                    .filter(Boolean);
+
+                  // first part = normal paragraph text
+                  const mainText = parts[0];
+
+                  // rest = bullet points
+                  const bullets = parts.slice(1);
+
+                  return (
+                    <>
+                      {/* Main description paragraph */}
+                      <p className="text-gray-600 text-[11px] sm:text-xs md:text-sm lg:text-base leading-relaxed">
+                        {mainText ||
+                          "No description available for this product."}
+                      </p>
+
+                      {/* Dynamic Checkmark List */}
+                      {bullets.length > 0 && (
+                        <ul className="space-y-1.5 sm:space-y-2 pt-1 sm:pt-2">
+                          {bullets.map((item, i) => (
+                            <li
+                              key={i}
+                              className="flex items-start sm:items-center gap-1.5 sm:gap-2 text-gray-700 text-[11px] sm:text-xs md:text-sm p-0.5 sm:p-1"
+                            >
+                              <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white bg-green-600 rounded-full shrink-0 p-0.5 mt-0.5 sm:mt-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             </div>
 
@@ -229,52 +227,51 @@ const DescriptionTabs = ({ product }) => {
                 </li>
               </ul> */}
               <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-  <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-    <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      Weight:
-    </span>
-    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      {product?.additional_info?.weight || "N/A"}
-    </span>
-  </li>
+                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    Weight:
+                  </span>
+                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    {product?.additional_info?.weight || "N/A"}
+                  </span>
+                </li>
 
-  <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-    <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      Color:
-    </span>
-    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      {product?.additional_info?.color || "N/A"}
-    </span>
-  </li>
+                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    Color:
+                  </span>
+                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    {product?.additional_info?.color || "N/A"}
+                  </span>
+                </li>
 
-  <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-    <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      Type:
-    </span>
-    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      {product?.additional_info?.type || "N/A"}
-    </span>
-  </li>
+                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    Type:
+                  </span>
+                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    {product?.additional_info?.type || "N/A"}
+                  </span>
+                </li>
 
-  <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-    <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      Stock Count:
-    </span>
-    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      {product?.additional_info?.stock_count ?? "N/A"}
-    </span>
-  </li>
+                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    Stock Count:
+                  </span>
+                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    {product?.additional_info?.stock_count ?? "N/A"}
+                  </span>
+                </li>
 
-  <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-    <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-      Tags:
-    </span>
-    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base flex-1">
-      {product?.additional_info?.tags?.join(", ") || "N/A"}
-    </span>
-  </li>
-</ul>
-
+                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
+                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
+                    Tags:
+                  </span>
+                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base flex-1">
+                    {product?.additional_info?.tags?.join(", ") || "N/A"}
+                  </span>
+                </li>
+              </ul>
             </div>
 
             {/* Right Column - Customer Image & Discount Cards */}
@@ -327,52 +324,58 @@ const DescriptionTabs = ({ product }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Reviews */}
             <div className="col-span-1 lg:col-span-7">
-              {product?.reviews?.slice(0, visibleReviews).map((review, index) => (
-                <div
-                  key={index}
-                  className="py-3 sm:py-4 md:py-6 border-b border-gray-200 last:border-0"
-                >
-                  <div className="flex items-start justify-between gap-2 sm:gap-3">
-                    <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                      <img
-                        src={
-                          review.avatar ||
-                          `https://ui-avatars.com/api/?name=${review?.name || "/placeholder.svg"}`
-                        }
-                        alt={review?.name || "Reviewer"}
-                        className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0"
-                      />
+              {product?.reviews
+                ?.slice(0, visibleReviews)
+                .map((review, index) => (
+                  <div
+                    key={index}
+                    className="py-3 sm:py-4 md:py-6 border-b border-gray-200 last:border-0"
+                  >
+                    <div className="flex items-start justify-between gap-2 sm:gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                        <img
+                          src={
+                            review.avatar ||
+                            `https://ui-avatars.com/api/?name=${review?.name || "/placeholder.svg"}`
+                          }
+                          alt={review?.name || "Reviewer"}
+                          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0"
+                        />
 
-                      <div className="min-w-0 flex-1">
-                        <h4 className="font-semibold text-gray-900 text-[11px] sm:text-xs md:text-sm truncate">
-                          {review?.reviewerName}
-                        </h4>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-semibold text-gray-900 text-[11px] sm:text-xs md:text-sm truncate">
+                            {review?.reviewerName}
+                          </h4>
 
-                        <div className="flex gap-0.5 mt-0.5 sm:mt-1">
-                          {[...Array(5)].map((_, i) => (
-                            <svg
-                              key={i}
-                              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ${
-                                i < review?.rating
-                                  ? "text-orange-400"
-                                  : "text-gray-200"
-                              }`}
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
+                          <div className="flex gap-0.5 mt-0.5 sm:mt-1">
+                            {[...Array(5)].map((_, i) => (
+                              <svg
+                                key={i}
+                                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ${
+                                  i < review?.rating
+                                    ? "text-orange-400"
+                                    : "text-gray-200"
+                                }`}
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </svg>
+                            ))}
+                          </div>
                         </div>
                       </div>
+
+                      <span className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 shrink-0">
+                        {review?.date}
+                      </span>
                     </div>
 
-                    <span className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 shrink-0">{review?.date}</span>
+                    <p className="mt-2 sm:mt-3 md:mt-4 text-[11px] sm:text-xs md:text-sm text-gray-500 leading-relaxed">
+                      {review?.comment}
+                    </p>
                   </div>
-
-                  <p className="mt-2 sm:mt-3 md:mt-4 text-[11px] sm:text-xs md:text-sm text-gray-500 leading-relaxed">{review?.comment}</p>
-                </div>
-              ))}
+                ))}
 
               <div className="mt-4 sm:mt-6 md:mt-8 flex justify-center md:justify-start">
                 <button
