@@ -65,21 +65,23 @@ const Checkout = () => {
         },
       );
 
-      if (!res.ok) {
-        throw new Error("Failed to place order");
-      }
-
       const data = await res.json();
       console.log("Backend error:", data);
 
-      if (data.payment_url) {
-        window.location.href = data.payment_url;
-      } else {
-        alert("Order placed successfully!");
-        clearCart();
+      if (!res.ok) {
+        throw new Error(data?.detail || "Failed to place order");
       }
+
+      if (data?.payment_url) {
+        window.location.href = data.payment_url;
+        return;
+      }
+
+      alert("Order placed successfully!");
+      clearCart();
     } catch (error) {
       console.error("Error placing order:", error);
+      alert(error.message || "Something went wrong while placing order.");
     } finally {
       setLoading(false);
     }
@@ -385,18 +387,8 @@ const Checkout = () => {
                       className="w-4 h-4 accent-[#00B207]"
                     />
                     <span className="text-sm text-[#1A1A1A]">Paypal</span>
-                  </label>
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="amazon"
-                      checked={paymentMethod === "amazon"}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="w-4 h-4 accent-[#00B207]"
-                    />
-                    <span className="text-sm text-[#1A1A1A]">Amazon Pay</span>
                   </label> */}
+
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
@@ -407,6 +399,17 @@ const Checkout = () => {
                       className="w-4 h-4 accent-[#00B207]"
                     />
                     <span className="text-sm text-[#1A1A1A]">Stripe</span>
+                  </label>
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="sslcommerz"
+                      checked={paymentMethod === "sslcommerz"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="w-4 h-4 accent-[#00B207]"
+                    />
+                    <span className="text-sm text-[#1A1A1A]">Ssl Commerz </span>
                   </label>
                 </div>
               </div>

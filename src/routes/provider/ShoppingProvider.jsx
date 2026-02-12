@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const CartContext = createContext();
+const CartContext = createContext(null);
 
 const API = "https://green-harvest-backend-seven.vercel.app/api/cart";
 
@@ -227,4 +227,13 @@ export const ShoppingProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);
+export const useCart = () => {
+  const context = useContext(CartContext);
+
+  if (!context) {
+    throw new Error("useCart must be used within ShoppingProvider");
+  }
+
+  return context;
+};
+
