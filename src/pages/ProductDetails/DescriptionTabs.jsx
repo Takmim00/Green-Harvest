@@ -1,62 +1,111 @@
+import axios from "axios";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { GiLindenLeaf } from "react-icons/gi";
 import { SlTag } from "react-icons/sl";
-
+import { toast } from "react-toastify";
+import ProductReviews from "./ProductReviews";
 const tabs = [
   { id: "descriptions", label: "Descriptions" },
   { id: "additional", label: "Additional Information" },
   { id: "feedback", label: "Customer Feedback" },
 ];
-const Review = [
-  {
-    id: 1,
-    name: "Kristin Watson",
-    avatar: "https://i.pravatar.cc/150?u=kristin",
-    rating: 5,
-    date: "2 min ago",
-    comment: "Duis at ullamcorper nulla, eu dictum eros.",
-  },
-  {
-    id: 2,
-    name: "Jane Cooper",
-    avatar: "", // Test empty avatar for fallback
-    rating: 4,
-    date: "30 Apr, 2021",
-    comment:
-      'Keep the soil evenly moist for the healthiest growth. If the sun gets too hot, Chinese cabbage tends to "bolt" or go to seed; in long periods of heat, some kind of shade may be helpful. Watch out for snails, as they will harm the plants.',
-  },
-  {
-    id: 3,
-    name: "Jacob Jones",
-    avatar: "https://i.pravatar.cc/150?u=jacob",
-    rating: 5,
-    date: "2 min ago",
-    comment:
-      "Vivamus eget euismod magna. Nam sed lacinia nibh, et lacinia lacus.",
-  },
-  {
-    id: 4,
-    name: "Ralph Edwards",
-    avatar: "https://i.pravatar.cc/150?u=ralph",
-    rating: 5,
-    date: "2 min ago",
-    comment:
-      "200+ Canton Pak Choi Bok Choy Chinese Cabbage Seeds Heirloom Non-GMO Productive Brassica rapa VAR. chinensis, a.k.a. Canton's Choice, Bok Choi, from USA",
-  },
-];
+// const Review = [
+//   {
+//     id: 1,
+//     name: "Kristin Watson",
+//     avatar: "https://i.pravatar.cc/150?u=kristin",
+//     rating: 5,
+//     date: "2 min ago",
+//     comment: "Duis at ullamcorper nulla, eu dictum eros.",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Cooper",
+//     avatar: "", // Test empty avatar for fallback
+//     rating: 4,
+//     date: "30 Apr, 2021",
+//     comment:
+//       'Keep the soil evenly moist for the healthiest growth. If the sun gets too hot, Chinese cabbage tends to "bolt" or go to seed; in long periods of heat, some kind of shade may be helpful. Watch out for snails, as they will harm the plants.',
+//   },
+//   {
+//     id: 3,
+//     name: "Jacob Jones",
+//     avatar: "https://i.pravatar.cc/150?u=jacob",
+//     rating: 5,
+//     date: "2 min ago",
+//     comment:
+//       "Vivamus eget euismod magna. Nam sed lacinia nibh, et lacinia lacus.",
+//   },
+//   {
+//     id: 4,
+//     name: "Ralph Edwards",
+//     avatar: "https://i.pravatar.cc/150?u=ralph",
+//     rating: 5,
+//     date: "2 min ago",
+//     comment:
+//       "200+ Canton Pak Choi Bok Choy Chinese Cabbage Seeds Heirloom Non-GMO Productive Brassica rapa VAR. chinensis, a.k.a. Canton's Choice, Bok Choi, from USA",
+//   },
+// ];
 const DescriptionTabs = ({ product }) => {
   const [activeTab, setActiveTab] = useState("descriptions");
   const [loading, setLoading] = useState(false);
   const [visibleReviews, setVisibleReviews] = useState(2);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [reviews, setReviews] = useState(product?.reviews || []);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+
+  const handleSubmitReview = async () => {
+    if (!rating || !comment.trim()) {
+      toast.error("Please give rating and review");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      const token = localStorage.getItem("access");
+
+      const res = await axios.post(
+        `https://green-harvest-backend-seven.vercel.app/api/products/${product.id}/reviews/create/`,
+        {
+          rating,
+          comment,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      console.log(res.data);
+
+      toast.success("Review added successfully");
+
+      // add new review to list
+      setReviews((prev) => [res.data, ...prev]);
+
+      // hide form
+      setReviewSubmitted(true);
+      setRating(0);
+      setComment("");
+    } catch (err) {
+      toast.error("Failed to add review");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const handleLoadMore = () => {
     setLoading(true);
 
-    // simulate API call with timeout
+    // simulate API delay (UX feel)
     setTimeout(() => {
-      setVisibleReviews((prev) => prev + 2);
+      setVisibleReviews((prev) => prev + 6);
       setLoading(false);
-    }, 1000); // 1 second loading simulation
+    }, 800);
   };
 
   return (
@@ -319,85 +368,7 @@ const DescriptionTabs = ({ product }) => {
         </div>
       )}
 
-      {activeTab === "feedback" && (
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 lg:py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-            {/* Left Column - Reviews */}
-            <div className="col-span-1 lg:col-span-7">
-              {product?.reviews
-                ?.slice(0, visibleReviews)
-                .map((review, index) => (
-                  <div
-                    key={index}
-                    className="py-3 sm:py-4 md:py-6 border-b border-gray-200 last:border-0"
-                  >
-                    <div className="flex items-start justify-between gap-2 sm:gap-3">
-                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                        <img
-                          src={
-                            review.avatar ||
-                            `https://ui-avatars.com/api/?name=${review?.name || "/placeholder.svg"}`
-                          }
-                          alt={review?.name || "Reviewer"}
-                          className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full object-cover shrink-0"
-                        />
-
-                        <div className="min-w-0 flex-1">
-                          <h4 className="font-semibold text-gray-900 text-[11px] sm:text-xs md:text-sm truncate">
-                            {review?.reviewerName}
-                          </h4>
-
-                          <div className="flex gap-0.5 mt-0.5 sm:mt-1">
-                            {[...Array(5)].map((_, i) => (
-                              <svg
-                                key={i}
-                                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ${
-                                  i < review?.rating
-                                    ? "text-orange-400"
-                                    : "text-gray-200"
-                                }`}
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                              </svg>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <span className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 shrink-0">
-                        {review?.date}
-                      </span>
-                    </div>
-
-                    <p className="mt-2 sm:mt-3 md:mt-4 text-[11px] sm:text-xs md:text-sm text-gray-500 leading-relaxed">
-                      {review?.comment}
-                    </p>
-                  </div>
-                ))}
-
-              <div className="mt-4 sm:mt-6 md:mt-8 flex justify-center md:justify-start">
-                <button
-                  onClick={handleLoadMore}
-                  disabled={loading || visibleReviews >= Review.length}
-                  className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 font-semibold text-[11px] sm:text-xs md:text-sm rounded-full transition-all duration-200 ${
-                    loading
-                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                      : "bg-[#EDFBEA] text-[#00B207] hover:bg-[#00B207] hover:text-white"
-                  }`}
-                >
-                  {loading
-                    ? "Loading..."
-                    : visibleReviews >= Review.length
-                      ? "No More Reviews"
-                      : "Load More"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {activeTab === "feedback" && <ProductReviews productId={product.id} />}
     </div>
   );
 };
