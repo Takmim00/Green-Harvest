@@ -116,7 +116,7 @@ const DescriptionTabs = ({ product }) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`pb-2 sm:pb-3 md:pb-4 px-3 sm:px-4 md:px-6 font-medium transition-colors text-[11px] sm:text-xs md:text-sm lg:text-base whitespace-nowrap ${
+              className={`pb-2 sm:pb-3 md:pb-4 px-3 sm:px-4 md:px-6 font-medium transition-colors text-[11px] sm:text-xs md:text-sm lg:text-base whitespace-nowrap cursor-pointer ${
                 activeTab === tab.id
                   ? "border-b-2 border-emerald-500 text-emerald-600"
                   : "text-gray-600 hover:text-gray-900"
@@ -228,53 +228,6 @@ const DescriptionTabs = ({ product }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             {/* Left Column - Description */}
             <div className="col-span-1 lg:col-span-7">
-              {/* <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    Weight:
-                  </span>
-                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    {product?.dimensions?.width}
-                  </span>
-                </li>
-
-                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    color:
-                  </span>
-                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">7–10 days</span>
-                </li>
-
-                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    Type:
-                  </span>
-                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    Keep refrigerated
-                  </span>
-                </li>
-
-                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    Stock Status:
-                  </span>
-                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    {product?.availabilityStatus}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
-                  <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
-                    Tags:
-                  </span>
-                  <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm lg:text-base flex-1">
-                    {product?.tags?.[0]} ,{" "}
-                    <span className="text-black underline">
-                      {product?.tags?.[1]}{" "}
-                    </span>
-                    , Cabbage, Green, Cabbage,
-                  </span>
-                </li>
-              </ul> */}
               <ul className="space-y-2 sm:space-y-3 md:space-y-4">
                 <li className="flex items-start gap-2 sm:gap-4 md:gap-6">
                   <span className="font-medium text-gray-800 min-w-16 sm:min-w-20 md:min-w-30 text-[11px] sm:text-xs md:text-sm lg:text-base">
