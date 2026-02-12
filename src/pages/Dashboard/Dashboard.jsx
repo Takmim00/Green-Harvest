@@ -44,43 +44,7 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
-  // const recentOrders = [
-  //   {
-  //     id: "738",
-  //     date: "8 Sep, 2020",
-  //     total: "$135.00",
-  //     products: 5,
-  //     status: "Processing",
-  //   },
-  //   {
-  //     id: "703",
-  //     date: "24 May, 2020",
-  //     total: "$25.00",
-  //     products: 1,
-  //     status: "on the way",
-  //   },
-  //   {
-  //     id: "130",
-  //     date: "22 Oct, 2020",
-  //     total: "$250.00",
-  //     products: 4,
-  //     status: "Completed",
-  //   },
-  //   {
-  //     id: "561",
-  //     date: "1 Feb, 2020",
-  //     total: "$35.00",
-  //     products: 1,
-  //     status: "Completed",
-  //   },
-  //   {
-  //     id: "536",
-  //     date: "21 Sep, 2020",
-  //     total: "$578.00",
-  //     products: 13,
-  //     status: "Completed",
-  //   },
-  // ];
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {

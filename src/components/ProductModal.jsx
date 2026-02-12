@@ -14,6 +14,7 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -39,19 +40,27 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
   };
 
   const handleWishlistClick = () => {
-    if (!product) return;
+    if (!product || wishlistLoading) return;
 
     requireAuth(() => {
-      toggleWishlist(product);
+      setWishlistLoading(true);
 
-      setIsAnimating(true);
-      setTimeout(() => setIsAnimating(false), 300);
+      const already = isInWishlist(product.slug);
 
-      if (isInWishlist(product.slug)) {
+      // 🔥 instant toast (optimistic)
+      if (already) {
         toast.warn(`${product.name} removed from wishlist!`);
       } else {
         toast.success(`${product.name} added to wishlist!`);
       }
+
+      // animation
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 300);
+
+      toggleWishlist(product).finally(() => {
+        setWishlistLoading(false);
+      });
     });
   };
 
@@ -235,8 +244,13 @@ const ProductModal = ({ isOpen, product, loading, onClose }) => {
                   {/* Wishlist */}
                   <button
                     onClick={handleWishlistClick}
-                    className={`p-2.5 md:p-3 bg-[#bdf5c7] rounded-full transition cursor-pointer ${
+                    disabled={wishlistLoading}
+                    className={`p-2.5 md:p-3 bg-[#bdf5c7] rounded-full transition ${
                       isAnimating ? "scale-125" : ""
+                    } ${
+                      wishlistLoading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
                     }`}
                   >
                     <Heart

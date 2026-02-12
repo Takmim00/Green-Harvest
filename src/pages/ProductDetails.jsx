@@ -23,6 +23,8 @@ const ProductDetails = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleAddToCart = () => {
     if (!product) return;
 
@@ -68,20 +70,45 @@ const ProductDetails = () => {
   const favorite = product ? isInWishlist(product.slug) : false;
 
   // Handle wishlist click
+  // const handleWishlistClick = () => {
+  //   if (!product) return;
+
+  //   requireAuth(() => {
+  //     toggleWishlist(product);
+
+  //     setIsAnimating(true);
+  //     setTimeout(() => setIsAnimating(false), 300);
+
+  //     if (isInWishlist(product.slug)) {
+  //       toast.warn(`${product.name} removed from wishlist!`);
+  //     } else {
+  //       toast.success(`${product.name} added to wishlist!`);
+  //     }
+  //   });
+  // };
   const handleWishlistClick = () => {
-    if (!product) return;
+    if (!product || loading) return;
 
     requireAuth(() => {
-      toggleWishlist(product);
+      setLoading(true);
 
-      setIsAnimating(true);
-      setTimeout(() => setIsAnimating(false), 300);
+      const already = isInWishlist(product.slug);
 
-      if (isInWishlist(product.slug)) {
+      // 🔥 toast আগে
+      if (already) {
         toast.warn(`${product.name} removed from wishlist!`);
       } else {
         toast.success(`${product.name} added to wishlist!`);
       }
+
+      // animation
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 300);
+
+      // async পরে
+      toggleWishlist(product).finally(() => {
+        setLoading(false);
+      });
     });
   };
 
@@ -270,9 +297,10 @@ const ProductDetails = () => {
 
             <button
               onClick={handleWishlistClick}
+              disabled={loading}
               className={`p-2.5 sm:p-3 rounded-full transition shrink-0 bg-[#bdf5c7] cursor-pointer ${
                 isAnimating ? "scale-125" : ""
-              }`}
+              } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <Heart
                 className={`w-4 h-4 sm:w-5 sm:h-5 ${

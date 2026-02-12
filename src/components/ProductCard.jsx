@@ -29,28 +29,54 @@ const ProductCard = ({ product }) => {
 
   const primaryImage = getProductImage(product.images);
 
-  const handleWishlistClick = (product) => {
+//   const handleWishlistClick = (product) => {
+//   if (!product) return;
+
+//   requireAuth(async () => {
+//     if (loading) return;
+//   setLoading(true);
+//     const already = isInWishlist(product.slug); // আগে ধরো
+
+//     await toggleWishlist(product); // wait করো
+
+//     setIsAnimating(true);
+//     setTimeout(() => setIsAnimating(false), 300);
+
+//     if (already) {
+//       toast.warn(`${product.name} removed from wishlist!`);
+//     } else {
+//       toast.success(`${product.name} added to wishlist!`);
+//     }
+//     setLoading(false);
+//   });
+// };
+
+const handleWishlistClick = (product) => {
   if (!product) return;
 
-  requireAuth(async () => {
+  requireAuth(() => {
     if (loading) return;
-  setLoading(true);
-    const already = isInWishlist(product.slug); // আগে ধরো
+    setLoading(true);
 
-    await toggleWishlist(product); // wait করো
+    const already = isInWishlist(product.slug);
 
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 300);
-
+    // 🔥 toast আগে দেখাও
     if (already) {
       toast.warn(`${product.name} removed from wishlist!`);
     } else {
       toast.success(`${product.name} added to wishlist!`);
     }
-    setLoading(false);
+
+    // animation
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 300);
+
+    // async পরে করো
+    toggleWishlist(product).finally(() => {
+      setLoading(false);
+    });
   });
 };
-
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:border-[#00B307] hover:shadow-[0_0_0_2px_rgba(0,179,7,0.15),0_10px_20px_rgba(0,179,7,0.25)] hover:-translate-y-2">
