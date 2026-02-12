@@ -10,11 +10,11 @@ const CheckoutSuccess = () => {
   const orderId = params.get("order_id");
   const { clearCart } = useCart();
 
-  useEffect(() => {
-    if (sessionId) {
+   useEffect(() => {
+    if (sessionId || orderId) {  // SSLCommerz / Stripe দুইটার জন্য
       clearCart();
     }
-  }, [sessionId, clearCart]);
+  }, [sessionId, orderId, clearCart]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
