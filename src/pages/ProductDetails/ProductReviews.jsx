@@ -35,7 +35,7 @@ export default function ProductReviews({ productId }) {
   const alreadyReviewed =
     token &&
     currentUser &&
-    reviews.some((r) => r.user?.full_name === currentUser?.email);
+    reviews.some((r) => r.user?.email === currentUser?.email);
 
   console.log(reviews);
 
@@ -220,7 +220,7 @@ export default function ProductReviews({ productId }) {
       <div className="space-y-4">
         {reviews.slice(0, visibleReviews).map((r) => {
           const isOwner =
-            token && currentUser && r.user?.full_name === currentUser?.email;
+            token && currentUser && r.user?.email === currentUser?.email;
 
           return (
             <div key={r.id} className="border rounded-xl p-4">
