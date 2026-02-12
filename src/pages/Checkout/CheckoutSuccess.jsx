@@ -6,15 +6,16 @@ import { useCart } from "../../routes/provider/ShoppingProvider";
 const CheckoutSuccess = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const sessionId = params.get("session_id");
   const orderId = params.get("order_id");
+  const sessionId = params.get("session_id");
   const { clearCart } = useCart();
 
-   useEffect(() => {
-    if (sessionId || orderId) {  // SSLCommerz / Stripe দুইটার জন্য
+  useEffect(() => {
+    if (orderId) {
+      // SSLCommerz / Stripe দুইটার জন্য
       clearCart();
     }
-  }, [sessionId, orderId, clearCart]);
+  }, [orderId, clearCart]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
