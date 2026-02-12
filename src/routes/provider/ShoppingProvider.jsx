@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 const CartContext = createContext(null);
 
@@ -21,9 +22,28 @@ const mapToCartItem = (product, quantity = 1) => {
 };
 
 export const ShoppingProvider = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
   const [cart, setCart] = useState([]);
-  const token = localStorage.getItem("access");
+
+ const [token, setToken] = useState(localStorage.getItem("access"));
+
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+  const handleStorage = () => {
+    setToken(localStorage.getItem("access"));
+  };
+
+  window.addEventListener("storage", handleStorage);
+  return () => window.removeEventListener("storage", handleStorage);
+}, []);
+useEffect(() => {
+  if (!user) {
+    setCart([]);
+  }
+}, [user]);
+
+
   // 🔹 Load cart from server on first render
   useEffect(() => {
     const fetchCart = async () => {

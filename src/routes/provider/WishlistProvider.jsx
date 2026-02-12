@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 const WishlistContext = createContext();
 const API = "https://green-harvest-backend-seven.vercel.app/api/wishlist";
 
 export const WishlistProvider = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
   const [wishlist, setWishlist] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("access"));
   const [loading, setLoading] = useState(true);
@@ -16,6 +19,11 @@ export const WishlistProvider = ({ children }) => {
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
+useEffect(() => {
+  if (!user) {
+    setWishlist([]); // ⭐ logout হলে wishlist clear
+  }
+}, [user]);
 
   // 🔹 Load wishlist
   useEffect(() => {
