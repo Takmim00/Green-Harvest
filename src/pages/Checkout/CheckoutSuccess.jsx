@@ -11,7 +11,7 @@ const CheckoutSuccess = () => {
   const { clearCart } = useCart();
 
    useEffect(() => {
-    if (sessionId || orderId) {  // SSLCommerz / Stripe দুইটার জন্য
+    if (sessionId || orderId) {  
       clearCart();
     }
   }, []);

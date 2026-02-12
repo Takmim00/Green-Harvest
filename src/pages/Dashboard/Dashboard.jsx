@@ -44,7 +44,6 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
-
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -99,6 +98,12 @@ const Dashboard = () => {
         return "text-gray-600 bg-gray-50";
     }
   };
+  const isProfileComplete =
+  user?.first_name &&
+  user?.last_name&&
+  user?.phone &&
+  user?.street_address;
+
   if (loading) {
     return (
       <div className="flex justify-center py-20 min-h-screen">
@@ -115,6 +120,20 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Profile Card */}
+      {!isProfileComplete  && (
+        <div className=" p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <p className="text-sm text-yellow-800 font-medium">
+            Your profile is incomplete. Please update your information.
+          </p>
+          <Link
+            to="/dashboard/settings"
+            className="inline-block mt-2 text-sm font-semibold text-[#00B250] hover:underline"
+          >
+            Complete Profile
+          </Link>
+        </div>
+      )}
+
       <div className="bg-white rounded-lg shadow-sm p-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* User Info */}
@@ -127,7 +146,9 @@ const Dashboard = () => {
               />
             </div>
             <h2 className="mt-4 text-2xl font-bold text-gray-900">
-              {user.first_name} {user.last_name}
+              {user.first_name || user.last_name
+                ? `${user.first_name} ${user.last_name}`
+                : "Your Name"}
             </h2>
             <Link
               to="/dashboard/settings"
@@ -144,15 +165,20 @@ const Dashboard = () => {
               BILLING ADDRESS
             </p>
             <h3 className="text-lg font-bold text-gray-900 mb-1">
-              {user.first_name} {user.last_name}
+              {user.first_name || user.last_name
+                ? `${user.first_name} ${user.last_name}`
+                : "Your Name"}
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              {user.street_address}, {user.city}, {user.country} -
-              {user.postcode}
+              {user.street_address
+                ? `${user.street_address}, ${user.city}, ${user.country} - ${user.postcode}`
+                : "No address added yet"}
             </p>
             <div className="space-y-1 mb-4">
               <p className="text-sm text-gray-900 font-medium">{user.email}</p>
-              <p className="text-sm text-gray-900 font-medium">{user.phone}</p>
+              <p className="text-sm text-gray-900 font-medium">
+                {user.phone || "No phone number added"}
+              </p>
             </div>
             <Link
               to="/dashboard/settings"
