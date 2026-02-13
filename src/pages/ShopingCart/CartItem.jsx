@@ -3,7 +3,6 @@ import { useCart } from "../../routes/provider/ShoppingProvider";
 import { toast } from "react-toastify";
 
 const CartItem = ({ item }) => {
-  console.log(item);
   const { updateQuantity, removeFromCart } = useCart();
   const subtotal = item.price * item.quantity;
 

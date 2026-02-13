@@ -44,7 +44,6 @@ const OrderHistory = () => {
       );
 
       setOrders(res.data.results);
-      console.log(res.data.results);
       setTotalOrders(res.data.count || res.data.results.length);
     } catch (err) {
       console.error("Failed to fetch orders:", err);

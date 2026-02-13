@@ -30,7 +30,6 @@ export default function OrderDetailsPage() {
         }
 
         const data = await res.json();
-        console.log(data);
         setOrderData(data);
       } catch (err) {
         setError(err.message);

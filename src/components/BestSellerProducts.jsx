@@ -59,7 +59,6 @@ const BestSellerProducts = () => {
 
   // Product IDs for top row - Best Seller Cards
   const topRowProductIds = [16, 23, 25, 14, 27];
-  // console.log(topRowProductIds);
 
   // Product lists for bottom section
   const hotDealsProducts = [

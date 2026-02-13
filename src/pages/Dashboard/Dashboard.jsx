@@ -59,7 +59,6 @@ const Dashboard = () => {
         );
         if (!res.ok) throw new Error("Failed to fetch orders");
         const data = await res.json();
-        console.log(data);
 
         // map backend data to your frontend structure
         const mappedOrders = data.results.map((order) => ({

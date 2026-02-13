@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 const ShoppingCart = () => {
   const { cart, getCartTotal, loading ,clearCart} = useCart();
   const [couponCode, setCouponCode] = useState("");
-console.log(cart);
   const subtotal = getCartTotal();
   const shipping = 0; // Free shipping
   const total = subtotal + shipping;
@@ -17,7 +16,6 @@ console.log(cart);
   const handleApplyCoupon = () => {
     if (couponCode.trim()) {
       // Coupon logic can be implemented here
-      console.log("Applying coupon:", couponCode);
     }
   };
 const handleClearCart = async () => {

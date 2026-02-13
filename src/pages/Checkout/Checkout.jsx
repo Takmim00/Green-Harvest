@@ -66,7 +66,6 @@ const Checkout = () => {
       );
 
       const data = await res.json();
-      console.log("Backend error:", data);
 
       if (!res.ok) {
         throw new Error(data?.detail || "Failed to place order");

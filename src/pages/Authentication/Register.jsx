@@ -43,7 +43,6 @@ export default function Register() {
       email: formData.email,
       password: formData.password,
     });
-    console.log(success);
 
     if (success) {
       navigate("/");

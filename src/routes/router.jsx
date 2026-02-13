@@ -13,6 +13,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import About from "../pages/About/About";
 import Register from "../pages/Authentication/Register";
 import SignIn from "../pages/Authentication/SignIn";
+import CheckoutCancel from "../pages/Checkout/CheckoutCancel";
+import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess";
 import Contact from "../pages/Contact/Contact";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardCart from "../pages/Dashboard/DashboardCart";
@@ -22,8 +24,7 @@ import OrderDetails from "../pages/Dashboard/OrderDetails";
 import OrderHistory from "../pages/Dashboard/OrderHistoy";
 import NotFound from "../pages/NotFound/NotFound";
 import FAQ from "../pages/faq/FAQ";
-import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess";
-import CheckoutCancel from "../pages/Checkout/CheckoutCancel";
+import PrivateRoute from "./private/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +61,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signIn",
@@ -83,13 +88,21 @@ export const router = createBrowserRouter([
         element: <FAQ />,
       },
       {
-        path:"/checkout/success",
-        element:<CheckoutSuccess/>
+        path: "/checkout/success",
+        element: (
+          <PrivateRoute>
+            <CheckoutSuccess />
+          </PrivateRoute>
+        ),
       },
       {
-        path:"/checkout/cancel",
-        element:<CheckoutCancel/>
-      }
+        path: "/checkout/cancel",
+        element: (
+          <PrivateRoute>
+            <CheckoutCancel />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -99,27 +112,52 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/order-history",
-        element: <OrderHistory />,
+        element: (
+          <PrivateRoute>
+            <OrderHistory />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/order/:order_id",
-        element: <OrderDetails />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <OrderDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/wishlist",
-        element: <DashboardWishlist />,
+        element: (
+          <PrivateRoute>
+            <DashboardWishlist />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/shopping-cart",
-        element: <DashboardCart />,
+        element: (
+          <PrivateRoute>
+            <DashboardCart />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/settings",
-        element: <DashboardSettings />,
+        element: (
+          <PrivateRoute>
+            <DashboardSettings />
+          </PrivateRoute>
+        ),
       },
     ],
   },

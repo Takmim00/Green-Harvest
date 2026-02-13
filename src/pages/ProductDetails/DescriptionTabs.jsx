@@ -80,7 +80,6 @@ const DescriptionTabs = ({ product }) => {
           },
         },
       );
-      console.log(res.data);
 
       toast.success("Review added successfully");
 

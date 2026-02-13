@@ -67,7 +67,6 @@ const [count, setCount] = useState(0);
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setProducts(data.results || []);
         setTotalPages(
           Math.ceil((data.count || 0) / (data.results?.length || 1)),

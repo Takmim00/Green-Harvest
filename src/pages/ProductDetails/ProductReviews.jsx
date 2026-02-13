@@ -39,7 +39,6 @@ export default function ProductReviews({ productId }) {
     currentUser &&
     reviews.some((r) => r.user?.email === currentUser?.email);
 
-  console.log(reviews);
 
   /* ---------------- CREATE / UPDATE ---------------- */
   const handleSubmit = async () => {

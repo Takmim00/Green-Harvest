@@ -6,28 +6,31 @@ const API = "https://green-harvest-backend-seven.vercel.app/api/wishlist";
 
 export const WishlistProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
+const token = localStorage.getItem("access");
 
   const [wishlist, setWishlist] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem("access"));
+  // const [token, setToken] = useState(localStorage.getItem("access"));
+
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const handleStorage = () => {
-      setToken(localStorage.getItem("access"));
-    };
+  // useEffect(() => {
+  //   const handleStorage = () => {
+  //     setToken(localStorage.getItem("access"));
+  //   };
 
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, []);
-useEffect(() => {
-  if (!user) {
-    setWishlist([]); // ⭐ logout হলে wishlist clear
-  }
-}, [user]);
+  //   window.addEventListener("storage", handleStorage);
+  //   return () => window.removeEventListener("storage", handleStorage);
+  // }, []);
+  useEffect(() => {
+    if (!user) {
+      setWishlist([]);
+      setLoading(false);
+    }
+  }, [user]);
 
   // 🔹 Load wishlist
   useEffect(() => {
-    if (!token) return;
+    if (!token || !user) return;
 
     const fetchWishlist = async () => {
       try {
@@ -37,6 +40,7 @@ useEffect(() => {
             Authorization: `Bearer ${token}`,
           },
         });
+        if (!res.ok) throw new Error("Cart fetch failed");
 
         const data = await res.json();
 
@@ -53,7 +57,6 @@ useEffect(() => {
           status:
             item.stock_status === "IN_STOCK" ? "In Stock" : "Out of Stock",
         }));
-        console.log("Wishlist loaded:", formatted);
 
         setWishlist(formatted);
       } catch (err) {
@@ -64,7 +67,7 @@ useEffect(() => {
     };
 
     fetchWishlist();
-  }, [token]);
+  }, [token, user]);
 
   const toggleWishlist = async (product) => {
     if (!token) return;
@@ -81,11 +84,14 @@ useEffect(() => {
 
     try {
       if (existingItem) {
-        await fetch(`${API}/remove/?item_id=${existingItem.wishlistId}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
+        const res = await fetch(
+          `${API}/remove/?item_id=${existingItem.wishlistId}`,
+          {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
+        if (!res.ok) throw new Error("Remove wishlist failed");
         setWishlist((prev) => prev.filter((i) => i.slug !== product.slug));
       } else {
         const res = await fetch(`${API}/add/`, {

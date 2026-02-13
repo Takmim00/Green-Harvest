@@ -23,7 +23,6 @@ const IntroducingProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.results);
-        console.log(data.results);
         setLoading(false);
       })
       .catch((err) => {
