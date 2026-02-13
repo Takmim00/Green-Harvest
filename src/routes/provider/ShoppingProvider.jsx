@@ -124,25 +124,6 @@ export const ShoppingProvider = ({ children }) => {
     }
   };
 
-  // 🔹 Remove single item
-  // const removeFromCart = async (productId) => {
-  //   const token = localStorage.getItem("access");
-
-  //   try {
-  //     if (token) {
-  //       const res = await fetch(`${API}/remove/?item_id=${productId}`, {
-  //         method: "DELETE",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       if (!res.ok) throw new Error("Remove failed");
-  //     }
-  //     setCart((prev) => prev.filter((item) => item.id !== productId));
-  //   } catch (err) {
-  //     console.error("❌ Remove from cart failed:", err);
-  //   }
-  // };
   const removeFromCart = async (productId) => {
   const token = localStorage.getItem("access");
 
@@ -158,7 +139,6 @@ export const ShoppingProvider = ({ children }) => {
 
     if (!res.ok) throw new Error("Remove failed");
 
-    // ✅ success হলে তবেই UI update
     setCart((prev) => prev.filter((item) => item.id !== productId));
   } catch (err) {
     console.error("❌ Remove from cart failed:", err);
