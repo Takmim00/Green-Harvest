@@ -27,7 +27,6 @@ export default function OrderDetailsPage() {
         }
 
         const data = await res.json();
-        console.log(data);
 
         setOrderData(data);
       } catch (err) {
@@ -87,6 +86,10 @@ export default function OrderDetailsPage() {
     },
     { step: "Delivered", completed: orderData.status === "delivered" },
   ];
+  const completedCount = timelineSteps.filter((step) => step.completed).length;
+  const totalCount = timelineSteps.length;
+  const progressWidth =
+    totalCount > 1 ? (completedCount / totalCount) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-white py-8 px-4">
@@ -238,62 +241,69 @@ export default function OrderDetailsPage() {
         </div>
 
         {/* Timeline */}
-        <div className="mb-8 pb-8">
-          <div className="flex items-start justify-between relative">
-            {/* Timeline line container */}
-            <svg
-              className="absolute top-5 left-0 w-full h-1 pointer-events-none"
-              style={{ height: "4px" }}
-            >
-              <line
-                x1="0"
-                y1="0"
-                x2="100%"
-                y2="0"
-                stroke="#16a34a"
-                strokeWidth="4"
-              />
-              <line
-                x1="50%"
-                y1="0"
-                x2="100%"
-                y2="0"
-                stroke="#d1d5db"
-                strokeWidth="4"
-              />
-            </svg>
+        <div className="mb-10">
+          <div className="relative">
+            {/* Background Line */}
+            <div className="absolute top-6 left-0 w-full h-2 bg-gray-300 rounded-full" />
 
-            {timelineSteps.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center flex-1 relative z-10"
-              >
-                {/* Circle */}
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white relative mb-4 ${
-                    item.completed
-                      ? "bg-green-600"
-                      : "border-2 border-green-500 bg-white text-green-600"
-                  }`}
-                >
-                  {item.completed ? (
-                    <CheckCircle size={24} />
-                  ) : (
-                    <span className="text-sm font-bold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  )}
-                </div>
-                {/* Step label */}
-                <p
-                  className={`text-sm font-semibold text-center ${
-                    item.completed ? "text-green-600" : "text-gray-500"
-                  }`}
-                >
-                  {item.step}
-                </p>
-              </div>
-            ))}
+            {/* Active Progress Line */}
+            <div
+              className="absolute top-6 left-0 h-2 bg-green-600 rounded-full transition-all duration-500"
+              style={{ width: `${progressWidth}%` }}
+            />
+
+            {/* Steps */}
+            <div className="relative flex justify-between items-center">
+              {timelineSteps.map((item, index) => {
+                const isCompleted = item.completed;
+
+                const firstIncompleteIndex = timelineSteps.findIndex(
+                  (step) => !step.completed,
+                );
+
+                const isCurrent =
+                  index === firstIncompleteIndex ||
+                  (firstIncompleteIndex === -1 &&
+                    index === timelineSteps.length - 1);
+
+                return (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center text-center w-1/4"
+                  >
+                    {/* Circle */}
+                    <div
+                      className={`w-12 h-12 flex items-center justify-center rounded-full font-semibold transition-all duration-300 z-10
+                ${
+                  isCompleted
+                    ? "bg-green-600 text-white"
+                    : isCurrent
+                      ? "bg-green-600 text-white"
+                      : "border-2 border-green-500 border-dashed text-green-600 bg-white"
+                }`}
+                    >
+                      {isCompleted ? (
+                        <CheckCircle size={22} />
+                      ) : (
+                        <span className="text-sm font-bold">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Label */}
+                    <p
+                      className={`mt-3 text-sm font-semibold whitespace-nowrap
+                ${
+                  isCompleted || isCurrent ? "text-green-600" : "text-gray-500"
+                }`}
+                    >
+                      {item.step}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
