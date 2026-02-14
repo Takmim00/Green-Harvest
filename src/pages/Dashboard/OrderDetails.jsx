@@ -2,8 +2,6 @@ import { CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 
-
-
 export default function OrderDetailsPage() {
   const { order_id } = useParams(); // get order_id from route param
   const [orderData, setOrderData] = useState(null);
@@ -24,12 +22,13 @@ export default function OrderDetailsPage() {
             },
           },
         );
-
         if (!res.ok) {
           throw new Error("Failed to fetch order data");
         }
 
         const data = await res.json();
+        console.log(data);
+
         setOrderData(data);
       } catch (err) {
         setError(err.message);
@@ -189,7 +188,7 @@ export default function OrderDetailsPage() {
                   Payment Method:
                 </p>
                 <p className="text-base font-bold text-gray-900">
-                  {orderData.paymentMethod}
+                  {orderData.payment_method}
                 </p>
               </div>
               <div className="border-t border-gray-200 pt-5">
@@ -202,13 +201,13 @@ export default function OrderDetailsPage() {
                 <div className="flex justify-between items-start mb-4">
                   <p className="text-sm text-gray-600">Discount</p>
                   <p className="text-sm font-semibold text-gray-900">
-                    {orderData.discount}
+                    {orderData.discount_percentage}
                   </p>
                 </div>
                 <div className="flex justify-between items-start mb-4">
                   <p className="text-sm text-gray-600">Shipping</p>
                   <p className="text-sm font-semibold text-gray-900">
-                    {orderData.shipping}
+                    {orderData.shipping_cost}
                   </p>
                 </div>
                 <div className="border-t border-gray-200 pt-4 flex justify-between items-start">
