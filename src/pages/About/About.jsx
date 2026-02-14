@@ -18,8 +18,8 @@ import "swiper/css/zoom";
 
 // import required modules
 import { Autoplay, Pagination } from "swiper/modules";
-import { useScrollAnimation } from "./../../hooks/useScrollAnimation";
 import Testimonials from "../../components/Testimonials";
+import { useScrollAnimation } from "./../../hooks/useScrollAnimation";
 
 const features = [
   {
@@ -219,42 +219,42 @@ const TEAM_MEMBERS = [
     id: 1,
     name: "Jenny Wilson",
     role: "Ceo & Founder",
-    image: "https://picsum.photos/seed/jenny/400/500",
+    image: "https://media.istockphoto.com/id/904559680/photo/this-farm-is-my-pride-and-joy.jpg?s=612x612&w=0&k=20&c=yZPOBZSqnHV4zF66ahEoXrPMwwi3Emh1XSNhXyjJNzg=",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
   {
     id: 2,
     name: "Jane Cooper",
     role: "Worker",
-    image: "https://picsum.photos/seed/jane/400/500",
+    image: "https://img.freepik.com/premium-photo/mature-man-basket-harvest-greenhouse-farming-smile-with-sustainability-summer-person-happy-portrait-with-food-production-agriculture-nursery-vegetables-australia_590464-523620.jpg",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
   {
     id: 3,
     name: "Cody Fisher",
     role: "Security Guard",
-    image: "https://picsum.photos/seed/cody/400/500",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA00rdlzUpunkZ04P5VR2LSJpuj_2Lk7fUPQ4ooP-CdQ&s",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
   {
     id: 4,
     name: "Robert Fox",
     role: "Senior Former Manager",
-    image: "https://picsum.photos/seed/robert/400/500",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlgrZ2aMBAmJ8F9Pj7jOIzgPIlZGmdoKOAZOai5rMfmg&s",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
   {
     id: 5,
-    name: "Nature image",
+    name: "Harly bress",
     role: "Senior Former Manager",
-    image: "https://swiperjs.com/demos/images/nature-4.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnfzaHb9H6SsvfrpJzdNUjBTmoW1_8djtvlA&s",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
   {
     id: 6,
-    name: "Nature image",
+    name: "Jhon Doe",
     role: "Senior Former Manager",
-    image: "https://swiperjs.com/demos/images/nature-5.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV00FhzzS0i0e1vezjLI174gwczfQWQAJOag&s",
     socials: { facebook: "#", twitter: "#", pinterest: "#", instagram: "#" },
   },
 ];
@@ -491,71 +491,67 @@ const About = () => {
               a mi.
             </p>
           </div>
+
           <Swiper
             modules={[Pagination, Autoplay]}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
-            navigation
-            pagination={{ el: ".team-pagination", clickable: true }}
             spaceBetween={30}
+            pagination={{
+              el: ".team-pagination", // 🔥 এইটা add করো
+              clickable: true,
+            }}
+            className="pb-12"
             breakpoints={{
               0: { slidesPerView: 1 },
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 4 },
             }}
-            className=""
           >
-            <div className="relative group/carousel">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
-                {TEAM_MEMBERS.map((member) => (
-                  <SwiperSlide
-                    key={member.id}
-                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+            {TEAM_MEMBERS.map((member) => (
+              <SwiperSlide
+                key={member.id}
+                className=" rounded-lg  shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                <div className="relative overflow-hidden aspect-4/5">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* Social Overlay */}
+                  <div
+                    className="absolute inset-0 bg-black/20 flex items-center justify-center gap-3
+                        opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
-                    <div className="relative overflow-hidden aspect-4/5">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                    <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
+                      <FaFacebookF />
+                    </button>
+                    <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors">
+                      <BsTwitterX />
+                    </button>
+                    <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
+                      <FaPinterestP />
+                    </button>
+                    <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
+                      <FaInstagram />
+                    </button>
+                  </div>
+                </div>
 
-                      {/* Social Overlay */}
-                      <div
-                        className={`absolute inset-0 bg-black/20 flex items-center justify-center gap-3 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}
-                      >
-                        <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
-                          <FaFacebookF />
-                        </button>
-                        <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors">
-                          <BsTwitterX />
-                        </button>
-                        <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
-                          <FaPinterestP />
-                        </button>
-                        <button className="w-10 h-10 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
-                          <FaInstagram />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="p-5 text-left">
-                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
-                        {member.name}
-                      </h3>
-                      <p className="text-gray-500 text-sm mt-1">
-                        {member.role}
-                      </p>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </div>
-            </div>
-          </Swiper>
+                <div className="p-5 text-left">
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm mt-1">{member.role}</p>
+                </div>
+              </SwiperSlide>
+            ))}
           <div className="team-pagination flex justify-center mt-8"></div>
+          </Swiper>
         </section>
         {/* 5th section  */}
-        <Testimonials/>
+        <Testimonials />
       </div>
     </div>
   );
