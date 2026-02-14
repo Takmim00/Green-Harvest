@@ -63,6 +63,9 @@ const ProductDetails = () => {
       setIsFavorite(false);
     }
   }, [product]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
