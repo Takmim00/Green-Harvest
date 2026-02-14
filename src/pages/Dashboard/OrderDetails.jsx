@@ -173,47 +173,63 @@ export default function OrderDetailsPage() {
           </div>
 
           {/* Order Summary */}
-          <div className="border border-gray-200 rounded-lg p-6">
+
+          <div className="border border-gray-200 rounded-xl p-6 max-w-md bg-white">
             <div className="space-y-5">
-              <div className="flex justify-between items-start">
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                  Order ID:
-                </p>
-                <p className="text-base font-bold text-gray-900">
-                  {orderData.id}
-                </p>
+              {/* Order ID & Payment */}
+              <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+                <div>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                    Order ID:
+                  </p>
+                  <p className="text-xl font-bold text-gray-700">
+                    #{orderData.id}
+                  </p>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                    Payment Method:
+                  </p>
+                  <p className="text-xl font-semibold text-gray-700 capitalize text-start">
+                    {orderData.payment_method}
+                  </p>
+                </div>
               </div>
-              <div className="flex justify-between items-start">
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                  Payment Method:
-                </p>
-                <p className="text-base font-bold text-gray-900">
-                  {orderData.payment_method}
-                </p>
-              </div>
-              <div className="border-t border-gray-200 pt-5">
-                <div className="flex justify-between items-start mb-4">
-                  <p className="text-sm text-gray-600">Subtotal:</p>
-                  <p className="text-sm font-semibold text-gray-900">
-                    {orderData.subtotal}
+
+              {/* Price Details */}
+              <div className="space-y-4">
+                {/* Subtotal */}
+                <div className="flex justify-between text-sm">
+                  <p className="text-gray-500">Subtotal:</p>
+                  <p className="font-semibold text-gray-900">
+                    ${Number(orderData.subtotal).toFixed(2)}
                   </p>
                 </div>
-                <div className="flex justify-between items-start mb-4">
-                  <p className="text-sm text-gray-600">Discount</p>
-                  <p className="text-sm font-semibold text-gray-900">
-                    {orderData.discount_percentage}
+
+                {/* Discount */}
+                <div className="flex justify-between text-sm">
+                  <p className="text-gray-500">Discount</p>
+                  <p className="font-semibold text-gray-900">
+                    {orderData.discount_percentage}%
                   </p>
                 </div>
-                <div className="flex justify-between items-start mb-4">
-                  <p className="text-sm text-gray-600">Shipping</p>
-                  <p className="text-sm font-semibold text-gray-900">
-                    {orderData.shipping_cost}
+
+                {/* Shipping */}
+                <div className="flex justify-between text-sm">
+                  <p className="text-gray-500">Shipping</p>
+                  <p className="font-semibold text-gray-900">
+                    {Number(orderData.shipping_cost) === 0
+                      ? "Free"
+                      : `$${Number(orderData.shipping_cost).toFixed(2)}`}
                   </p>
                 </div>
-                <div className="border-t border-gray-200 pt-4 flex justify-between items-start">
+
+                {/* Total */}
+                <div className="flex justify-between items-center pt-4 border-t border-gray-200">
                   <p className="text-base font-semibold text-gray-900">Total</p>
-                  <p className="text-lg font-bold text-green-600">
-                    {orderData.total}
+                  <p className="text-2xl font-bold text-green-600">
+                    ${Number(orderData.total).toFixed(2)}
                   </p>
                 </div>
               </div>
