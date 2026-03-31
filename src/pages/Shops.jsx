@@ -82,7 +82,7 @@ const [count, setCount] = useState(0);
 
   // Fetch categories (once)
   useEffect(() => {
-    fetch("https://green-harvest-backend-seven.vercel.app/api/categories/leaf/")
+    fetch("https://green-harvest-backend-seven.vercel.app/api/categories/root/")
       .then((res) => res.json())
       .then((data) => setCategories(data || []))
       .catch((err) => console.error("Categories fetch failed", err));
