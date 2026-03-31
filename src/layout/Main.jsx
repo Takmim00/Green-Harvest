@@ -6,26 +6,36 @@ import Breadcrumb from "../shared/Breadcrumb";
 import Loader from "../components/Loader/Loader";
 
 const Main = () => {
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate page loading (or wait for actual content)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // adjust time if needed
+  const [loading,setLoading] = useState(true)
+  const [showLoader,setShowLoader] = useState(true)
 
-    return () => clearTimeout(timer);
-  }, []);
+  useEffect(()=>{
+
+    const t1 = setTimeout(()=>{
+      setLoading(false)     // start slide animation
+    },2000)
+
+    const t2 = setTimeout(()=>{
+      setShowLoader(false)  // remove loader after animation
+    },3200)
+
+    return ()=>{
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+
+  },[])
 
   return (
     <>
-      {loading && <Loader />} {/* Show loader while loading */}
+      {showLoader && <Loader hide={!loading} />}
 
-      <div className={`overflow-x-hidden ${loading ? "hidden" : "block"}`}>
-        <Navbar />
-        <Breadcrumb />
-        <Outlet />
-        <Footer />
+      <div className="overflow-x-hidden">
+        <Navbar/>
+        <Breadcrumb/>
+        <Outlet/>
+        <Footer/>
       </div>
     </>
   );

@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.4",
+    "gsap": "^3.14.2",
     "lucide-react": "^0.562.0",
     "mixitup": "^3.3.2",
     "react": "^19.2.0",
