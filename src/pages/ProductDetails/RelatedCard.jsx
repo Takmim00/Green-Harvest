@@ -3,32 +3,32 @@ import ProductCard from "../../components/ProductCard";
 
 const RelatedProducts = ({ currentProduct }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!currentProduct) return;
+    if (!currentProduct?.category) return;
 
-    setLoading(true); // fetch start
+    setLoading(true);
 
-    fetch("https://green-harvest-backend-seven.vercel.app/api/products")
+    const category = encodeURIComponent(
+      currentProduct.category.toLowerCase()
+    );
+
+    fetch(
+      `https://green-harvest-backend-seven.vercel.app/api/products/?category=${category}&page_size=5`
+    )
       .then((res) => res.json())
       .then((data) => {
-        const related = data.results
-          .filter(
-            (item) =>
-              item.category === currentProduct.category &&
-              item.id !== currentProduct.id
-          )
-          .slice(0, 5);
+        const related = data.results.filter(
+          (item) => item.id !== currentProduct.id
+        );
 
         setRelatedProducts(related);
       })
       .catch((err) => {
         console.error("Failed to load related products:", err);
       })
-      .finally(() => {
-        setLoading(false); // fetch end
-      });
+      .finally(() => setLoading(false));
   }, [currentProduct]);
 
   return (
@@ -38,7 +38,7 @@ const RelatedProducts = ({ currentProduct }) => {
       </h2>
 
       {loading ? (
-        <div className=" flex justify-center items-center">
+        <div className="flex justify-center items-center">
           <div className="w-10 h-10 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
         </div>
       ) : (
@@ -51,7 +51,7 @@ const RelatedProducts = ({ currentProduct }) => {
 
           {relatedProducts.length === 0 && (
             <p className="text-center text-gray-500 text-lg mt-6">
-              No product available in this category
+              No related products found
             </p>
           )}
         </>
