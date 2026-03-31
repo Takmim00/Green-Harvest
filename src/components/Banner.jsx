@@ -44,7 +44,7 @@ export default function Banner() {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [autoPlay]);
@@ -52,7 +52,7 @@ export default function Banner() {
   const goToSlide = (index) => {
     setCurrentSlide(index);
     setAutoPlay(false);
-    setTimeout(() => setAutoPlay(true), 5000);
+    setTimeout(() => setAutoPlay(true), 8000);
   };
 
   const nextSlide = () => {
@@ -76,7 +76,8 @@ const slide = slides[currentSlide];
         <div className="grid grid-cols-1 md:grid-cols-2 h-full md:gap-20 items-center">
           {/* Image */}
           <div className="flex justify-center">
-            <div className="h-65 md:h-105 flex items-center justify-center overflow-hidden">
+            {/* <div className="h-65 md:h-105 flex items-center justify-center overflow-hidden"> */}
+            <div className="h-65 md:h-105 flex items-center justify-center overflow-hidden will-change-transform">
               <img 
                 key={slide.id}
                 src={slide.image || "/placeholder.svg"} 
